@@ -1,0 +1,23 @@
+Who is the founder of python ?
+
+Guido van Rossum and released in 1991.
+
+what is python ?
+
+python is a powerful yet simple language used everywhere from small scripts
+
+to large scale AI systems. Its readability and vast libraries make it top 
+
+choice for begineers and experts alike.
+
+Example : metro systems in qr code scanning and in spotify and many more...
+
+why python is used ?
+
+Python is widely used because it's incredibly versatile, easy to learn, and powerful. Its clean, readable syntax makes it perfect for beginners, while its vast ecosystem of libraries and frameworks supports advanced applications in web development, data science, AI, automation, and more. Companies like Google, Netflix, and NASA rely on Python for tasks ranging from backend development to machine learning and scientific computing. 
+
+
+
+
+
+
