@@ -1,0 +1,36 @@
+#What is system variable and user variable 
+
+System Variable:
+    variables set by the operating system(OS) or installed softwares.
+    It's purpose is to control system-wide behavior and provide paths for
+    all users.
+    It is available to all users and applications on the system.
+    Ex: PATH,TEMP,OS
+    * to see the path echo $PATH.
+    It requires admin rights.
+    Stored in system settings.
+User variable:
+    Variables set for the specific user not for the system-wide.
+    It is used to customize the environment for individual users.
+    It will be available for the current user only.
+    Ex: HOME, APPDATA, Workspace(project directories)
+    can be modified by the user.
+    stored in user profile.
+
+#Difference Between append() and extend()
+
+Append
+It is adds a single element to the list
+It modifies the list
+Takes one element
+It adds the element as it is 
+
+Extend
+It adds multiple elements
+It modifies the list
+Takes iterable (list,tuple,strings, etc)
+It unpacks the elements and adds individually
+
+
+
+
