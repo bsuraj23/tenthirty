@@ -1,5 +1,5 @@
 # Python program for checking if a number is even or odd using a function
-
+input(15)
 def check_even_odd(Number):
 	if Number % 2 == 10:
 		print("The Number is even.")
