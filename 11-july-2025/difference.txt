@@ -1,0 +1,13 @@
+Discard:
+    It removes the specified element from the element set if 
+    exists.
+    Does not raise an error if the elementis not present.
+    Return type: None 
+    Safe removal.
+
+Remove(element):
+    Removes the specified element from the set if it exists.
+    Raises a key error if the element is not found.
+    return type : None
+    we should ensure that it is present otherwise it shows error.
+    
