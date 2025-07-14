@@ -1,0 +1,32 @@
+List - When you need ordered, mutable sequences with possible duplicates.
+
+Set - When you need unique elements and fast membership checks.
+
+Tuple - When you need an immutable sequence (e.g., dictionary keys).
+
+Dict - When you need key-value pairs with fast lookups.
+
+
+Insertion Order:
+
+    List, Tuple, Dict - Maintain order.
+
+    Set  No guaranteed order.
+
+Duplicates:
+
+    List & Tuple - Allow duplicates.
+
+    Set & Dict keys - No duplicates (unique elements only).
+
+Heterogenous Data:
+
+    All support mixed data types (e.g., [1, "hello", 3.14]).
+
+    Dict keys must be hashable (e.g., int, str, tuple; but not list or set).
+
+Mutability:
+
+    List, Set, Dict - Can be modified after creation.
+
+    Tuple - Immutable (cannot change after creation).
