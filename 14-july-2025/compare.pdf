@@ -1,3 +1,7 @@
+
+#Difference b/w set tuple and dict for Insertion and duplicate, Heterogenous or not 
+
+
 List - When you need ordered, mutable sequences with possible duplicates.
 
 Set - When you need unique elements and fast membership checks.
@@ -30,3 +34,4 @@ Mutability:
     List, Set, Dict - Can be modified after creation.
 
     Tuple - Immutable (cannot change after creation).
+
