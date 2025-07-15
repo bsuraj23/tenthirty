@@ -1,0 +1,10 @@
+d = {"name" : "Sunil ", "age" : 21}
+print(d)
+d.update({"number" : 6304432502, "employ" : "yes"})
+print(d)
+print(d.pop("number"))
+print(d)
+print(len(d))
+print(d.get("name"))
+print(d.values())
+print(d.keys())
