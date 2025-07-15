@@ -6,4 +6,3 @@ if(a >= 18):
         print("Checking for Indian Citizenship")
 else:
     print("You are not eligible to vote")       
-    

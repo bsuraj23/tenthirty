@@ -3,4 +3,6 @@
     
 words=['hello', 'world', 'python', 'rocks']
 for word in words:
-    print(word,len(word))
+    print(word, end=' ')
+    print()
+print(len(words))
