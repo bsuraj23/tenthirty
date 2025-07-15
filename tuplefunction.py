@@ -1,0 +1,6 @@
+tuple = (10,57,35,85,10,45)
+print(len(tuple))
+print(sum(tuple))
+print(tuple.count(10))
+print(tuple.index(57))
+print(max(tuple))
