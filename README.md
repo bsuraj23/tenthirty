@@ -1,54 +1,76 @@
-#Manish Kumar Volunter on 15-07-25
-#15-07-25 codes
+# 📘 OS Concepts & Python Codes 
+**Contributed by Manish Kumar – Volunteer on 15-07-25**
 
-#ABOUT OS
-An Operating System (OS) is system software that manages computer hardware, software resources, and provides essential services for computer programs. 
-It acts as an interface between the user and the hardware, handling tasks such as process scheduling, memory management, file systems, and device control. 
-Common examples include Windows, Linux, and macOS.
+This repository contains notes and example code snippets related to Operating Systems and basic Python dictionary operations. The goal is to serve as a quick reference for students and beginners.
 
-# Types of Operating Systems:
-Batch OS – Executes batches of jobs without user interaction (e.g., early IBM systems).
-Time-Sharing OS – Allows multiple users to access the system simultaneously.
-Distributed OS – Manages a group of independent computers as a single system.
-Real-Time OS (RTOS) – Responds to inputs within a guaranteed time frame (used in embedded systems).
-Mobile OS – Designed for smartphones and tablets (e.g., Android, iOS).
+---
 
-#Core Functions of an Operating System:
-Process Management
-Manages running programs (called processes), including multitasking, process scheduling, synchronization, and inter-process communication.
+## 🖥️ About Operating Systems (OS)
 
-Memory Management
-Allocates and deallocates memory space to processes. Handles virtual memory, paging, and segmentation.
+An **Operating System (OS)** is system software that manages computer hardware, software resources, and provides essential services for computer programs.  
+It acts as an interface between the user and the hardware, handling tasks such as process scheduling, memory management, file systems, and device control.  
+**Common examples include**: Windows, Linux, and macOS.
 
-File System Management
-Organizes, stores, retrieves, and secures data on storage devices.
+---
 
-Device Management
-Controls and communicates with hardware devices (e.g., keyboards, printers, disks) using drivers.
+## 🔧 Core Functions of an Operating System
 
-Security & Access Control
-Protects system resources from unauthorized access and enforces permissions and user authentication.
+- **Process Management**  
+  Handles process scheduling, multitasking, synchronization, and communication between processes.
 
-User Interface
-Provides interfaces like CLI (Command Line Interface) or GUI (Graphical User Interface) for users to interact with the system.
-#KEY-VALUE PAIR
+- **Memory Management**  
+  Manages memory allocation, deallocation, paging, and segmentation.
 
-#Update a key-value pair in a dictionary using a specific key
-d={'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
+- **File System Management**  
+  Organizes, stores, retrieves, and secures data on storage devices.
+
+- **Device Management**  
+  Communicates with and controls hardware components via drivers.
+
+- **Security & Access Control**  
+  Prevents unauthorized access and enforces authentication and permissions.
+
+- **User Interface**  
+  Provides CLI (Command Line Interface) or GUI (Graphical User Interface) to interact with the OS.
+
+---
+
+## 🧠 Types of Operating Systems
+
+- **Batch OS** – Executes batches of jobs without user interaction (e.g., early IBM systems).  
+- **Time-Sharing OS** – Supports multiple users simultaneously.  
+- **Distributed OS** – Manages multiple computers as a unified system.  
+- **Real-Time OS (RTOS)** – Ensures timely response in embedded systems.  
+- **Mobile OS** – Designed for mobile devices (e.g., Android, iOS).
+
+---
+
+## 🔑 Python Dictionary Key-Value Update
+
+```python
+# Update a key-value pair in a dictionary using a specific key
+d = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
 update_key = 'b'
+
 if update_key in d:
     d[update_key] = 10
+
 print("Updated dictionary key-value of b to 10:")
 print(d)
 
-#ZIP FILE IN DICT
+Updated dictionary key-value of b to 10:
+{'a': 1, 'b': 10, 'c': 3, 'd': 4, 'e': 5}
 
-#zip is used to combine two lists into a dictionary
-names=['Mike', 'John', 'Sara', 'Anna']
-ages=[25, 30, 22, 28]
+
+# zip is used to combine two lists into a dictionary
+names = ['Mike', 'John', 'Sara', 'Anna']
+ages = [25, 30, 22, 28]
+
 d = dict(zip(names, ages))
 print("Dictionary created using zip:")
 print(d)
+
+---
 
 
 
