@@ -58,6 +58,8 @@ if update_key in d:
 print("Updated dictionary key-value of b to 10:")
 print(d)
 
+## Output
+
 Updated dictionary key-value of b to 10:
 {'a': 1, 'b': 10, 'c': 3, 'd': 4, 'e': 5}
 
@@ -71,6 +73,10 @@ print("Dictionary created using zip:")
 print(d)
 
 ---
+Output:
+Dictionary created using zip:
+{'Mike': 25, 'John': 30, 'Sara': 22, 'Anna': 28}
+
 
 
 
