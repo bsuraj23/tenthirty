@@ -1,0 +1,38 @@
+1. continue → "Skip This One!"
+What it does: Skips the current iteration of a loop and jumps to the next one.
+
+Real-life analogy:
+
+You’re eating a box of chocolates. If you find a flavor you dislike (e.g., coconut), you skip it 
+(continue) and move to the next chocolate.
+
+2. break → "Stop the Entire Loop!"
+What it does: Exits the loop immediately (no more iterations).
+
+Real-life analogy:
+
+You’re searching for your lost keys. Once you find them,
+ you stop searching (break) instead of checking every other place.
+
+3. pass → "Do Nothing (Placeholder)"
+What it does: A null operation—Python ignores it. Used as a placeholder for empty code blocks.
+
+Real-life analogy:
+
+You’re building a robot and leave a slot empty for a 
+future part. You write pass to say, "I’ll add this later."
+
+4. pause (Actually time.sleep()) → "Wait for X Seconds"
+What it does: Delays execution for a specified time (in seconds). Not a keyword—requires import time.
+
+Real-life analogy:
+
+You’re watching a video and hit pause for 5 seconds before resuming.
+
+continue: To skip specific items in a loop (e.g., ignore invalid data).
+
+break: To exit early when a condition is met (e.g., found a target).
+
+pass: To avoid syntax errors in empty code blocks (e.g., unfinished functions).
+
+time.sleep(): To add delays (e.g., animations, rate-limiting).
