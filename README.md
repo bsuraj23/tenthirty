@@ -1,10 +1,7 @@
 # 📘 OS Concepts & Python Codes 
 **Contributed by Manish Kumar – Volunteer on 15-07-25**
 
-This repository contains notes and example code snippets related to Operating Systems and basic Python dictionary operations. The goal is to serve as a quick reference for students and beginners.
-
 ---
-
 ## 🖥️ About Operating Systems (OS)
 
 An **Operating System (OS)** is system software that manages computer hardware, software resources, and provides essential services for computer programs.  
