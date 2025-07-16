@@ -1,11 +1,10 @@
-d = {"name" : "sai pavan kumar", "age" : 21}
-print(d)
-d.update({"number" : 987456321, "employ" : "yes"})
-print(d)
-print(d.pop("number"))
-print(d)
-print(len(d))
-print(d.get("name"))
-print(d.values())
-print(d.keys())
+#same key different value type
+school1 = {"subject": ["science", "math", "chemistry", "english"]}
+school2 = {
+    "subject": ["physics", "biology", "english", "history"]}
+school3 = {"subject":("art", "music", "dance", "commerce")} 
+
+print(school1)
+print(school2)
+print(school3)
 
