@@ -1,0 +1,6 @@
+print(any([0]))
+print(any([1,1,0]))
+print(any([]))
+print(any(["False", "True"]))
+print(any([False, False, False]))
+print(any(["null","True"]))
