@@ -1,0 +1,5 @@
+Real-Life Analogy
+Function = Microwave Button 🍿
+You define (def) the "Popcorn" button once.
+Later, you just press the button (call the function) instead of setting the time manually every time.
+

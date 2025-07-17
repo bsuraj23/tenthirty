@@ -1,0 +1,32 @@
+
+
+#all function 
+
+Imagine you have a bunch of light bulbs 💡, and you want to check:
+
+all() → Are ALL the bulbs turned on?
+
+If every single bulb is on, all() says True.
+
+If even one bulb is off, all() says False.
+
+any() → Is AT LEAST ONE bulb turned on?
+
+If any bulb is on (even just one), any() says True.
+
+If all bulbs are off, any() says False.
+
+
+Example: Shopping List 🛒
+all(): Do I have all the items? (Milk, Eggs, Bread)
+
+✅ Milk, ✅ Eggs, ✅ Bread → True
+
+✅ Milk, ❌ Eggs, ✅ Bread → False
+
+any(): Do I have at least one item?
+
+❌ Milk, ✅ Eggs, ❌ Bread → True
+
+❌ Milk, ❌ Eggs, ❌ Bread → False
+
