@@ -1,0 +1,21 @@
+a=int(input("enter a number a="))
+b=int(input("enter a number b="))
+c= a+b
+d=str(input("enter a string ="))
+e=str(input("enter a string ="))
+f=d+e
+g=float(input("enter a float value= "))
+h=float(input("enter a float value= "))
+i=g+h
+print(c)
+print(f)
+print(i)
+print(type(a))
+print(type(b))
+print(type(c))
+print(type(d))
+print(type(e))
+print(type(f))
+print(type(g))
+print(type(h))
+print(type(i))
