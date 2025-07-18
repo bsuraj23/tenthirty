@@ -1,0 +1,21 @@
+
+# ascii()
+# print(ascii("hello"))
+# print(ascii("hëllö"))
+# print(ascii("€"))
+# print(ascii("\nTab"))
+# print(ascii("😊"))
+
+# bin()
+print(bin(5))
+print(bin(10))
+print(bin(255))
+print(bin(0))
+print(bin(1024))
+
+# # ord()
+print(ord('A'))
+print(ord('a'))
+print(ord('@'))
+print(ord('€'))
+print(ord('\n'))
