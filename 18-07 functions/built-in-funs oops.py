@@ -1,0 +1,19 @@
+class Person:
+    pass
+p=Person
+setattr(p,'name','Harish')
+setattr(p,'age',21)
+setattr(p,'country','India')
+setattr(p,'status',True)
+setattr(p,'score',100)
+
+print(getattr(p,'name'))
+print(getattr(p,'age'))
+print(getattr(p,'country'))
+print(getattr(p,'status'))
+#print(getattr(p,'score'))
+
+delattr(p,'score')
+setattr(p,'score',90)
+print(getattr(p,'score'))
+print((getattr(p,'status')))
