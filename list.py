@@ -1,21 +1,22 @@
-#creating a list
-list = [1,2,5,8,"sai","pavan"]
-print(list)
+#creating a list of fruits
+fruits = ["apple","banana","cherry"]
 
-#printing index of above list
-print(list[0])
-print(list[-1])
+#printing the entire list
+print("Original list:", fruits)
 
-#using append for above list
-list.append("kumar")
-print(list)
+#Accessing elements
+print("First fruit:", fruits[0])
 
-#using insert for above list
-list.insert(3,"hello")
-print(list)
+#adding a new fruit to the list
+fruits.append("orange")
+print("List after adding orange:", fruits)
 
-#removing index for list
-list.remove(1)
-print(list)
-list = list * 2
-print(list)
+#Removing an item
+fruits.remove("banana")
+print("List after removing banana:", fruits)
+
+#Iterating through the list
+print("Fruits in the list:")
+for fruit in fruits:
+    print(fruit)
+
