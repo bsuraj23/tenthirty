@@ -1,0 +1,11 @@
+
+pdb functions 
+
+a - shows all the variable
+p a - here p works as print the variable which we asked 
+c - continue running the code 
+n - next line 
+q - quit the debugger 
+
+it is a way to pause the code right middle of the code so we can see where the error is and it is one
+of the best way to find the error in the code.
