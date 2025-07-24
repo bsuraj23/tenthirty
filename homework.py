@@ -9,7 +9,7 @@ print("Step 1: File created and data written.")
 
 # Step 2: Append Data to the File
 with open(file_name, "a") as file:
-    file.write("This is an appended line.\n")
+    file.write("This is an appended line.\n"
 print("Step 2: Data appended to the file.")
 
 # Step 3: Read the File
