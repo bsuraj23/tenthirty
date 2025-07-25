@@ -27,13 +27,13 @@ else:
     print("File Not found!")
 
 os.rename("creating file.txt","file2.py")   #it only runs one time when the file name is renamed,
-print("File renamed to 'file2.py'")         #if you run more than one time it will get the file is already exist!
+print("File renamed to 'file2.py'")         #if you run more than one time it will get error the file is already exist!
 
 
 os.remove("file2.py")                     #removing
 print("file deleted successfully")
-  
-from module_with_constants import PI
-print(PI)
+
+
+
 
 
