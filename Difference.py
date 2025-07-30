@@ -25,6 +25,9 @@ print(lq.get())
 #priority queue
 
 from queue import PriorityQueue
-pq=PriorityQueue
-pq.put(2, 'Sanjay')
-pq.put(1, 'Rizwan')
+pq=PriorityQueue()
+
+pq.put((2, 'Sanjay'))
+pq.put((1, 'Rizwan'))
+print(pq.get())
+
