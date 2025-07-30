@@ -9,4 +9,6 @@ pq.put((1, "task medium"))
 pq.put((0, "task high"))
 
 print("Priority Queue Output:")
-
+while not pq.empty():
+    priority, task = pq.get()
+    print(f"Priority {priority} -> {task}")
