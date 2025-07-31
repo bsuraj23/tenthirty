@@ -1,20 +1,3 @@
-#Example 1: simple_module.py
-
-def greet():
-    print("Hello from simple module!")
-
-
-# Example 2: math_module.py with alias
-
-def add(x, y):
-    return x + y
-
-def multiply(x, y):
-    return x * y
-import math_module as mm  # alias
-
-print("Sum:", mm.add(10, 5))
-print("Product:", mm.multiply(4, 3))
 
 # Example 3: module_with_class.py
  
