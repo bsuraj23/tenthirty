@@ -1,0 +1,12 @@
+from queue import LifoQueue
+stack=LifoQueue()
+print(stack.empty())
+stack.put('a')
+stack.put('b')
+stack.put('c')
+stack.put(10)
+stack.put(20)
+print(stack.get())
+print(stack.get())
+print(stack.qsize())
+print(stack.full())

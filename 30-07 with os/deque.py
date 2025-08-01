@@ -1,0 +1,13 @@
+from collections import deque
+d1=deque()
+d1.append(1)
+print(d1)
+d1.append(2)
+print(d1)
+print(d1.pop())
+print(d1.pop())
+print(d1.append(4))
+print(d1.append(5))
+print(d1)
+print(d1.popleft())
+print(d1)
