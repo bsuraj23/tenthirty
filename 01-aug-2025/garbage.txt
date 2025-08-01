@@ -1,0 +1,27 @@
+
+
+# we are not specifically writing garbage collection in code when it will get activated ?
+
+Ans: In python it automatically cleans the data so we no need to use manually. 
+They are two scenario's 
+->python by default it keeps tracking of all variables and the object when there
+is no one is using it clean automatically.
+-> When the count becomes zero then also it deletes the data 
+ex:
+a = [1,2,3,4]
+b = a 
+a = None 
+b = None 
+then it cleans the data 
+
+We can manually clean the garbage collection using gc.collect function 
+
+sample code:
+
+import gc 
+
+a = 100 
+a = None
+
+gc.collect() 
+print("garbage is collected")
