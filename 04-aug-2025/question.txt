@@ -1,0 +1,19 @@
+
+# Can you access the code from child to parent class ?
+
+No we cannot directly access a child class method or properties 
+from a parech object unless the object is actually an instane of 
+child class.
+
+Why ?
+
+When we create an object from the parent class python only gives
+it access to what is defined in the parent ut doesn't count about it's
+future children 
+
+# can on class can have two add functions ?
+
+Actutually no because it two functions in the same class have the same 
+name only the last one will work the earlier one get over written.
+- python doesn't support method called overloading like other languages
+by default.
