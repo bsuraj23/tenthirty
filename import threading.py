@@ -1,4 +1,0 @@
-import threading
-
-def task():
-
