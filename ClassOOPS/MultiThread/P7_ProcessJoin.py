@@ -11,3 +11,4 @@ process.start()
 
 process.join()
 print("Main program waited for process to finish.")
+process.kill()

@@ -1,4 +1,6 @@
 # Lambda is a small anonymous function
-square = lambda x: x * x
+nameOFFunction = lambda print("somemthing ")
 
-print(square(5))  # Output: 25
+
+
+print(nameOFFunction(6))  # Output: 25

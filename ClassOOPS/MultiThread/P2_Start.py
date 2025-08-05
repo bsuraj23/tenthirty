@@ -5,4 +5,5 @@ def task():
 
 # Create and start the thread
 my_thread = threading.Thread(target=task)
-my_thread.start()  # Starts running in parallel
+  # Starts running in parallel
+my_thread.start()
