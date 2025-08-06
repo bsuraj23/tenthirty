@@ -1,4 +1,4 @@
-#creating a list
+ #creating a list
 list = [1,2,5,8,"sai","pavan"]
 print(list)
 
