@@ -6,6 +6,6 @@ class Child(Parent):
   def test2(self):
     print("I am in Child") 
 
-obj2 = Child()
-obj2.test2()
+obj1 = Parent()
+obj1.test1()
 # This raises attributeError!
