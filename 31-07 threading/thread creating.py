@@ -4,4 +4,6 @@ def task():
 def add():
     print("Add  is running")
 
-my_thread=thre
+my_thread=threading.Thread(target=task)
+print("Thread created:",my_thread)
+my_thread.start()

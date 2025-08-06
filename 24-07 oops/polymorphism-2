@@ -1,0 +1,9 @@
+class circle:
+    def area(self):
+        return 3.14*5*5
+class sqr:
+    def area(self):
+        return 4*4
+shapes=[circle(),sqr()]
+for temp in shapes:
+    print(temp.area())

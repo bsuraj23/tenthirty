@@ -1,0 +1,91 @@
+python questions 
+
+15-07
+
+1) learn os
+2) zip fun
+3) dict features
+
+
+16-07
+
+1) nested for loop (cricket overs code)
+2) use break, continue and pass statements
+3) differences of break, continue, pass
+4)only to print vowels
+
+
+17-07
+
+1)features of os
+2)len, ascii, binary, ord
+3)diff b/w all and any
+    if one element is true in any the whole statement is true and if atleast one element is false the whole statement is False
+4)sri vasthav is to explain build 8th code from suraj sir repository
+
+
+18-07
+
+1)what is open source and closed source of OS
+2)what is interpretation and compilation
+3)use function to print square in diff method
+4)global and local functions
+
+
+
+21-07
+
+1)do regularexpression use digits and alphabets to print both at same time
+2)do practice try and exceptions
+
+
+23-07
+
+1)open file with function using read, write, append, and more......
+2)create a file and open it and delete it
+
+24-07
+
+1)what is pdb and set_trace
+2)objectcreation
+
+
+25-07
+
+1)pdb and set_trace
+2)use super()
+
+28-07
+
+1)diff b/w @classmethod and @abstractmethod
+
+
+30-07
+
+1)write a program without using python and google how to know all modules
+2)write a program to compile all 
+3)HOW TO REMOVE queue directly
+4)priority queue
+5)w.a.p to get the most repeated character from the collection of arrays
+6)leap year
+
+
+31-07
+
+0)
+1)lambda fun which will print user input
+2)square the numbers without lambda and with lambda
+3)without using lambda print even and odd numbers
+4)do the code mostly using lambda
+5)
+
+
+
+
+
+
+04-08
+
+1)can you access the funs from child as parent
+2)using constructor without using any parameters and with using parameters call the function
+3)

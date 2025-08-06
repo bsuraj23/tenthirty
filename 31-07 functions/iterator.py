@@ -6,4 +6,11 @@ class Countupto:
         return self
     def __next__(self):
         if self.current <= self.max:
-            num
+            num=self.current
+            self.current+=1
+            return num
+        else:
+            raise StopIteration
+counter=Countupto(10)
+for num in counter:
+    print(num)
