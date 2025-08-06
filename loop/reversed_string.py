@@ -1,18 +1,24 @@
-s="Manish"
-rev=""
+# s="Manish"
+# rev=""
 
-#starting from the last character of the string
-n=len(s)-1 
+# #starting from the last character of the string
+# n=len(s)-1 
 
-while n >=0:
-    rev += s[n] #apending characters in reverse order
-    n -=1       #decresing index
+# while n >=0:
+#     rev += s[n] #apending characters in reverse order
+#     n -=1       #decresing index
 
-print(rev)
+# print(rev)
 
 #without any built-in functions
-# s = "Manish"
-# rev = ""
-# for char in s:
-#     rev = char + rev
-# print("Reversed string:", rev) 
+s =input("Enter a string: ")
+a=s.lower()
+rev = ""
+for i in a:
+    rev = i + rev
+print("Reversed string:", rev) 
+
+if a == rev:
+    print("The string is a palindrome.")
+else:
+    print("The string is not a palindrome.")

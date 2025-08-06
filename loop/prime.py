@@ -11,5 +11,6 @@ else:
             break
     if count == 0:
         print("Prime number ")
+#it
     else:
         print("Not a prime number")
