@@ -5,5 +5,4 @@ def task():
 
 # Create a process
 process = multiprocessing.Process(target=task)
-
 print("Process created:", process)
