@@ -25,7 +25,7 @@
 #         print("Found 5!")
 #         break
 
-# Example 4: Break if item exists in list
+ Example 4: Break if item exists in list
 names = ["Tom", "Jerry", "Spike"]
 for name in names:
     if name == "Jerry":
