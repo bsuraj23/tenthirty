@@ -1,0 +1,53 @@
+
+
+1. What is .com, .org, .in ?
+
+These are the high level domain's 
+
+.com is a commercial domain used in various things like bussiness etc 
+.org it is a organization website it is owned by certain organization like WHO etc and these all non profit
+domain's
+.in is a country level top domains it is used in a specific country .in is India , .sg Singapore etc
+
+2. what is the difference b/w Fast API and Django ?
+
+API - Application Program Interface 
+
+FastAPI :
+    It is a pythin web framework spcially made to build API's quickly and efficiently.
+    It focuses on sending and recieving data's not HTML 
+Example: Cloud Kitchen
+
+Django :
+    It is a full stack web framework 
+    It helps to build a entire site Backend + Frontend without having to start from Scratch 
+Example : a Fully furnished restaurent(Tradtional)
+
+
+# real time Example
+
+Django 🏠 (Full House)
+Django is like renting a fully furnished restaurant:
+Kitchen → Django ORM for database
+Waiters → Authentication system (login, register)
+Menu board → Templating engine
+Manager → Admin panel for managing orders & menu items
+Cash counter → Built-in form handling & payment integration support
+All connected — you just start cooking and serving.
+If your goal is to build the entire website — backend + frontend + admin — Django is great because it has everything built-in.
+With FastAPI ⚡ (Cloud Kitchen)
+
+FastAPI is like running a cloud kitchen:
+You have a super-fast chef (FastAPI server) who only makes food.
+You don’t have tables, menus, or waiters — you just make dishes and send them to delivery apps like Zomato/Swiggy (API clients).
+You choose your own tools for database, payment, and authentication — nothing is forced on you.
+If your goal is to only provide a backend API for:
+A mobile app
+A frontend built in React, Angular, or Vue
+A microservice in a big system
+Then FastAPI is perfect because it’s lightweight and extremely fast.
+
+Simple takeaway:
+Django → Full restaurant (you can serve customers directly through the site) 🍽
+FastAPI → Cloud kitchen (only cooks & sends food to apps/websites) 📦
+
