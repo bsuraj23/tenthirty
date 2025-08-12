@@ -1,0 +1,19 @@
+
+1. what is SSL ?
+SSL - Secure Socket Layer 
+- It secures the protocol that helps to keep the data safe it sent between 
+your browser and website.
+- Without SSL data travels as plain text anyone intercepts it could read it.
+- With SSL data is encrypted so if someone intercepts it, it's useless without 
+the decryption key.
+* SQL is outdated today we actually use TLS 
+
+TLS - transport Layer security 
+
+2. What is PIP ?
+pip - instals packages in python 
+Ex: pip install numpy
+- It is a package manager 
+- We can download and uninstall python libraries and tools
+- pip download's them from pypi 
+
