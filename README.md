@@ -1,7 +1,7 @@
 # workspace
 
 
-# the questions which is gave as home works 
+# The questions which is gave as home works 
 
 1. what is declaration and assigning ?
 Declaration is when you introduce a variable to the program. You're telling the program that a variable exists and what type of data it will hold (depending on the programming language).
