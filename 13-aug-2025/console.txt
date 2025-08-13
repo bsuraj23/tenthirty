@@ -1,0 +1,89 @@
+
+
+# what is console ?
+
+A console is basically a text-based interface 
+where you can type commands and see output from your computer or a program.
+
+# what are the status codes of http ?
+- In http status code is 3 digit number sent by the 
+server to tell the client what happend with the request 
+
+✅ Success
+200 OK – Request succeeded.
+201 Created – Resource created successfully (often after POST).
+204 No Content – Request succeeded but no data is returned.
+
+📍 Redirection
+301 Moved Permanently – Resource moved to a new URL.
+302 Found – Temporary redirect.
+304 Not Modified – Use cached version, no changes.
+
+⚠️ Client Errors
+400 Bad Request – Request format is wrong.
+401 Unauthorized – No valid authentication.
+403 Forbidden – You’re not allowed, even if logged in.
+404 Not Found – Resource not found.
+429 Too Many Requests – You’re rate-limited.
+
+💥 Server Errors
+500 Internal Server Error – Generic server crash.
+502 Bad Gateway – Server got a bad response from another server.
+503 Service Unavailable – Server is overloaded or down for maintenance.
+504 Gateway Timeout – Server took too long to respond.
+
+# what are the other servers useful in FastAPI ?
+
+uvicorn is the default choice for FastAPI there are other
+useful servers they are:
+ Gunicorn used for when we expect more traffic in site
+ Hypercorn - App needing experimental protocols like HTTP/3.
+ Daphne - Real time apps like chats, live dashboards
+ Apache/Nginix - best for front facing production setups.
+
+# what are the features of website ?
+
+in website features can mean two slightly differnt 
+things depending on context:
+Core structural features – what almost every website has for basic functionality.
+Specialized or advanced features – what makes a website unique or interactive.
+
+1. Core Features (almost every website has these)
+Homepage – The main entry point; gives a quick idea of the purpose and offerings.
+Navigation Menu – Links to important sections (e.g., About, Services, Contact).
+Content Pages – Information about products, services, or topics.
+Branding – Logo, colors, fonts that make the site recognizable.
+Responsive Design – Works well on phones, tablets, and desktops.
+Contact Options – Forms, phone numbers, or email links.
+Footer – Extra navigation, copyright info, privacy policy links.
+
+2. Advanced / Functional Features
+Search Bar – Quickly find content.
+User Accounts & Login – For personalization, purchases, or saved settings.
+E-commerce Tools – Product catalog, shopping cart, secure checkout.
+Blog or News Section – Updates, tips, or company announcements.
+Multimedia – Images, videos, audio.
+Interactive Elements – Quizzes, calculators, polls, chatbots.
+SEO Optimization – Makes the site discoverable on Google.
+Analytics Integration – Tracks visitors and behavior.
+Security Features – HTTPS encryption, privacy tools.
+Social Media Integration – Links or live feeds from social platforms.
+
+# what is addressing in computing ?
+
+-In computing, an address is basically a way to 
+identify a specific location so the computer knows 
+where to find or store something — similar to how 
+your home address tells someone where to deliver 
+a package.
+
+IP Address:
+A unique identifier for a device on a network.
+Example: 192.168.1.5 (IPv4) or 2001:db8::1 (IPv6).
+Lets computers find each other on the internet or a local network.
+
+# what is ipconfig 
+
+ipconfig - internet protocol configuration 
+- it is a command line tool that used in windows to 
+view and manage the network settings of the computer 
