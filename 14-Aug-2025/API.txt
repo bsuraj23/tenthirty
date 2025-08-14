@@ -1,0 +1,29 @@
+
+# what is REST API ?
+REST- Representational State Transfer 
+- It's not a programming language or framework 
+- It is an architectural style for desgining API's 
+- It defines rules for how two systems should talk each other over 
+HTTP
+= Rest api's exchange data using formats like JSON or XML 
+
+#What is FAST API ?
+- FastAPI is a python web framework 
+- It's a tool we can use to build REST API's 
+
+# Before RESTAPI Technologies used ?
+
+-There are several methods and styles used 
+
+SOAP - Simple Object Access Protocol 
+-XML-RPC
+-COBRA - Common Object Request Broker Architecture
+-RMI - Remote Method Invocation 
+-DCOM
+
+Why REST replaced them 
+-SOAP, XML-RPC, and CORBA were heavy and complicated.
+-REST uses simple HTTP + JSON, which is lighter, faster,
+and easier for browsers & mobile apps.
+-JSON is smaller than XML, making it faster to transmit 
+and easier to parse in JavaScript.
