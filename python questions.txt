@@ -1,4 +1,4 @@
-python questions 
+python questions
 
 15-07
 
@@ -20,7 +20,7 @@ python questions
 1)features of os
 2)len, ascii, binary, ord
 3)diff b/w all and any
-    if one element is true in any the whole statement is true and if atleast one element is false the whole statement is False
+    if one element is true in any the whole statement is true and if atleast one element is false the whole statement is False
 4)sri vasthav is to explain build 8th code from suraj sir repository
 
 
@@ -63,7 +63,7 @@ python questions
 30-07
 
 1)write a program without using python and google how to know all modules
-2)write a program to compile all 
+2)write a program to compile all
 3)HOW TO REMOVE queue directly
 4)priority queue
 5)w.a.p to get the most repeated character from the collection of arrays
@@ -86,7 +86,7 @@ python questions
 
 04-08
 
-1)using constructor without using any parameters and with using parameters call the function 
+1)using constructor without using any parameters and with using parameters call the function
 
 
 05-08
@@ -99,5 +99,27 @@ python questions
 
 
 11-08
+
 1)diff b/w fastapi and Django
 2)
+
+12-08
+
+1)wht is PiP
+2)what is SSL certificate
+3)what is OR2
+
+13-08
+
+1)by vs code do the configuration
+2)what is console
+3)understand the status code of http
+4)what are the other servers which will helpful for FastAPI
+5)what is IP address
+
+14-08
+
+1)Which tech is used for backend and how to know easily when we say backend tech(like a program or tech..)
+2)what is cache in fastAPI
+3)why the FAstApI called REST, and what it called when it not invented before the REST
+4)
