@@ -1,0 +1,19 @@
+def factorial(n):  #factorial 
+    if n == 0:
+        return 1
+    return n*factorial(n-1)
+print(factorial(5))
+
+def fibonnaci(n): #fibonnaci 
+    if n <= 1:
+        return n
+    return fibonnaci(n-1)+fibonnaci(n-2)
+print(fibonnaci(10))
+
+def sum(n):
+    if n==1:
+        return n
+    return n+sum(n-1)
+print(sum(6))
+    
+    
