@@ -122,4 +122,6 @@ python questions
 1)Which tech is used for backend and how to know easily when we say backend tech(like a program or tech..)
 2)what is cache in fastAPI
 3)why the FAstApI called REST, and what it called when it not invented before the REST
-4)
+4)practice pip with examples
+5)what is routing 
+6)
