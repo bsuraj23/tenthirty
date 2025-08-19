@@ -21,5 +21,5 @@ car1 = Bmw("X5", "electric")
 # car2 = bmw("BMW M2")
 
 print(car1.type)
-   
+
           
