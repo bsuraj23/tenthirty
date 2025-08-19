@@ -1,0 +1,7 @@
+
+# how to change the port number ?
+
+-To change the port number while running in terminal 
+ # uvicorn main:app --port 8090
+- Just type two hyphen's and give the number 
+it will automatically gives another port number. 
