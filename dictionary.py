@@ -1,4 +1,4 @@
-#same key different value type
+#same key different value type   djfhdfhgdagfghfggdajfhdjhgf
 school1 = {"subject": ["science", "math", "chemistry", "english"]}
 school2 = {
     "subject": ["physics", "biology", "english", "history"]}
