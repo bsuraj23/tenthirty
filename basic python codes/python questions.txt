@@ -125,3 +125,13 @@ python questions
 4)practice pip with examples
 5)what is routing 
 6)
+
+17-08
+
+1)How to use fastapi postman
+2)work on postman url
+3)
+
+21-08
+
+1)what is ajax

@@ -12,7 +12,7 @@ class Parent:
         print("Parent class")
 class Child(Parent):
     def display(self):
-        super().display()
+        
         print("Child class")
 pobj=Parent()
 cobj=Child()
