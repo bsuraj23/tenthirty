@@ -1,0 +1,10 @@
+#what is AJAX ?
+
+AJAX = asynchronous javascript and XML 
+- It is a technique in frontend 
+- AJAX is a way for web pages to talk to the server without reloading
+the whole page 
+- example Autocomplete search suggestion (google search box)
+-Infinite scroll on social media 
+-With AJAX, the browser can send and receive data in the background 
+(asynchronously) without reloading the whole page.
