@@ -1,0 +1,9 @@
+#WHAT IS AJAX?
+
+1.AJAX = Asynchronous JavaScript and XML → a technique for web communication.
+
+2.It lets web pages send/receive data from the server without reloading.
+3.Mostly uses JSON today (instead of XML) for data exchange.
+4.Improves speed, interactivity, and user experience.
+5.Common in apps like Google search suggestions, chat apps, Instagram likes.
+6.Update part of a webpage dynamically without reloading.
