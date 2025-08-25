@@ -5,3 +5,4 @@ result = subprocess.run(["echo", "Hello from subprocess!"], capture_output=True,
 
 print("Output:", result.stdout)
 print("Exit code:", result.returncode)
+result.kill()

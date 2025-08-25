@@ -1,14 +1,19 @@
 # Example 1
-import simple_module
+import math
 
-# Example 2
-import math_module as mm
+print(math.sqrt(49))
 
-# Example 3
-from module_with_class import Person
+# # Example 2
+# import math as temp
 
-# Example 4
-from module_with_constants import PI
 
-# Example 5
-from module_with_functions import square
+# temp.sqrt(36)
+
+# # Example 3
+# from module_with_class import trig
+
+# # Example 4
+# from module_with_constants import PI
+
+# # Example 5
+# from module_with_functions import square
