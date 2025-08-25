@@ -1,0 +1,26 @@
+#what is the better technologies for uvicorn ?
+
+-the other technologies are hypercorn,Daphne and WSGI servers 
+
+#what is conflict in GITHUB ?
+-A conflict in GITHUB happens when Git cannot automatically merge changes b/w branches
+because the same part of file has been edited differently in each branch.
+This occurs 
+Merging branches, pulling and rebasing 
+
+# learn about linux commands ?
+here some are the linux commands that i know :
+cmd - change directory 
+rmdir - remove the folder
+rm - remove 
+sudo su - to get admin access 
+sudo apt install (filename) - to install the file 
+sudo apt-get update - to update the new os files 
+pwd - to know the current directory
+clear - to clear the history 
+shutdown -s = to shutdown the system 
+whoami - current user 
+ls - list the files in current directory
+uname -a = systeminfo
+uptime - to know how long the system is on 
+ping - to know whether network is connected or not 

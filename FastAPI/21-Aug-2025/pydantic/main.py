@@ -4,6 +4,7 @@ from pydantic import BaseModel
 app = FastAPI()
 
 # here base model is parent class via OOPS concept
+
 class item(BaseModel):
     name: str
     price: float
