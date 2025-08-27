@@ -135,3 +135,12 @@ python questions
 21-08
 
 1)what is ajax
+2)run the commands of Linux
+3)what is conflict in GitHub
+4)
+
+26-08
+1)(uvicorn main:app --reload) in this why do we have here 2 hyphen, what is the role of those 2 hyphen
+2)what is the difference between delete and patch
+3)practice eular
+4)

@@ -39,6 +39,7 @@ def get_single_user(user_id:int):
 def update_user(user_id:int,user:User):
     if user_id not in user_details:
         raise HTTPException(status_code = 404, detail="No user Found")
+    user_details[user_id]=user
     return {"message":"user updated","user":user}
 
 @app.delete("/user/{user_id}")
