@@ -1,0 +1,33 @@
+
+
+# why two hyphens ?
+
+two hyphwns are used to denote a full length command line 
+option also it is called as flag or argument.
+two write full descriptive word it is used 
+Ex:
+--help
+--host
+--port 
+
+single hyphens are used for single letter quick way to specify the
+a common option 
+Ex:
+-r 
+-a
+-l 
+# what is patch ?
+To edit certain part of the code the patch is used 
+
+#what is pagination ? 
+pagination is the process of dividing a large data to smaller,
+manageable chunks or pages for easier consumption.
+
+#hit the post from the browser 
+
+browser: firefox 
+step - 1: go to the browser go to developer options (cmd+option+i)
+step - 2: go to the network and we will see the usual get request 
+step - 3: see there will be a headers click on it and give reset one 
+tab will get opened then set GET into POST 
+step - 4: now click resend then the option changes to POST.
