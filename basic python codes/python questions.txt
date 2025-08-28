@@ -144,3 +144,7 @@ python questions
 2)what is the difference between delete and patch
 3)practice eular
 4)
+
+28-08
+1)write the code in 05 pydantic and add exception handling to put
+2)

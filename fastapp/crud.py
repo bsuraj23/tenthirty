@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 app=FastAPI()
 
@@ -7,7 +7,7 @@ user_details={}
 count_id=1
 
 class User(BaseModel):
-    name:str
+    name:str = Field(..., min_length=3, max_length=20)
     phone:int
     age:int
 
@@ -46,6 +46,6 @@ def update_user(user_id:int,user:User):
 def delete_user(user_id:int):
     if user_id not in user_details:
         raise HTTPException(status_code=404,detail="No User Found")
-    delete=user_details.pop[user_id]
+    delete=user_details.pop(user_id)
     return {"message":"deleted successfully","user":delete}
 
