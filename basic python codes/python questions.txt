@@ -148,3 +148,15 @@ python questions
 28-08
 1)write the code in 05 pydantic and add exception handling to put
 2)
+
+29-08
+1)work on dependency
+2)hit any internet video open and test it
+3)write down an API to get all users
+4)get all products and get a product with a particular name
+5)what python process are running in my laptop to check which is running i need to know
+6)nested model and custom validation
+7)data serialization and response customization
+8)enforcing data types and handling missing fields
+9)database integration
+10)
