@@ -1,0 +1,27 @@
+Python uses reference counting as the primary way to manage memory, and garbage collection as a backup to collect cyclic references (like when two objects refer to each other).
+
+1. Reference Counting (Immediate Cleanup)
+As soon as an object’s reference count drops to zero, it is immediately deleted.
+
+a = [1, 2, 3]
+b = a
+del a
+del b  # Now the list has no references → Python deletes it
+
+
+2. Cyclic Garbage Collector (Automatic Cleanup)
+Runs periodically, especially when:
+
+A certain number of object allocations/deallocations happen.
+
+Python detects cyclic references.
+
+Python hits internal GC thresholds.
+
+Python's gc module keeps track of these thresholds for three generations of objects (Gen 0, Gen 1, Gen 2).
+
+
+import gc
+
+gc.collect()  # Manually trigger garbage collection
+print(gc.get_threshold())  # See thresholds
