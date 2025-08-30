@@ -1,5 +1,5 @@
-print("Hellow Old and new students ");
-# len()
+# print("Hellow Old and new students ");
+#len()
 # print(len("OpenAI"))
 # print(len([1, 2, 3, 4]))
 # print(len((True, False)))
