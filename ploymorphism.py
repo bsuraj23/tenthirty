@@ -105,4 +105,4 @@ def walk_anything(obj):
     obj.walk()
 
 walk_anything(Duck()) 
-walk_anything(Person())   
+walk_anything(Person())  
