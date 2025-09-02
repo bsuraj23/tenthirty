@@ -1,3 +1,4 @@
+#Recursion
 def sum(n):
     if n==0:
         return 0
@@ -5,7 +6,13 @@ def sum(n):
 print(sum(10))
 
 
-
+#without recursion
+def sum(n):
+    total=0
+    for i in range(0,n+1):
+        total=total+i
+    return total
+print(sum(10))
 
 
 
