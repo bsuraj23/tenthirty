@@ -151,12 +151,47 @@ python questions
 
 29-08
 1)work on dependency
-2)hit any internet video open and test it
+2)hit any internet video open it and test it
 3)write down an API to get all users
 4)get all products and get a product with a particular name
-5)what python process are running in my laptop to check which is running i need to know
+5)what python processes are running in my laptop to check which is running i need to know
 6)nested model and custom validation
 7)data serialization and response customization
 8)enforcing data types and handling missing fields
 9)database integration
 10)
+
+01-09
+
+1)what is vertical and horizontal
+2)draw uml diagrams using university in databases
+3)work on MySQL to create table and insert and manipulate table data
+4)what is sqlalchemy
+5)
+
+03-09
+
+1)what are sub queries 
+2)practice on joins
+3)fastapi using sql
+4)what is sqlalchemy
+5)hands on uml
+6)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
