@@ -1,0 +1,2 @@
+file 2 is created
+ this is new content that we appended

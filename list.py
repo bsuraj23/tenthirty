@@ -1,5 +1,11 @@
+
 #creating a list of fruits
 fruits = ["apple","banana","cherry"]
+
+ #creating a list
+list = [1,2,5,8,"sai","pavan"]
+print(list)
+
 
 #printing the entire list
 print("Original list:", fruits)

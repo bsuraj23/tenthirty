@@ -1,0 +1,35 @@
+Difference between any() and all() built in fuction 
+
+
+1)  any():
+    Returns True if at least one element in the iterable is True.
+
+    Returns False if all elements are False or the iterable is empty.
+
+
+    example:
+             values = [0, False, 5]
+             print(any(values))   
+     Output: True (because 5 is True)
+
+             values = [0,False]
+             print(any(values))
+     Output: False (because 0 is False)
+
+
+2)  all():
+    Returns True only if all elements in the iterable are True.
+
+    Returns False if any element is False or the iterable is empty.   
+
+
+    example:
+             values = [1, True, 3]
+             print(all(values))   
+     Output: True (all values are True)
+
+             values2 = [1, 0, 3]
+             print(all(values2))   
+     Output: False (0 is False)
+
+ 
