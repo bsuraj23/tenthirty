@@ -1,3 +1,30 @@
+
+#fun without parameters
+def greet():
+    print("Hello welcome to python!")
+
+greet()
+
+
+#fun with parameters
+def add_numbers(a, b):
+    result = a + b
+    print("The sum is:", result)
+
+add_numbers(5, 3)
+
+#fun with return value
+def multiply(x, y):
+    return x * y
+product = multiply(4, 6)
+print("The product is:", product)
+
+
+#fun with default parameters
+def greet(name="Guest"):
+    print("Hello,", name)
+greet("alice")
+greet()
 from functools import reduce
 
 # Sample list
@@ -35,3 +62,4 @@ gen = count_up_to_five()
 print("Generator output:")
 for number in gen:
     print(number)
+
