@@ -178,6 +178,11 @@ python questions
 5)hands on uml
 6)
 
+04-09
+1)what is instance variable and static variable
+2)can you access instance variable from static
+3)
+
 
 
 
