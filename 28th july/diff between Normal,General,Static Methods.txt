@@ -1,0 +1,46 @@
+1. Normal Method :
+   This is the most common type of method. It’s defined inside a class and takes self as the first parameter. It can access or modify object (instance) data.
+
+   Example:
+   
+   class Student:
+    def show(self):
+        print("This is a normal method")
+
+   s = Student()
+   s.show()
+
+2. General Method  :
+   There is no official term "general method" in Python — but sometimes people informally refer to:
+
+   Either:
+   A normal instance method (just a regular method),Or a method that performs general logic, not specific to instance or class.
+
+   Example :
+   
+    class MathTools:
+    def square(self, x): 
+        return x * x
+
+3. Abstract Method
+
+    An abstract method is declared in an abstract base class, but it has no implementation. Any subclass must implement this method.
+
+    Python uses the abc module to support abstract methods.
+
+    Example :
+    
+    from abc import ABC, abstractmethod
+
+    class Shape(ABC):
+    @abstractmethod
+    def area(self):  # 👈 Abstract method
+        pass
+
+    class Circle(Shape):
+    def area(self):
+        return 3.14 * 5 * 5  # example value
+
+    c = Circle()
+    print(c.area())
+

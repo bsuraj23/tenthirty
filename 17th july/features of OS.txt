@@ -1,0 +1,76 @@
+key features of an Operating System (OS)
+
+1. Process Management
+
+       Handles creation, scheduling, and termination of processes (running programs).
+
+       Ensures multitasking by managing CPU time between processes.
+
+2. Memory Management
+
+       Manages RAM allocation to processes.
+
+       Keeps track of each byte and avoids overlap.
+
+       Handles virtual memory (using disk as extra RAM).
+
+3. File System Management
+
+       Organizes files in directories/folders.
+
+       Handles reading, writing, deletion, and permissions.
+
+       Supports file types and file systems (FAT, NTFS, ext4).
+
+4. Device Management
+   
+       Manages input/output devices like keyboards, mice, printers, etc.
+
+       Uses device drivers to communicate with hardware.
+
+       Ensures efficient access and control over devices.
+
+5. User Interface (UI)
+
+       Provides a way for users to interact with the system.
+
+       CLI (Command Line Interface): e.g., bash, cmd
+
+       GUI (Graphical User Interface): e.g., Windows, macOS
+
+6. Security and Protection
+       
+       Protects system from unauthorized access, viruses, and threats.
+
+       Manages user authentication, file permissions, and encryption.
+
+8. Networking
+	
+	Enables communication between systems over LAN, WAN, or Internet.
+
+	Manages network protocols, sharing resources, and file transfers.
+
+9. Resource Allocation
+	
+	Allocates CPU, memory, disk, and I/O devices to processes as needed.
+
+	Ensures fair and efficient resource usage.
+
+10. Error Detection and Handling
+
+	Continuously monitors the system for hardware/software errors.
+
+	Alerts users or takes corrective action.
+
+
+
+
+
+
+
+
+
+
+
+
+

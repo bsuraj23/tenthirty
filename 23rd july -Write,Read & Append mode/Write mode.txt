@@ -1,0 +1,2 @@
+This file is created using write mode in Python.
+This line is added using append mode.
