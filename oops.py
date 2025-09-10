@@ -1,57 +1,92 @@
-#class and object with encapsulation
-# Class definition
-class Student:
-    def __init__(self, name, grade):
-        self.name = name        # public attribute
-        self.__grade = grade    # private attribute (encapsulation)
-
-    def display(self):
-        print("Name:", self.name)
-        print("Grade:", self.__grade)
-
-# Creating object
-s1 = Student("Alice", "A")
-s1.display()
-
-#inheritence
-# Base class
+#Single Inheritance
 class Animal:
     def speak(self):
         print("Animal speaks")
 
-# Derived class
 class Dog(Animal):
-    def speak(self):
+    def bark(self):
         print("Dog barks")
 
-# Creating objects
-a = Animal()
+# Create object
 d = Dog()
-
-a.speak()
 d.speak()
+d.bark()
 
-#polymorphism
-class Shape:
-    def area(self):
-        print("Area not defined")
+#Multilevel Inheritance
+class Animal:
+    def speak(self):
+        print("Animal speaks")
 
-class Square(Shape):
-    def __init__(self, side):
-        self.side = side
+class Dog(Animal):
+    def bark(self):
+        print("Dog barks")
 
-    def area(self):
-        return self.side * self.side
+class Puppy(Dog):
+    def weep(self):
+        print("Puppy weeps")
 
-class Circle(Shape):
-    def __init__(self, radius):
-        self.radius = radius
+# Create object
+p = Puppy()
+p.speak()
+p.bark()
+p.weep()
 
-    def area(self):
-        return 3.14 * self.radius * self.radius
+#Multiple Inheritance
+class Father:
+    def skills(self):
+        print("Gardening and Programming")
 
-# Polymorphism
-shapes = [Square(4), Circle(3)]
+class Mother:
+    def skills(self):
+        print("Cooking and Art")
 
-for shape in shapes:
-    print("Area:", shape.area())
+class Child(Father, Mother):
+    def show(self):
+        print("Child has following skills:")
+
+# Create object
+c = Child()
+c.show()
+c.skills()
+
+#Encapsulation
+class Person:
+    def __init__(self, name):
+        self.__name = name  # private variable
+
+    def get_name(self):
+        return self.__name  # public method to access private variable
+
+    def set_name(self, name):
+        self.__name = name  # public method to modify private variable
+
+# Create object
+p = Person("John")
+
+# Access name using getter
+print("Name:", p.get_name())
+
+# Modify name using setter
+p.set_name("Alice")
+print("Updated Name:", p.get_name())
+
+#Polymorphism
+class Dog:
+    def sound(self):
+        print("Dog barks")
+
+class Cat:
+    def sound(self):
+        print("Cat meows")
+
+# Function showing polymorphism
+def animal_sound(animal):
+    animal.sound()
+
+# Create objects
+d = Dog()
+c = Cat()
+
+# Call the function with different objects
+animal_sound(d)
+animal_sound(c)

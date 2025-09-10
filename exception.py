@@ -1,9 +1,17 @@
 try:
-  num1 = int(input("Enter a number" ))
-  num2 = int(input("Enter another number"))
-  result = num1 / num2
-  print("Result:", result)
+    num1 = int(input("Enter the numerator: "))
+    num2 = int(input("Enter the denominator: "))
+
+    result = num1 / num2
+
 except ZeroDivisionError:
-  print("You cannot divide by zero.")
+    print("Error: Cannot divide by zero.")
+
 except ValueError:
-  print("Enter a valid integer.")  
+    print("Error: Please enter valid integers.")
+
+else:
+    print("Result:", result)
+
+finally:
+    print("Exception completed.")
