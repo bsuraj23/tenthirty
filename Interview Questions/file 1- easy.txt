@@ -1,0 +1,116 @@
+1) What are Python’s key features? Why is it called an interpreted language?
+
+->python's key features include it is a high-level language, interpreted, dynamic, and it supports multiple programming paradigms like oops and it is open source free for all.
+->it is considered as an interpreted language because it executes line by line code.
+
+2) Difference between *Python 2 and Python 3*?
+
+->print statements are different
+eg: In python 2 the print statement is print"Hello"
+    In python 3 the print statement is print("Hello")
+->Integer Division
+eg: in python 2 when we divide 7/2 yield, the answer is 3
+    in python 3 when we divide 7/2 yield, the answer is 3.5
+
+3) Explain indentation in Python. What happens if indentation is incorrect?
+-> In pyhton, the indentation is crucial as it defines the structure and scope of code blocks. python consists tabs or spaces at the beginning of a line to indicate code hierachy. it comes after for, if,else,while, class, def...
+-> if we indicate incorrect the indentation error will occur, the flow of structure program is disturbed.
+
+4) What are Python **keywords**? Can you use them as variable names?
+-> python keywords are reserved words that have predifined meanings. it is like for, while,import,class,True,False,None, if,else.
+-> We cannot use as variable names because if we use those it will give syntaxerror.
+
+5)  Difference between **list, tuple, set, and dictionary**. Give examples.
+->List: Mutable- which we can modify after creation and ordered(maintains in an order of elements).square brackets[]
+eg:lst=[1,2,"apple",2,True]
+   lst.append(3)
+   print(lst[0])
+->Tuple: Immutable-which cannot modify after creation and it is ordered (maintains in an order of elemants).paranthesis()
+eg:tup=(1,2,"banana",2,False)
+tup.append(3) #cannot be added because it is immutable and it would raise error
+print(tup[2])
+->Set: Mutable-which can modify after creation and it unordered(does not main any order of elemants).braces{} and paranthesis()
+eg:set={1,2,"orange",2,True} #here 2 is ignored because it is duplicate
+   set.add(4)
+   print(set)
+->Dictionary:Mutable-which can modify after creation and it is ordered in python 3.7+, unordered in older versions.braces{}
+eg:dict={"name":"Harish","age":21,"id":24}
+   dict["job"]="engineer"
+   print(dict["name"])
+
+6) What is the difference between **mutable and immutable** data types?
+-> Mutable data types:These data types whose values can be modified after creation.
+   when you modify a mutable object, you are changing the original object in memory.
+eg:list, Set, Dictionary
+-> Immutable data types: these data types whose values cannot be modified after creation.
+   if we want to modify the values we need to create a new object, the original object is unchanged
+eg:integer, string, float, tuples
+
+7)Explain **== vs is** operator in Python with examples.
+-> In python, == and IS are comparison operators used to evaluate relationships between objects, but they serve different purposes.
+-> ==(Equality operator):Compares the values of two objects. retruns True if the values of the objects are equal, otherwise False.
+eg:a=[1,2,3]
+   b=[1,2,3]
+   c=[4,5,6]
+print(a==b) #it prints True
+print(a==c) #it prints False
+->is(identity operator): compares the identity of two objexts. returns True if two variables refer to the exact  same object in memory,
+                         otherwise False
+eg:a=[1,2,3]
+   b=[1,2,3]
+   c=a
+print(a is b)   #it prints False because the objects are different
+print(a is c)  # it prints True because both refer to the same objects
+->eg2:a=100
+    b=100 
+print(a is b) #it prints True because same cached object
+->   a=500
+   b=500
+print(a is b) #it prints False because the caches integers from -5 to 256, so it will works True only in that range
+
+8) What is the difference between **append() vs extend()** in lists?
+-> The append() and Extend() methods in python lists both add elements to a list, but they differ in how they handle
+   the elements being added.
+eg: Append(): when we use append() we can only add single element to the end of the list
+    lst=[1,2,3]
+    lst.append(4)  
+    print(lst)   #prints [1,2,3,4]
+    lst.append([5,6]) #when we add multiple items wheather that item is a simple value or collection itself.
+    print(lst)   # prints [1,2,3,4,[5,6]]
+eg: Extend(): Adds multiple elemants from an iterable(like another list, tuple, set, or string) to the end of the list
+    lst=[1,2,3]
+    lst.extend([4,5])
+    print(lst)  #prints [1,2,3,4,5]
+    lst.append("abc")  #when we want to add all individuals  items  from an iterable  to the existing list, effectively merging it.
+    print(lst)  #it prints [1,2,3,4,5,'a','b','c']  
+
+9)Explain **shallow copy vs deep copy** in Python.
+->In python, shallow copy and deep copy are two distinct methods for creating copies of objects, particularly when dealing with
+  mutable data structures and nested objects
+ ->Shallow copy:we can create an object reference of original object data and when we modify the reference object data 
+   the original will also changes the data like reference object data.
+eg:import copy
+   original=[[1,2],[3,4]]
+   shallow_copy=copy.copy(origianl)
+   shallow_copy[1][1]=99
+   print(original)      #it prints [[1,2],[3,99]] here original also changed
+   print(shallow_copy)   #it prints [[1,2],[3,99]] here is the reference which is directly changed.
+ ->deep copy: we can create an object with the reference of original object data, when if we change or modify the 
+   reference object data the original will not change, unlike shallow copy
+eg: import copy 
+    original=[[1,2],[3,4]]
+    deep_copy=copy.deepcopy(original)
+    deep_copy[0][1]=100
+    print(original)   #it prints [[1,2],[3,4]] here cannot changed the data in deep copy unlike shallow copy
+    print(deep_copy)  # it prints [[1,100],[3,4]] here the reference object of data changed directly.
+
+10) How does python handles ma=emory management(garbage collection)?
+-> Python automatically manages memory.Python memory management is largely automatic, combining the immediate deallocation
+   of reference counting with the more comprehensive. It uses a combination of:
+   ->reference counting 
+   ->Garbage collection for cyclic references 
+   ->Private heap and memory management
+
+
+
+

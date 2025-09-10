@@ -64,4 +64,4 @@ def delete_user(user_id:int, session:session_dep):
         raise HTTPException(status_code=404, detail="user not found")
     session.delete(user)
     session.commit()
-    return {"message":"user deleted successfully"}
+    return {"message": "user deleted successfully"}
