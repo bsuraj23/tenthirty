@@ -82,3 +82,11 @@ even = filter (lambda x:  x%2==0, nums)
 sqr= map (lambda x : x**2, even)
 
 print(list(sqr))
+
+#json
+import json 
+person = {"name":"soham", "age": 22, "address": "amravati"}
+json_string= json.dumps(person)
+print(json_string)
+print(type(json_string))
+
