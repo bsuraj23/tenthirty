@@ -1,0 +1,35 @@
+1. What are Python’s key features? Why is it called an interpreted language?
+
+Key Features:
+
+>Easy to learn and read: Python’s syntax is simple and close to English.
+>Interpreted language: Python executes code line by line, without compiling into machine code.
+>Dynamically typed: No need to declare variable types explicitly.
+>Extensive libraries: Offers a vast collection of libraries for web development, data science, etc.
+>Object-Oriented & Functional: Supports classes, inheritance, and functional programming features.
+>Portability: Code written on one platform runs on others without modification.
+
+Why interpreted?
+>Python doesn’t compile to binary before execution.
+>It reads and executes the code directly at runtime.
+>Errors are detected line by line during execution.
+
+3Explain indentation in Python. What happens if indentation is incorrect?
+indentation means adding spaces at the beginning of a line to show that a group of code belongs together. Python uses this instead of {} like other languages.
+
+Example:
+
+if True:
+    print("Hello")  # This line is inside the if block
+print("Bye")       # This line is outside
+
+
+If you don’t indent correctly, Python will give an error and stop running the program.
+
+Example of wrong indentation:
+
+if True:
+print("Hello")  # ❌ Error!
+
+
+So, always make sure the lines inside loops, functions, or conditions are indented properly.
