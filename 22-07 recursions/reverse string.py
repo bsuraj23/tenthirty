@@ -1,15 +1,11 @@
-#without RecursionError
-def reverse_string(s):
-    return s[::-1]
-print(reverse_string("harish"))
-
-
 #recursion
-def reverse_string(s):
-    if len(s)==0:
+def reverse_string(text):
+    if len(text)==0:
         return ""
-    return reverse_string(s[1:])+s[0]
-
+    return reverse_string(text[1:])+text[0]
 print(reverse_string("Harish"))
 
-
+#slicing
+def reverse_string(text):
+    return text[::-1]
+print(reverse_string("Reddy"))

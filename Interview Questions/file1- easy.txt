@@ -104,8 +104,8 @@ eg: import copy
     print(original)   #it prints [[1,2],[3,4]] here cannot changed the data in deep copy unlike shallow copy
     print(deep_copy)  # it prints [[1,100],[3,4]] here the reference object of data changed directly.
 
-10) How does python handles ma=emory management(garbage collection)?
--> Python automatically manages memory.Python memory management is largely automatic, combining the immediate deallocation
+10) How does python handles memory management(garbage collection)?
+-> Python automatically manages memory. Python memory management is largely automatic, combining the immediate deallocation
    of reference counting with the more comprehensive. It uses a combination of:
    ->reference counting 
    ->Garbage collection for cyclic references 
