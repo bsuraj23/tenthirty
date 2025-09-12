@@ -1,0 +1,61 @@
+ What are Python’s key features? Why is it called an interpreted language?
+
+Key Features:
+
+>Easy to learn and read: Python’s syntax is simple and close to English.
+>Interpreted language: Python executes code line by line, without compiling into machine code.
+>Dynamically typed: No need to declare variable types explicitly.
+>Extensive libraries: Offers a vast collection of libraries for web development, data science, etc.
+>Object-Oriented & Functional: Supports classes, inheritance, and functional programming features.
+>Portability: Code written on one platform runs on others without modification.
+
+Why interpreted?
+>Python doesn’t compile to binary before execution.
+>It reads and executes the code directly at runtime.
+>Errors are detected line by line during execution.
+
+3Explain indentation in Python. What happens if indentation is incorrect?
+indentation means adding spaces at the beginning of a line to show that a group of code belongs together. Python uses this instead of {} like other languages.
+>If you don’t indent correctly, Python will give an error and stop running the program.
+
+4. What are Python keywords? Can you use them as variable names?
+Keywords are reserved words with predefined meanings, e.g.:
+if, else, for, while, class, def, return, try, except, import
+
+5. Difference between list, tuple, set, and dictionary
+List: Ordered, mutable, allows duplicates. Example: [1, 2, 2, 3]
+Tuple: Ordered, immutable, allows duplicates. Example: (1, 2, 2, 3)
+Set: Unordered, mutable, no duplicates allowed. Example: {1, 2, 3}
+Dictionary: Unordered, mutable, keys must be unique. Example: {"a": 1, "b": 2}
+
+6. Difference between mutable and immutable data types
+Mutable: Objects that can be changed after creation. Examples: list, set, dictionary
+Immutable: Objects that cannot be changed after creation. Examples: tuple, string, int
+
+7. Difference between == and is
+== checks if two values are equal.
+Example: [1,2] == [1,2] → True
+
+is checks if two variables point to the same object in memory.
+Example: a = [1,2]; b = a; a is b → True
+
+8. Difference between append() vs extend() in lists
+append() adds a single element to the end of a list.
+Example: list1.append([3,4]) → [1,2,[3,4]]
+extend() adds elements from another iterable individually.
+Example: list1.extend([3,4]) → [1,2,3,4]
+
+9. Difference between shallow copy and deep copy
+
+Shallow copy: Creates a new object, but nested objects refer to the same memory.
+Changing nested elements affects the original.
+
+Deep copy: Creates a new object and recursively copies all nested objects.
+Changing nested elements does not affect the original.
+
+10. How does Python handle memory management (Garbage collection)?
+
+Python uses automatic memory management.
+It keeps track of all objects and their references.
+When an object’s reference count drops to zero, it’s automatically removed from memory.
+Python also has a garbage collector that handles cyclic references.
