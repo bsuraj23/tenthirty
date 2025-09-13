@@ -6,7 +6,7 @@ print(date)
 
 #  validation
 
-pattern2 =r"\d{2}/[\w.-]{3}/\d{4}"
+pattern2 =r"\d{2}/\[\d.-]{3}/\d{4}"
 text=["30apr2003","12dec2012"]
 
 for d in text:
