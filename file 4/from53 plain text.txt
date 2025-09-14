@@ -1,0 +1,93 @@
+ 53.What are partial functions (`functools.partial`)?
+ partial functions are functions where some arguments are fixed or preset. 
+The functools.partial function allows you to create a new version of an existing function with one or more arguments already filled in.
+
+ 54.What is memoization? How is it different from caching?
+Memoization is an optimization technique where you store the results of expensive function calls and return the cached result when the same inputs occur again.
+
+What is Caching?
+Caching is a broader term where you store data so that future requests are faster. Memoization is a specific type of caching focused on function results.
+Difference between Memoization and Caching – Simple Points
+
+Memoization:
+>Stores results of a function to reuse later.
+>Used only for functions.
+>Helps avoid repeated calculations.
+>Usually implemented inside the function.
+
+Caching:
+>Stores data to reuse later.
+>Used for functions, files, web pages, etc.
+>Helps speed up access or reduce resource use.
+>Can be global or across systems.
+
+55.How do you implement functional pipelines in Python?
+A functional pipeline is a way to process data by passing it through a series of functions, where the output of one function becomes the input of the next.
+In Python, you can implement pipelines using function composition, map(), filter(), and other tools like functools.reduce.
+
+56.How do you implement tail recursion optimization (since Python doesn’t have it natively)?
+Tail Recursion Optimization in Python
+Python doesn’t optimize tail recursion automatically like some other languages. However, you can simulate or implement it manually to avoid hitting recursion limits for deep recursive calls.
+
+> What is Tail Recursion?
+A recursive function is tail recursive when the recursive call is the last operation in the function.
+In languages that support it, tail recursion can be optimized to reuse the same stack frame.
+Since Python lacks this optimization, you can:
+>Use iteration instead of recursion, or
+>Use a decorator or trampoline to simulate tail call optimization.
+
+57.57. Explain higher-order functions with real-world use cases.
+Higher-Order Functions in Python?
+A higher-order function is a function that either:
+Takes one or more functions as arguments, or
+Returns a function as a result.
+This makes it possible to build flexible, reusable, and composable code.
+Key Points:
+Functions can be passed around like variables.
+It helps in abstraction and separating concerns.
+Common examples include map(), filter(), and sorted().
+
+58.Differences Between map, filter, reduce, and Comprehensions in Python
+1️map():
+
+Purpose: Applies a function to every item in an iterable.
+Returns: A map object (can be converted to list, set, etc.).
+Use case: Transform each element of a sequence.
+Example:
+nums = [1, 2, 3]
+squared = list(map(lambda x: x**2, nums))
+print(squared)  # [1, 4, 9]
+
+2️.filter()
+Purpose: Selects items from an iterable that satisfy a condition.
+Returns: A filter object (convertible to list, set, etc.).
+Use case: Filter elements based on a condition.
+Example:
+nums = [1, 2, 3, 4, 5]
+evens = list(filter(lambda x: x % 2 == 0, nums))
+print(evens)  # [2, 4]
+
+3️.reduce()
+Purpose: Performs a cumulative operation on iterable elements to produce a single value.
+Returns: A single value.
+Use case: Sum, multiply, or combine items.
+
+Example:
+from functools import reduce
+nums = [1, 2, 3, 4]
+total = reduce(lambda x, y: x + y, nums)
+print(total)  # 10
+
+4️.Comprehensions (list/set/dict)
+Purpose: Create new iterables in a concise and readable way.
+Returns: A list, set, or dictionary depending on the comprehension used.
+Use case: Transform, filter, or combine elements in a readable syntax.
+
+Example:
+nums = [1, 2, 3, 4, 5]
+squared_evens = [x**2 for x in nums if x % 2 == 0]
+print(squared_evens)  # [4, 16]
+60. What are monads in functional programming, and can they be represented in Python?
+Monads in functional programming are design patterns that allow chaining computations while handling side effects (like None values, errors, or I/O) in a consistent way.
+ They wrap a value in a container and provide a method (usually called bind) to apply functions to that value safely, maintaining the context.
+Yes, they can be represented in Python using classes with a bind (or flat_map) method.
