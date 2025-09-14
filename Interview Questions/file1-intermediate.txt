@@ -206,7 +206,24 @@ print(acc.get_balance())  # output: 1500
 # print(acc.__balance) ❌ AttributeError
 -->Abstraction: Hiding the implementation details and exposing only the essential features
 
-8)
+8)What are **magic/dunder methods** in Python? Give examples (__str__, __init__)?
+-->Dunder=Double Underscore eg->__int__, __str__.
+  These are special methods in python that start and end with __.
+  we dont need to call directly. Python calls them automatically when you do certain things.
+eg:with __init__, __str__
+  class Student:
+    def __init__(self, name, age):
+       self.name=name
+       self.age=age
+    def __str__(self):            #double underscore is called dunder which is starting and ending of the function name
+       return f'Name:{self.name}, Age:{self.age}'
+  s1=Student("Harish",21)
+  print(s1)                 
+
+9)
+
+
+
 
 
 
