@@ -13,14 +13,17 @@ eg: in python 2 when we divide 7/2 yield, the answer is 3
     in python 3 when we divide 7/2 yield, the answer is 3.5
 
 3) Explain indentation in Python. What happens if indentation is incorrect?
+
 -> In pyhton, the indentation is crucial as it defines the structure and scope of code blocks. python consists tabs or spaces at the beginning of a line to indicate code hierachy. it comes after for, if,else,while, class, def...
 -> if we indicate incorrect the indentation error will occur, the flow of structure program is disturbed.
 
 4) What are Python **keywords**? Can you use them as variable names?
+
 -> python keywords are reserved words that have predifined meanings. it is like for, while,import,class,True,False,None, if,else.
 -> We cannot use as variable names because if we use those it will give syntaxerror.
 
 5)  Difference between **list, tuple, set, and dictionary**. Give examples.
+
 ->List: Mutable- which we can modify after creation and ordered(maintains in an order of elements).square brackets[]
 eg:lst=[1,2,"apple",2,True]
    lst.append(3)
@@ -39,6 +42,7 @@ eg:dict={"name":"Harish","age":21,"id":24}
    print(dict["name"])
 
 6) What is the difference between **mutable and immutable** data types?
+
 -> Mutable data types:These data types whose values can be modified after creation.
    when you modify a mutable object, you are changing the original object in memory.
 eg:list, Set, Dictionary
@@ -47,6 +51,7 @@ eg:list, Set, Dictionary
 eg:integer, string, float, tuples
 
 7)Explain **== vs is** operator in Python with examples.
+
 -> In python, == and IS are comparison operators used to evaluate relationships between objects, but they serve different purposes.
 -> ==(Equality operator):Compares the values of two objects. retruns True if the values of the objects are equal, otherwise False.
 eg:a=[1,2,3]
@@ -69,6 +74,7 @@ print(a is b) #it prints True because same cached object
 print(a is b) #it prints False because the caches integers from -5 to 256, so it will works True only in that range
 
 8) What is the difference between **append() vs extend()** in lists?
+
 -> The append() and Extend() methods in python lists both add elements to a list, but they differ in how they handle
    the elements being added.
 eg: Append(): when we use append() we can only add single element to the end of the list
@@ -85,6 +91,7 @@ eg: Extend(): Adds multiple elemants from an iterable(like another list, tuple, 
     print(lst)  #it prints [1,2,3,4,5,'a','b','c']  
 
 9)Explain **shallow copy vs deep copy** in Python.
+
 ->In python, shallow copy and deep copy are two distinct methods for creating copies of objects, particularly when dealing with
   mutable data structures and nested objects
  ->Shallow copy:we can create an object reference of original object data and when we modify the reference object data 
@@ -104,8 +111,9 @@ eg: import copy
     print(original)   #it prints [[1,2],[3,4]] here cannot changed the data in deep copy unlike shallow copy
     print(deep_copy)  # it prints [[1,100],[3,4]] here the reference object of data changed directly.
 
-10) How does python handles memory management(garbage collection)?
--> Python automatically manages memory. Python memory management is largely automatic, combining the immediate deallocation
+10) How does python handles ma=emory management(garbage collection)?
+
+-> Python automatically manages memory.Python memory management is largely automatic, combining the immediate deallocation
    of reference counting with the more comprehensive. It uses a combination of:
    ->reference counting 
    ->Garbage collection for cyclic references 

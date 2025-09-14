@@ -1,0 +1,215 @@
+1)What are *functions* in Python? Difference between \*args and \*\*kwargs?
+-> A function is a block of reusable code that performs a specific code.
+-> when we want to rewrite the whole code you can define it with a function after you can call it if needed. 
+ No need to rewrite the whole code, just call the function it will be executed.
+eg: def function_name():
+    	add=20+30
+ 	return add 
+    print(function_name())
+-> functions helps in reusability, readability, and modularity.
+Difference between arges and kwargs:Both are used in function definitions when you dont know in advance how many arguments or parameters will be passed.
+->*args:(Arbitrary Positional Arguments)
+  -it collects extra positional arguments as tuple, use it when you want to pass a variable number  of arguments.
+eg: def add_numbers(*args):
+    	return sum(args)
+    print(add_numbers(1,2,3)) #it prints 6
+->**kwargs:(Arbitrary keyword argument)
+  -it collects extra keyword arguments as dictionary, use when you want to handle arguments that you dont know
+    in advance
+eg: def print_details(**kwargs):
+    	for key, value in kwargs.items():
+		print(f"{key}:{value}")
+    print_details(name="harish",age=21)
+
+2)Explain **decorators** in Python with an example.
+->A decorator is a function it used another function as input, adds some functionality to it, and returns a new function as it called wrapper, it is used in extra code without modifying or changing the original source code.
+->wrap: it is a function used for extra behaviour.
+->the decorators are used mainly for add logging, to check authentication, to measure execution time, to modify or 
+  extend function behaviour without rewriting it
+eg1:def my_decorator(fun):
+    def wrapper():
+        print("before the function runs")
+        fun()
+        print("After the function run")
+    return wrapper
+@my_decorator   #this is the decorator to hello()
+def hello():
+    print("Helo world!")
+hello() 
+
+eg2:#decorator with argument
+def smart_division(fun):
+    def wrapper(a,b):
+        print(f'Division {a} by {b}')
+        if b==0:
+            return "Error!, Division by zero"
+        return fun(a,b)
+    return wrapper
+@smart_division
+def division(a,b):
+    return a/b
+print(division(5,0))
+print(division(10,5))
+
+3)What are generators and yield?
+->A generator is a special type function that allows you to create an iterator(something you can loop over)
+  in a simple and memory efficient way.
+->Instead of returning of all values at once(like a list), a generator yield values at a time, only when needed.
+->Yield: Yield is like return or print, but it pause the function instead of end the function.
+  When the function is called again, it resumes where it left off.
+eg: def my_generator():
+	yield 1
+	yield 2
+	yield 3
+
+   gen= my_generator()
+   
+print(next(gen))  #1
+print(next(gen))   #2
+print(next(gen))    #3
+
+if you print again it will raise StopIteration
+eg2: def countdown(n):
+	while n>0:                    #output
+   	   yield n                     5
+	   n=n-1			4
+     for num in countdown(5):		3
+	print(num)                      2
+					1
+4)Difference between iterable, iterator, and generator?
+->Iterable: An iterable is a pyhtonn object we can loop over with using for loop.
+  It implements the iter method
+eg: text="python"	
+    for char in text:	
+	print(char)     #here string Python is an iterable, because we can loop over it.
+->Iterator: We can turn an iterable to iterator using iter() method.
+            By this we can fetch items one by one using next()
+eg:numbers[1,2,3]      #here numbers are iterable
+  item=iter(numbers)   #here item is an iterator
+  print(next(item))  #1
+  print(next(item))  #2
+  print(next(item))  #3
+  print(next(item))  #it will show Stopiteration 
+->Generator: It is function created with yield and generators are iterators
+   eg:def countdowm(n):
+         while n>0:
+           yield n
+           n=n-1
+      for num in countdown(5):
+     	print(num)           #it will print reverse order in numbers like 5,4,3,2,1
+
+5)Explain **list comprehension** with an example.?
+->List comprehension is a way of writing code in short and elegant to create lists in python.
+  Instead of writing a for loop and appending values, we can write it in one line.
+
+ eg: without list comprehension         with list comprehension
+        num=[]					num=[i*i for i in range(5)]
+        for i in range(5):			print(num)
+	    num.append(i*i)
+        print(num)                       output: [0,1,4,9,16]
+
+6) What is the difference between **classmethod, staticmethod, and instance method**?
+->Instance method
+  An instance method is a function defined in a class that operates on a instance object  of the class.
+  It takes self as the first parameter, which represents the object itself.
+eg: class Student:
+    def __init__(self, name, marks):
+        self.name = name       # instance variable
+        self.marks = marks     # instance variable
+    # Instance method
+    def display_info(self):
+        print(f"Name: {self.name}, Marks: {self.marks}")
+# Creating objects (instances)
+s1 = Student("Harish", 90)
+s2 = Student("Anu", 85)
+# Calling instance methods
+s1.display_info()   # Output: Name: Harish, Marks: 90
+s2.display_info()   # Output: Name: Anu, Marks: 85
+
+->static method: Static method does not depends on the self and class itself. in decorators we use @staticmethod
+eg: class Validator:
+    @staticmethod
+    def is_even(num):
+        return num % 2 == 0
+
+print(Validator.is_even(10))  # True
+print(Validator.is_even(7))   # False
+
+->A class method is a method that works on the class itself, not on the self(instances).
+  It takes cls(class) as the first parameter instead of self(instance) and we should use in decorators as
+    @classmethod
+eg: class Student():
+        school="Gitam University"
+        @classmethod
+        def get_school(cls):
+            return cls.school
+--->Example all three
+class Student:
+    school="Gitam University"
+    def __init__(self, name, age):
+        self.name=name        #instance variable
+        self.age=age          #instance variable
+    
+    #instance method
+    def show_details(self):
+        return f'name:{self.name},age:{self.age}'
+    
+    #static method
+    @staticmethod
+    def add(a,b):
+        return a+b
+    
+    #class method
+    @classmethod
+    def get_school(cls):     #here get_school is a class method
+        return cls.school    #here cls.school is a class variable
+    
+#How to use them
+s1=Student("Harish",21)      #(instance)
+print(s1.show_details())                           #output:name:Harish,age:21
+#using static method
+print(Student.add(5,5))                            #output:10
+#using class method
+print(Student.get_school())                        #output:Gitam University
+
+7)Explain **Python’s OOP concepts**: inheritance, polymorphism, encapsulation, abstraction?
+-->Inheritance: One class(child) can inherit properties and methods from another class(Parent). This promotes code reuse.
+eg:class Animal:  # Parent class
+    def speak(self):
+        return "I make sounds"
+
+   class Dog(Animal):  # Child class inherits Animal
+      def speak(self):   # Overriding
+         return "Woof!"
+   class Cat(Animal):
+    def speak(self):
+        return "Meow!"
+ dog = Dog()
+ cat= Cat()
+ print(dog.speak())        #woof!
+ print(cat.speak())        # Meow!
+-->Polymorphism: Same method name can behaves differently depending on the object. One name, many forms.
+eg: animals = [Dog(), Cat()]
+    for animal in animals:        #here Both Dog and Cat use the same method speak(), but output differs.
+       print(animal.speak())     # output: Dog → Woof!, Cat → Meow!
+-->Encapsulation: Binding the data and functions into a single entity. Restrict direct access to some attributes/methods to protect data
+eg: class BankAccount:
+    def __init__(self, balance):
+        self.__balance = balance   # private attribute
+    def deposit(self, amount):
+        self.__balance += amount
+    def get_balance(self):
+        return self.__balance
+acc = BankAccount(1000)
+acc.deposit(500)
+print(acc.get_balance())  # output: 1500
+# print(acc.__balance) ❌ AttributeError
+-->Abstraction: Hiding the implementation details and exposing only the essential features
+
+8)
+
+
+
+
+
+
