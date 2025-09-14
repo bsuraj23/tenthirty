@@ -1,0 +1,73 @@
+#Memory Optimization & Design
+
+21. Python memory views
+
+memory view gives a view into the memory of another object (like bytes or bytearray).
+
+Lets you slice and work with data without copying it.
+
+22. bytes vs byte array vs memory view
+
+bytes: immutable sequence of bytes.
+
+byte array: mutable sequence of bytes.
+
+memory view: a window to the memory of another object (zero-copy access).
+
+23. Reduce memory for large datasets
+
+Use generators or iterators instead of big lists.
+
+Use NumPy arrays instead of Python lists.
+
+Use chunking when reading files.
+
+Use __slots__ for classes.
+
+24. __slots__
+
+Special attribute in classes to define fixed attributes.
+
+Saves memory by avoiding a per-instance __dict__.
+
+26. functools.lru_cache internals
+
+Wraps a function.
+
+Stores a dict of arguments → result.
+
+When cache full, removes least recently used entry automatically.
+
+27. Weak references (weak ref)
+
+References to an object that don’t increase its ref count.
+
+Object can be garbage-collected even if weakly referenced.
+
+Useful for caches.
+
+28. Debug a memory leak
+
+Use trace malloc or obj graph to track allocations.
+
+Check reference cycles.
+
+Ensure files/sockets closed.
+
+Profile memory during program run.
+
+29. Generators vs lists
+
+Generators: produce items on the fly, low memory.
+
+Lists: hold all items in memory, faster random access.
+
+Trade-off: memory vs speed & indexing.
+
+30. Handle huge data (GBs)
+
+Stream data in chunks (don’t load all at once).
+
+Use iterators, yield, pandas.read_csv(chunksize=...).
+
+Use memory-mapped files (mmap) or databases.
