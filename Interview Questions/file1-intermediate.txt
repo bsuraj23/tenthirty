@@ -220,8 +220,34 @@ eg:with __init__, __str__
   s1=Student("Harish",21)
   print(s1)                 
 
-9)
+9) Explain **Python’s Global Interpreter Lock (GIL)**. Why is it important?
+-->GIL ensures that only one thread runs pyhton bytecode at a time, even on multi-core processors.
+eg:Imagine you have a classroom(CPU) with many students(threads) but only one pen(GIL).
+   Even through multiple students want to write on the board at the same time, only one can use the pen at a time.
+-->Why does Python have the GIL:Simple memory management- Python uses references counting to manage objects in memory.
+  So, the GIL prevents multiple threads from changing reference counts at the same time(avoid crashes).
+   --Good for single threaded programs-Simple safer memory management.
+   --multi programs running at a same time even in the multi-processor we cant use them in parallel because of the GIL.
 
+10) Difference between **deepcopy vs copy.copy()** in Python?
+-->copy.copy is shallow copy in python- Both uses reference data objects but
+  -In the shallow copy when we modify the reference object data in the original object of data can also changed.
+  -In the deepcopy when we modify the reference object data in the original object of data cannot be changed.
+eg:#shallow copy
+import copy
+original=[[1,2],[3,4]]
+shallow_copy=copy.cop(original)
+shallow_copy[0][1]=99
+print(original)           #[[1,99],[3,4]]    here the original also changed in shallow_copy
+print(shallow_copy)       #[[1,99],[3,4]]
+
+eg:deepcopy
+import copy
+original=[[1,2],[3,4]]
+deep_copy=copy.deepcopy(original)
+deep_copy[0][1]=100
+print(original)          #[[1,2],[3,4]]     here the original is not changed when you changed the reference
+print(deep_copy)         #[[1,100],[3,4]]    
 
 
 
