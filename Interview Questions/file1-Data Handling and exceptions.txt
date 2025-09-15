@@ -1,0 +1,41 @@
+Data handling and Error Management
+
+1) Explain **try, except, finally, else** in Python.?
+  In python, error handling done using try, except, else, and finally blocks
+-->try: If the code look like an error or might cause an error that code is inside the try block.
+-->except: The code that runs when an error happens. Here there are specific error the might can occur(ValueError, ZeroDivisionError)
+      and more , the all errors comes under the except.
+-->else: In this else when the try code has no error the else code runs. It is useful only when every code is running without error
+-->finally: In this finally code this runs compulsory, if  try, except, else codes works or doesn't works the finally wont care about it
+
+eg1: try                                 
+   try:                                   
+    x=int(input("Enter the number:"))         
+    print("You entered:",x)
+except ValueError:                              #output: you entered: 4
+    ("That input was not a number")     
+
+eg2: except
+try:
+    number=int(input())
+except ValueError:
+    print("it is not a number")           #output: it is not a number
+
+eg3:else
+try:
+    x=int(input("Enter the number:"))
+    print("You entered:",x)
+except ValueError:                         #output: Enter the number :5     #if try prints then else also prints here
+    ("That input was not a number")                 you entered : 5
+
+eg4:finally  (finally will execute compulsary)
+try:
+    number=int(input("Enter the number:"))
+except ValueError:
+    print("That is not a number")
+else:
+    print("yes, you entered a good number:", number)
+finally:                                                        #output: Enter the number: 1
+    print("Program was executed")                                        Yes, you entered a good number: 1
+                                                                         Program was executed             
+

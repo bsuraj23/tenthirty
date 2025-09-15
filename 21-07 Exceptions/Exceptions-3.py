@@ -5,7 +5,7 @@ except Exception as e:
 
 
 try:
-    num = 10
+    num = 20
 except:
     print("Error occurred")
 else:
@@ -16,5 +16,5 @@ try:
     x = int(input("Enter number: "))
 except:
     print("Invalid input")
-finally:
-    print("Execution finished")
+finally:                        #here this finally code will execute compulsary if the try or except works or doesnt
+    print("Execution finished")    #works it dont care

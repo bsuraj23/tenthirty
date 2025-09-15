@@ -8,4 +8,4 @@ try:
 except:
     print("error")
 else:
-    print("Result is:",result)
+    print("Result is:",result)   #if the try code runs properly then the else code also runs
