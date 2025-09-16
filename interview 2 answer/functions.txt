@@ -1,0 +1,51 @@
+21.What are default arguments in Python functions?
+ans: Definition: Default arguments are function parameters that have a default value.
+If the caller does not provide a value, the function uses the default.
+
+Syntax:
+def function_name(param1=default_value1, param2=default_value2):
+    # function body
+
+22.What is the difference between \*args and \*\*kwargs?
+ans:Difference Between *args and **kwargs
+Feature	                       *args	                                                         **kwargs
+Meaning	              Arbitrary number of positional arguments	                        Arbitrary number of keyword arguments
+Type                        received	                                                      Tuple	Dictionary
+Syntax in function	 def func(*args):	def func(**kwargs):
+Use case	      When you don’t know how many positional values will be passed	When you don’t know how many key=value pairs will be passed.
+
+23.Explain pass-by-value vs pass-by-reference in Python.
+ans:Pass-by-Value vs Pass-by-Reference
+Pass-by-Value: A copy of the actual value is passed to the function. Changes inside the function do not affect the original variable.
+Pass-by-Reference: A reference (pointer) to the original object is passed. Changes inside the function affect the original object.
+
+🔹 Python’s Behavior
+Python uses a “pass-by-object-reference” (or “pass-by-assignment”):
+Mutable objects (lists, dicts, sets) → behave like pass-by-reference
+Immutable objects (int, float, str, tuple) → behave like pass-by-value
+
+24.Can functions be assigned to variables in Python?
+ans:Assigned to variables
+Passed as arguments to other functions
+Returned from functions
+
+Assigning a Function to a Variable
+def greet(name):
+    return f"Hello, {name}!"
+
+# Assign function to a variable
+say_hello = greet
+# Call the function using the new variable
+print(say_hello("Alice"))   # Hello, Alice!
+
+
+✅ Key points:
+say_hello points to the same function object as greet.
+You can use it just like the original function.
+
+25.What are lambda functions?
+ans:A lambda function is a single-line, unnamed function defined using the keyword lambda.
+
+Syntax:
+lambda arguments: expression
+The expression is evaluated and returned automatically.

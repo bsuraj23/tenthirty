@@ -1,0 +1,64 @@
+41.What are decorators in Python?
+ans:A decorator is a function that modifies or enhances another function without changing its actual code.
+Think of it as wrapping a gift—the gift (your function) stays the same, but you add extra features (wrapper).
+Common Uses of Decorators:
+Logging
+Timing function execution
+Checking permissions
+Caching results
+Input validation
+Example: Timing how long a function takes.
+Summary:
+Decorators wrap a function to add extra behavior.
+Use @decorator_name for a clean syntax.
+Works with functions with or without arguments.
+Common in logging, authentication, caching, etc.
+
+42.Can a function return another function in Python?
+ans:n Python, a function can return another function. This is possible because functions are first-class objects in Python, meaning they can be passed around, returned, and assigned to variables just like numbers or strings.
+Explanation:
+multiplier(2) returns a function multiply(x) that multiplies by 2.
+multiplier(3) returns a function multiply(x) that multiplies by 3.
+This is a common pattern used in decorators and closures.
+
+✅ Key Points
+Functions are first-class objects in Python.
+Returning a function allows flexible and reusable code.
+Often used with decorators and closures.
+
+43.What is a higher-order function?
+ans:A higher-order function in Python is a function that either:
+Takes one or more functions as arguments, or
+Returns a function as its result, or both.
+In simple words, it’s a function that works with other functions.
+Common Higher-Order Functions in Python
+
+Python has built-in higher-order functions like:
+map() – applies a function to every item in a list
+filter() – filters items based on a function
+reduce() – reduces a list to a single value using a function
+sorted() – can take a key function.
+
+44.What is a context manager in Python?
+ans:A context manager in Python is a way to allocate and release resources safely and automatically. It is commonly used to manage resources like files, network connections, or locks, ensuring they are properly cleaned up even if an error occurs.
+✅ Key Points:
+Context managers manage resources safely.
+Use with to ensure automatic cleanup.
+Custom context managers implement __enter__ and __exit__, or use @contextmanager.
+Common examples: open(), threading.Lock(), decimal.localcontext().
+
+45.What is the difference between `with` and try-finally?
+ans:The with statement and try-finally in Python are both used to ensure cleanup of resources, but they have key differences in simplicity, readability, and use cases.
+| Feature            | `try-finally`                   | `with` (Context Manager)                               |
+| ------------------ | ------------------------------- | ------------------------------------------------------ |
+| Resource setup     | Manual                          | Automatic via `__enter__()`                            |
+| Resource cleanup   | Manual in `finally`             | Automatic via `__exit__()`                             |
+| Readability        | Less readable, more boilerplate | Cleaner, concise                                       |
+| Exception handling | Must handle manually if needed  | Exceptions automatically passed to `__exit__`          |
+| Use case           | Any code requiring cleanup      | Preferred for resources like files, locks, connections |
+
+Key Takeaways:
+with is basically a shortcut for try-finally but cleaner and safer.
+Use with whenever possible for files, locks, or network resources.
+try-finally is more general-purpose, can be used for any cleanup logic, not just resources.
+

@@ -1,0 +1,95 @@
+6.What are mutable and immutable data types in Python?
+ans: Mutable (changeable)
+Objects can be changed after creation.
+If you modify them, the same memory address is updated.
+Examples: [list, dict, set, byte array]
+
+Immutable (unchangeable)
+Objects cannot be changed after creation.
+Any modification creates a new object in memory.
+
+Examples:[int, float, str, tuple, frozen set, bytes]
+
+7.Explain the difference between `list`, `tuple`, `set`, and `dict`.
+ans:| Feature                | **List**                    | **Tuple**                          | **Set**                                               | **Dictionary (dict)**                  |
+| ---------------------- | --------------------------- | ---------------------------------- | ----------------------------------------------------- | -------------------------------------- |
+| **Definition**         | Ordered collection of items | Ordered, immutable collection      | Unordered collection of unique items                  | Collection of key–value pairs          |
+| **Syntax**             | `[1, 2, 3]`                 | `(1, 2, 3)`                        | `{1, 2, 3}`                                           | `{"a": 1, "b": 2}`                     |
+| **Mutable?**           | ✅ Yes                       | ❌ No (immutable)                   | ✅ Yes                                                 | ✅ Yes (keys immutable, values mutable) |
+| **Duplicates?**        | ✅ Allowed                   | ✅ Allowed                          | ❌ Not allowed                                         | ❌ Keys must be unique                  |
+| **Order preserved?**   | ✅ Yes (insertion order)     | ✅ Yes                              | ✅ (since Python 3.7+)                                 | ✅ (since Python 3.7+)                  |
+| **Indexing / Slicing** | ✅ Yes                       | ✅ Yes                              | ❌ No (unordered)                                      | ❌ Keys used instead                    |
+| **Use case**           | General purpose collection  | Fixed data, safe from modification | Unique elements, set operations (union, intersection) | Mapping data (like a real dictionary)  |
+
+List → Ordered & Changeable
+Tuple → Ordered & Unchangeable
+Set → Unordered & Unique
+Dict → Key–Value pairs
+
+8.What are Python’s built-in data types?
+ans:i)Numeric Types
+ int → integers
+ float → decimal numbers
+ complex → complex numbers (a + bj)
+ii)Sequence Types
+ list → ordered, mutable collection
+ tuple → ordered, immutable collection
+ range → sequence of numbers (used in loops)
+ lst = [1, 2, 3]
+ tup = (4, 5, 6)
+ r = range(1, 5)   # 1, 2, 3, 4
+iii) Text Type
+ str → string of Unicode characters
+ name = "Python"
+iv) Set Types
+ set → unordered collection of unique elements
+ frozen set → immutable set
+ s = {1, 2, 3}
+ fs = frozen set([1, 2, 3])
+v) Mapping Type
+ dict → key-value pairs
+ student = {"name": "Alice", "age": 20}
+vi) Boolean Type
+ bool → True or False
+ flag = True
+vii)Binary Types
+ bytes → immutable sequence of bytes
+ byte array → mutable sequence of bytes
+ memory view → memory view object
+
+✅ Summary:
+
+Numbers → int, float, complex
+Sequences → list, tuple, range, str
+Sets → set, frozen set
+Mapping → dict
+Boolean → bool
+Binary → bytes, byte array, memory view
+
+9.What is the difference between `is` and `==` operators?
+ans:| Operator | Meaning           | Compares                               | Example                                                             |
+| -------- | ----------------- | -------------------------------------- | ------------------------------------------------------------------- |
+| `==`     | Equality operator | **Values (contents)**                  | `"hello" == "hello"` → ✅ `True`                                     |
+| `is`     | Identity operator | **Memory addresses (object identity)** | `"hello" is "hello"` → depends on whether both point to same object |
+
+10.How are integers and floats stored in memory in Python?
+ans:Integers in Python
+In CPython (the default Python implementation), integers are stored as objects of type PyLongObject.
+Each integer stores:
+Reference count (for memory management / garbage collection).
+Type pointer (points to the integer type int).
+Value (the actual integer, stored in base-2^30 or base-2^15 chunks depending on platform).
+Small Integer Caching:
+Python caches integers between -5 and 256 for efficiency.
+So any variable set to one of these values will point to the same memory location.
+
+Floats in Python
+Floats in Python are objects of type PyFloatObject.
+Internally, they are stored as a C double (64-bit IEEE 754 floating point number).
+This means:
+1 bit → sign
+11 bits → exponent
+52 bits → mantissa (fraction)
+
+
+

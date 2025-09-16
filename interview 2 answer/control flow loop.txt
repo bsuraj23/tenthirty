@@ -1,0 +1,51 @@
+16.What is the difference between `break`, `continue`, and `pass`?
+ans:Difference Between break, continue, and pass
+| Keyword        | Meaning                         | Effect in Loop                  |
+| -------------- | ------------------------------- | ------------------------------- |
+| **`break`**    | Terminates the loop immediately | Exits the loop entirely         |
+| **`continue`** | Skips the current iteration     | Moves to the **next iteration** |
+| **`pass`**     | Placeholder (does nothing)      | The loop continues normally     |
+break → break the loop 🚪
+continue → skip this turn ⏭️
+pass → do nothing 😴
+
+17.What is the purpose of the `else` clause in loops?
+ans:Purpose of else in loops
+The else block runs after the loop finishes normally (i.e., without hitting a break).
+If the loop is terminated by break, the else block is skipped.
+
+Example with for loop
+for i in range(5):
+    if i == 3:
+        break
+    print(i)
+else:
+    print("Loop finished without break")
+
+18.How does `enumerate()` work in Python?
+ans: It adds a counter (index) to any iterable (list, tuple, string, etc.) and returns it as an enumerate object.
+
+Syntax:
+enumerate(iterable, start=0)
+start → optional, default is 0, the starting index.
+
+19.How do you iterate through a dictionary?
+ans:Iterating over Keys (default)
+student = {"name": "Alice", "age": 21, "grade": "A"}
+
+for key in student:
+    print(key)
+
+
+Output:
+name
+age
+grade
+
+20.How do you use list comprehension in Python?
+ans:A compact way to create a new list by applying an expression to each item in an iterable.
+Syntax:
+[expression for item in iterable if condition]
+Optional if condition filters elements.
+
+

@@ -1,0 +1,79 @@
+26.What are classes and objects in Python?
+ans:. Classes
+A class is a blueprint or template for creating objects.
+It defines attributes (data) and methods (functions) that its objects will have.
+
+Syntax:
+class ClassName:
+    # class attributes
+    # methods
+Objects:
+An object is an instance of a class.
+It represents actual data stored using the class blueprint.
+You can create multiple objects from the same class.
+
+27.What are instance methods, class methods, and static methods?
+ans:i)Instance Methods:
+The most common type.
+Defined inside a class and take self as the first parameter.
+Can access instance attributes and other instance methods.
+Called on objects.
+ii)Class Methods
+Defined with the @classmethod decorator.
+Takes cls as the first parameter, which refers to the class, not an instance.
+Can access class variables, but not instance variables.
+Called on class or object.
+iii)Static Methods
+Defined with the @staticmethod decorator.
+Does not take self or cls.
+Cannot access instance or class variables directly.
+Used for utility functions inside the class.
+| Method Type  | First Parameter | Can Access Instance Variables | Can Access Class Variables | Decorator       |
+| ------------ | --------------- | ----------------------------- | -------------------------- | --------------- |
+| **Instance** | `self`          | ✅ Yes                         | ✅ Yes                      | None            |
+| **Class**    | `cls`           | ❌ No                          | ✅ Yes                      | `@classmethod`  |
+| **Static**   | None            | ❌ No                          | ❌ No                       | `@staticmethod` |
+
+
+28.What are dunder (magic) methods in Python?
+ans:Dunder methods are special methods in Python that have double underscores (__) before and after the method name.
+They allow you to define or customize the behavior of Python objects for built-in operations.
+Also called special methods or magic methods.
+
+🔹 Common Dunder Methods
+Method	Purpose / Use Case
+__init__	Constructor, called when an object is created
+__str__	Defines string representation (print(obj))
+__repr__	Defines unambiguous representation of object
+__len__	Called by len()
+__add__	Defines behavior of + operator
+__eq__	Defines behavior of == operator
+__getitem__	Access items like obj[key]
+__setitem__	Set item like obj[key] = value
+__call__	Makes an object callable like a function
+
+29.What is the purpose of the `__init__` method?
+Purpose of __init__
+__init__ is called a constructor.
+It is automatically invoked when a new object is created from a class.
+Its main purpose is to initialize the object’s attributes with values.
+🔹 Syntax
+class ClassName:
+    def __init__(self, param1, param2, ...):
+        self.param1 = param1
+        self.param2 = param2
+
+
+self → refers to the current object being created.
+Other parameters → values passed during object creation.
+
+30.What is polymorphism in Python?
+ans:Polymorphism literally means “many forms”.
+In Python, it allows different objects or classes to be used interchangeably, as long as they share a common interface or method name.
+It enables one function or operator to work with different types of objects.
+
+Types of Polymorphism in Python
+Operator Overloading – Same operator behaves differently for different data types.
+
+print(5 + 10)        # 15 (int addition)
+print("Hello " + "World")  # Hello World (string concatenation)

@@ -1,0 +1,128 @@
+46. What is the difference between a module and a package?
+ans: Module:
+A module is a single Python file containing functions, classes, or variables that you can reuse in other programs.
+You create a module by simply writing a Python file, e.g., math_utils.py.
+Package:
+A package is a collection of modules organized in a directory.
+It must contain a special file __init__.py (can be empty) to tell Python that the directory is a package.
+comparasion table:
+| Feature    | Module                        | Package                            |
+| ---------- | ----------------------------- | ---------------------------------- |
+| Definition | Single `.py` file             | Directory containing modules       |
+| Contains   | Functions, classes, variables | Modules (and possibly subpackages) |
+| Usage      | `import module_name`          | `import package.module_name`       |
+| Purpose    | Reuse code in a single file   | Organize related modules           |
+
+Analogy:
+A module is like a book.
+A package is like a library full of books (modules), neatly organized.
+
+47.What does `__name__ == "__main__"` mean in Python?
+ans:Every Python file (module) has a special built-in variable called __name__.
+Its value depends on how the file is executed:
+Run directly (python file.py)	"__main__"
+Imported into another module	Module’s filename (e.g., "file").
+ii)To run some code only when the file is executed directly, not when it’s imported.
+Helps organize reusable code (functions, classes) and separate execution logic.
+Key Points:
+__name__ == "__main__" allows a file to act as both a script and a module.
+Keeps the executable code separate from reusable functions/classes.
+Very useful in larger projects to prevent unwanted code execution when importing modules.
+💡 Analogy:
+Think of a Python file as a toolbox:
+Functions and classes → tools you can reuse.
+if __name__ == "__main__": → instructions that run only if you open the toolbox directly.
+
+48.What is the difference between `import` and `from-import`?
+ans:import Statement:
+Imports the whole module.
+You need to use the module name as a prefix to access its functions, classes, or variables.
+from-import Statement:
+Imports specific functions, classes, or variables from a module directly.
+You can use them without the module name prefix.
+| Feature             | `import`           | `from-import`                         |
+| ------------------- | ------------------ | ------------------------------------- |
+| What it imports     | Entire module      | Specific attributes from module       |
+| Accessing items     | `module_name.item` | Directly by `item`                    |
+| Namespace pollution | Minimal            | Can pollute namespace if many imports |
+| Example             | `import math`      | `from math import sqrt, pi`           |
+
+Bonus: from module import *
+Imports all names from a module directly into your namespace.
+Not recommended because it can overwrite existing names and make code unclear.
+Summary:
+Use import module → keeps namespace clean, access with prefix.
+Use from module import item → convenient, no prefix needed.
+Avoid from module import * in large programs.
+
+49.How do relative imports work in Python?
+ans:Relative imports are used to import modules from the same package or sub-packages without specifying the full absolute path.
+They use dots (.) to indicate the current and parent directories:
+
+Dot Notation	Meaning
+.	Current package
+..	Parent package
+...	Grandparent package
+Example Project Structure:
+my_package/
+│
+├── __init__.py
+├── main.py
+├── utils/
+│   ├── __init__.py
+│   └── helpers.py
+└── data/
+    ├── __init__.py
+    └── loader.py
+
+50.How does Python search for modules when importing?
+ans:Python searches for modules in a specific order when you use import. Understanding this helps avoid ImportError and manage your project structure properly.
+
+(1). Search Order for Modules
+When you do:
+import my_module
+
+Python searches for my_module in this order:
+Current directory (or the script’s directory)
+Python first looks in the folder where the running script is located.
+
+PYTHONPATH (environment variable)
+Python checks all directories listed in the PYTHONPATH environment variable.
+Standard library directories
+Python looks in its built-in libraries, like os, sys, math, etc.
+
+Installed site-packages
+Python checks directories where packages installed via pip are located.
+sys.path list
+
+Python maintains sys.path, a list of directories it searches.
+You can view it by:
+
+import sys
+print(sys.path)
+
+
+✅ Python imports the first module it finds with the matching name.
+
+(2) Example
+Suppose the directory structure:
+project/
+│
+├── main.py
+├── my_module.py
+└── utils/
+    └── helper.py
+
+Python searches main.py folder → finds my_module.py → imports it.
+
+(3). Notes
+Module name conflicts:
+If a file in your folder has the same name as a standard library module (like random.py), Python will import your file first. This can cause unexpected behavior.
+Modifying sys.path:
+Packages vs modules:
+Python looks for __init__.py in directories to treat them as packages.
+
+✅ Summary:
+Python searches for modules in this order:
+Current directory → PYTHONPATH → Standard library → Site-packages → sys.pathYou can add directories to sys.path dynamically:
+

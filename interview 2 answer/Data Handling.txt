@@ -1,0 +1,80 @@
+56.How do you read and write files in Python?
+ans:Opening a File
+Use the open() function:
+file = open("example.txt", mode)
+mode can be:
+"r" → read (default)
+"w" → write (overwrites file)
+"a" → append (adds to the end)
+"rb" / "wb" → read/write in binary mode.
+Table:
+| Operation         | Syntax / Mode               |
+| ----------------- | --------------------------- |
+| Open file         | `open("filename", "r/w/a")` |
+| Read all          | `file.read()`               |
+| Read line         | `file.readline()`           |
+| Read all lines    | `file.readlines()`          |
+| Write             | `file.write("text")`        |
+| Append            | `open("filename", "a")`     |
+| Binary read/write | `"rb"` / `"wb"`             |
+| Auto close        | `with open(...) as file:`   |
+
+57.What is the difference between text mode and binary mode in file handling?
+ans:Text Mode ('r', 'w', 'a')
+Default mode when opening a file.
+Reads/writes the file as strings.
+Handles newline (\n) translation automatically:
+On Windows, \n is converted to \r\n when writing.
+On reading, \r\n is converted back to \n.
+Use when working with text files like .txt, .csv, .py.
+
+Binary Mode ('rb', 'wb', 'ab'):
+Reads/writes the file as bytes, not strings.
+No newline translation; reads/writes exact bytes.
+Use when working with images, audio, video, or any non-text files.
+Tables:
+| Feature             | Text Mode (`'r'/'w'`)            | Binary Mode (`'rb'/'wb'`)       |
+| ------------------- | -------------------------------- | ------------------------------- |
+| Data type           | `str`                            | `bytes`                         |
+| Newline translation | Yes (automatic `\n` handling)    | No                              |
+| Default mode        | Yes                              | No                              |
+| Use case            | Text files (`.txt`, `.csv`)      | Non-text files (`.jpg`, `.mp3`) |
+| Encoding            | Can specify (`encoding="utf-8"`) | Not applicable                  |
+
+58.How do you handle CSV files in Python?
+ans:Python has a built-in csv module to read and write CSV files.
+
+a) Reading a CSV File
+import csv
+
+with open("data.csv", "r") as file:
+    reader = csv.reader(file)  # Returns an iterable of rows
+    for row in reader:
+        print(row)
+Table:
+
+| Operation       | `csv` Module                          | `pandas`            |
+| --------------- | ------------------------------------- | ------------------- |
+| Read CSV        | `csv.reader` / `csv.DictReader`       | `pd.read_csv()`     |
+| Write CSV       | `csv.writer` / `csv.DictWriter`       | `df.to_csv()`       |
+| Header handling | Manual with `DictReader`/`DictWriter` | Automatic           |
+| Best for        | Small/simple files                    | Large/complex files |
+
+59.How do you serialize and deserialize JSON in Python?
+ans:Serialization = Converting a Python object (like a dict, list, etc.) into a JSON string.
+                Think of it as saving Python data into text format.
+Deserialization = Converting a JSON string back into a Python object.
+                  Think of it as loading the saved text back into Python.
+
+60. How do you handle command-line arguments in Python?
+ans:the standard way to handle command-line arguments is using the built-in argparse module. You can also use sys.argv for simpler cases, but argparse is more powerful and user-friendly.
+Limitations of sys.argv:
+No automatic type checking.
+No automatic help messages.
+Harder to handle optional arguments.
+✅ Recommendation: Use argparse for all real-world scripts—it’s robust, readable, and provides help messages automatically.
+
+
+
+
+

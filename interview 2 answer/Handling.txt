@@ -1,0 +1,108 @@
+36.What is the difference between `Exception` and `Base Exception`?
+ans:Python Exception Hierarchy:
+In Python, all errors are classes in a hierarchy:
+BaseException
+ ├── SystemExit
+ ├── KeyboardInterrupt
+ ├── GeneratorExit
+ └── Exception
+      ├── ValueError
+      ├── TypeError
+      └── ... other exceptions
+
+🔹 Key Differences
+Feature	                           BaseException	                                                                     Exception
+Level	                          Top-level of all exceptions	                                                   Subclass of BaseException
+Purpose                           For all exceptions, including system-exiting ones	                           For regular errors in programs
+Catches	                          Can catch everything, even KeyboardInterrupt or SystemExit	                   Does not catch system-exiting exceptions
+Use case	                  Rarely used directly; for advanced exception handling	                           Most common: try/except Exception
+
+37.Explain `try`, `except`, `finally`, and `else`.
+ans: i)try: You put code that might cause an error inside a try block.
+Python will attempt to run it, and if an error occurs, it jumps to except.
+
+try:
+    x = 10 / 0  # This will raise an error
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+ii)except: This block catches and handles exceptions.
+You can catch specific exceptions or all exceptions.
+
+try:
+    x = int("abc")
+except ValueError:
+    print("Invalid number!")
+iii)else: Runs only if no exception occurs in the try block.
+Useful for code that should run only when everything is fine.
+
+try:
+    x = int("123")
+except ValueError:
+    print("Invalid number!")
+else:
+    print("Conversion successful:", x)
+
+Output: Conversion successful: 123
+iv)finally: Runs always, whether an exception occurred or not.
+Useful for cleanup, like closing files or releasing resources.
+
+try:
+    x = 10 / 2
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+finally:
+    print("This always runs!")
+
+Output: This always runs!
+short:
+try → attempt risky code
+except → handle errors
+else → run if no errors
+finally → always run
+
+38.What are custom exceptions? How do you create them?
+ans:A custom exception is a user-defined error.
+
+Sometimes Python’s built-in exceptions (like ValueError or TypeError) are not descriptive enough.
+You can create your own exception to handle specific situations in your program.
+*Create a new class that inherits from Exception.
+Optionally, define an __init__ method to pass custom messages.
+Key Points:
+Inherit from Exception → makes your class behave like an exception.
+Use raise → to trigger your custom exception.
+Use try-except → to handle it safely.
+Custom exceptions make your code more readable and specific.
+
+39.Can one `except` block handle multiple exceptions?
+ans:In Python, a single except block can handle multiple exceptions by grouping them in parentheses. This is useful when you want to execute the same handling code for different types of errors.
+
+Syntax:
+try:
+    # code that may raise an exception
+    x = int(input("Enter a number: "))
+    y = 10 / x
+except (ValueError, ZeroDivisionError) as e:
+    print("Error occurred:", e)
+
+Explanation:
+ValueError → Happens if the user enters something that cannot be converted to an integer.
+ZeroDivisionError → Happens if the user enters 0 (division by zero).
+as e → Captures the exception object, so you can see the exact error message.
+
+40.What happens if there is no matching `except` block for an error?
+ans:If there is no matching except block for an exception.
+The program stops execution
+Python will raise the exception and display a traceback (detailed error message).
+The finally block will still execute if it exists, but any code after the try block won’t run.
+Explanation:
+The except ValueError does not match ZeroDivisionError.
+So Python prints a traceback and stops execution after the finally block.
+"Program continues..." is not printed.
+Summary:
+If no except matches, the program stops with an error.
+finally still runs.
+Using except Exception can catch unexpected errors safely.
+
+
+
+

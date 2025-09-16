@@ -1,0 +1,44 @@
+11.What is the difference between `append()` and `extend()` in lists?
+ans:| Method         | Purpose                                                        | What it adds                                         | Example                                                 |
+| -------------- | -------------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------| |
+| **`append()`** | Adds a **single element** to the end of the list               | Adds the whole object as **one item**                | `my_list.append([4, 5])` → adds `[4, 5]` as one element |
+| **`extend()`** | Adds **multiple elements** (from another iterable) to the list | Iterates over the iterable and adds items one by one | `my_list.extend([4, 5])` → adds `4` and `5` separately
+
+append() → think add ONE thing (even if it’s a list).
+extend() → think unpack and add MANY things.
+
+12. What is the difference between shallow copy and deep copy?
+ans:| Feature                      | **Shallow Copy**                                                                               | **Deep Copy**                                                                                |
+| ---------------------------- | ---------------------------------------------------------------------------------------------- | -----------------------------------------------|
+| **Definition**               | Creates a new object, but **copies references** of nested objects (not actual nested objects). | Creates a new object and **recursively copies all nested objects** (completely independent). |
+| **Effect on Nested Objects** | Changes in nested objects of the copy **affect the original**.                                 | Changes in nested objects of the copy **do not affect the original**.                        |
+| **Created by**               | `copy.copy()` or slicing (`[:]`) for lists.                                                    | `copy.deepcopy()`.                                                                           |
+
+13.How do you remove duplicates from a list?
+ans:Use set() if order doesn’t matter.
+Use dict.fromkeys() or loop if you need to preserve order.
+
+using set() (fastest, but order not preserved)
+nums = [1, 2, 2, 3, 4, 4, 5]
+unique = list(set(nums))
+print(unique)   # [1, 2, 3, 4, 5]  (order may change)
+
+14.How do slicing operations work on lists and strings?
+ans:licing in Python:
+Slicing allows you to extract a portion (sub-list or substring) using:
+sequence[start : stop : step]
+
+start → index where slicing begins (default = 0)
+stop → index where slicing ends (excluded) (default = end of sequence)
+step → gap between elements (default = 1)
+Works on any sequence type → lists, strings, tuples, etc.
+
+15.How do you reverse a string in Python?
+ans:Use slicing ([::-1]) → simplest & fastest.
+Use reversed() when you want an iterator for large strings.
+
+Using Slicing (Most Common)
+s = "Python"
+rev = s[::-1]
+print(rev)   # nohtyP
+

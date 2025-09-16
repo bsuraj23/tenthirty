@@ -1,0 +1,13 @@
+1.What are Python’s key features?
+ans: Features:
+ i)Easy to learn & read – Python uses clear, English-like syntax, making it beginner-friendly.
+ ii)Interpreted language – No need for compilation; Python runs line by line.
+ iii)Dynamically typed – You don’t have to declare variable types explicitly.
+ iv)High-level language – Focuses on problem-solving, not low-level details like memory management.
+ v)Portable – Python code runs on multiple platforms (Windows, Linux, Mac, etc.) without changes.
+ vi)Extensive standard library – Provides built-in modules for file handling, math, networking, etc.
+ vii)Object-Oriented – Supports classes, objects, inheritance, and encapsulation.
+ viii)Supports multiple paradigms – Procedural, Object-Oriented, and Functional programming.
+ ix)Large community & ecosystem – Rich support from developers, plus external libraries like NumPy, Pandas, Django, Flask, TensorFlow.
+ x)Automatic memory management – Python uses garbage collection to free unused memory.
+
