@@ -1,5 +1,6 @@
 square=lambda x:x*x       #Lambda is a small anonymous function
 print(square(5))
+
 def square(x):
     return x*x
 print(square(4))
