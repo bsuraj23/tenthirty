@@ -1,0 +1,229 @@
+1. What are Python’s key features? Why is it called an interpreted language?
+
+*keyfeatures:-simplesytax,portable,objectoriented,huge libraries,dynamically typed
+*interpreted:-python is not compile machine code directly.instead python interpreter excutes code line by line
+
+2. Difference between **Python 2 and Python 3**? 
+python 2:-
+Python 2 is old and no longer supported.
+Example: print "Hello"   # without parentheses
+python 3:-
+Python 3 is the present and future.
+Example: print("Hello")
+
+3. Explain indentation in Python. What happens if indentation is incorrect?
+Indentation = spaces at the beginning of a line.
+Python uses indentation instead of {} braces.
+Wrong indentation → program throws IndentationError.
+Example:-if True:
+            print("yes")
+         print("Done")
+
+4.What are Python **keywords**? Can you use them as variable names?
+*Keywords are special reserved words in Python.
+*They have predefined meanings and are used to define the syntax and structure of Python programs.
+*Since they are reserved, Python doesn’t allow us to use them for anything else (like naming variables, functions, or classes).
+For example: if, else, while, for, class, def, True, False, None, etc.
+
+5.Difference between **list, tuple, set, and dictionary**. Give examples.
+list:
+*A list is a collection of ordered items.
+*Allows duplicates
+*Mutable (you can change values)
+*Defined using square brackets [ ]
+Example:
+fruits = ["apple", "banana", "apple", "mango"]
+print(fruits)          # ['apple', 'banana', 'apple', 'mango']
+print(fruits[1])       # banana (indexing works)
+fruits[2] = "grape"    # changing element
+print(fruits)          # ['apple', 'banana', 'grape', 'mango']
+
+Tuple:
+*A Tuple is ordered collection.
+*It is immutable.
+It is defined as ()
+Example:
+numbers = (1, 2, 3, 2, 4)
+print(numbers)         # (1, 2, 3, 2, 4)
+print(numbers[0])      # 1
+# numbers[1] = 99       Error (cannot modify)
+
+set:
+*A set is unorder collection of unique values.
+*Unordered (no indexing)
+*Mutable (you can add/remove items, but cannot change specific index)
+* It is defined as {}
+Example:
+colors = {"red", "blue", "green", "red"}
+print(colors)          # {'blue', 'green', 'red'} (no duplicates)
+colors.add("yellow")   # add new element
+print(colors)          # {'blue', 'green', 'yellow', 'red'}
+
+Dictionary:
+A dictionary stores key-value pairs.
+*Keys must be unique
+*Values can be duplicate
+*Mutable
+*Defined using curly braces {key: value}
+Example:
+student = {
+    "name": "Alice",
+    "age": 20,
+    "age": 21,       # duplicate key overwrites old value
+    "grade": "A"
+}
+print(student)          # {'name': 'Alice', 'age': 21, 'grade': 'A'}
+print(student["name"])  # Alice
+student["age"] = 22     # updating value
+print(student)          # {'name': 'Alice', 'age': 22, 'grade': 'A'}
+
+6. What is the difference between **mutable and immutable** data types?
+*mutable:
+Mutable means changeable.
+Once you create the object, you can modify, add, or remove elements without creating a new object.
+Example: list, set, dictionary.
+# List is mutable
+fruits = ["apple", "banana", "mango"]
+print("Before:", fruits)
+fruits[1] = "grape"     # Changing element
+fruits.append("orange") # Adding element
+print("After:", fruits)
+
+immutable:
+Immutable means unchangeable.
+Once you create the object, you cannot modify it.
+If you try to change, Python actually creates a new object.
+Example: string, tuple, int, float
+# Tuple is immutable
+numbers = (1, 2, 3)
+print("Before:", numbers)
+# Trying to change
+# numbers[1] = 99   ❌ Error
+
+7.Explain **== vs is** operator in Python with examples.
+*== operater:-
+*== checks for equality of values.
+It compares whether the contents (values) of two objects are the same.
+Example:
+a = 10
+b = 10
+print(a == b)   # True (values are same)
+print(a is b)   # True (both point to same object in memory)
+
+is operater:
+*is checks for identity.
+*It compares whether two variables point to the same object in memory.
+* in is caches integers from -5 to 256
+Example 1:
+x = None
+y = None
+ print(x == y)    # True
+print(x is y)    # True
+Example 2:
+a = 100
+b = 100
+print(a is b)   # True (cached small int)
+x = 1000
+y = 1000
+print(x is y)   # False (not cached)
+
+8. What is the difference between **append() vs extend()** in lists?
+Append:
+*Adds a single element to the end of the list.
+*If you pass another list, it adds the whole list as one item (nested list).
+Example:
+fruits = ["apple", "banana"]
+fruits.append("mango")
+print(fruits)   # ['apple', 'banana', 'mango']
+fruits.append(["grape", "orange"])  # adds list as a single item
+print(fruits)   # ['apple', 'banana', 'mango', ['grape', 'orange']]
+
+extend:
+*Adds elements from another list (or iterable) to the end of the list.
+*It unpacks the items and adds them one by one.
+Example:
+colors = ["red", "blue"]
+colors.extend(["green", "yellow"])
+print(colors)   # ['red', 'blue', 'green', 'yellow']
+colors.extend("hi")  
+print(colors)   # ['red', 'blue', 'green', 'yellow', 'h', 'i']  (string unpacked)
+
+9. Explain **shallow copy vs deep copy** in Python.
+shallow copy:
+In shallow copy if we modify or change the refeernce object data the original object of data will also change . 
+Example:
+import copy
+list1 = [[1, 2], [3, 4]]
+shallow = copy.copy(list1)   # or list1.copy()
+print("Original:", list1)
+print("Shallow:", shallow)
+# Change inner list
+shallow[0][0] = 99
+print("After change:")
+print("Original:", list1)   # [[99, 2], [3, 4]]
+print("Shallow:", shallow)  # [[99, 2], [3, 4]]
+
+Deepcopy:
+In deepy copy if we modify or change reference object will change but not original object.
+Example:
+import copy
+list1 = [[1, 2], [3, 4]]
+deep = copy.deepcopy(list1)
+print("Original:", list1)
+print("Deep:", deep)
+# Change inner list
+deep[0][0] = 99
+print("After change:")
+print("Original:", list1)   # [[1, 2], [3, 4]]
+print("Deep:", deep)        # [[99, 2], [3, 4]]
+
+10. How does Python handle **memory management** (Garbage collection)?
+*When you run a Python program, it needs memory to store variables, objects, and data.
+*Python manages this memory automatically, so you don’t need to worry about manually allocating (malloc) or freeing (free) memory like in C/C++
+*Python’s memory manager + garbage collector take care of this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
