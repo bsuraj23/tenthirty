@@ -1,0 +1,82 @@
+61.What is the difference between `map()`, `filter()`, and `reduce()`?
+ans:In Python, map(), filter(), and reduce() are functional programming tools that work on iterables (like lists, tuples, etc.), but they serve different purposes.
+
+ (i) map(function, iterable)
+Applies a function to each element of an iterable.
+Returns a new iterable (map object).
+filter(function, iterable)
+
+(ii) filter(function, iterable)
+Applies a function that returns True/False to each element.
+Keeps only elements where the function returns True.
+
+(iii) reduce(function, iterable)
+Applies a function cumulatively to reduce iterable to a single value.
+Comes from functools module.
+Table:
+| Function   | Purpose                      | Returns      | Example use case  |
+| ---------- | ---------------------------- | ------------ | ----------------- |
+| **map**    | Transform each element       | Iterable     | Square numbers    |
+| **filter** | Select elements by condition | Iterable     | Keep even numbers |
+| **reduce** | Aggregate all elements       | Single value | Find product/sum  |
+
+62. What is a lambda function?
+ans:A lambda function in Python is a small anonymous function (a function without a name) that is defined using the keyword lambda.
+It’s often used for short, simple operations where defining a full function with def would be unnecessary.
+🔹 Syntax:
+lambda arguments: expression
+
+Can take any number of arguments.
+Must have only one expression (automatically returned).
+✅ When to use lambda?
+When you need a quick, throwaway function.
+Commonly used with map(), filter(), reduce(), sorted(), etc.
+
+63.Can you give an example where `filter()` is useful?
+ans:The filter() function is most useful when you want to pick elements from a collection based on a condition.
+✅ When to use filter():
+Extract even/odd numbers
+Remove empty strings or None values
+Pick valid data (like valid emails, phone numbers, etc.)
+
+64.How does `reduce()` work in Python?
+ans:reduce() is a function from the functools module.
+It reduces an iterable to a single value by applying a function cumulatively.
+Think of it as:
+
+(((x1 ⊕ x2) ⊕ x3) ⊕ x4) ...
+
+where ⊕ is the function you provide.
+🔹 Syntax
+from functools import reduce
+reduce(function, iterable[, initializer])
+function → takes two arguments.
+iterable → sequence like list/tuple.
+initializer (optional) → starting value.
+
+map → transforms each element.
+filter → keeps only some elements.
+reduce → combines everything into one value.
+
+65.What is the difference between list comprehension and `map()`?
+ans:1. List Comprehension
+   Pythonic and very readable.
+   Can include conditions (if statements).
+   Always produces a list.
+   2. map()
+   Applies a function to each element.
+   Returns a map object (an iterator) → usually converted to list().
+   Works well when you already have a function defined (including lambda).
+TABLE:
+
+| Feature              | List Comprehension                 | `map()`                               |
+| -------------------- | ---------------------------------- | ------------------------------------- |
+| **Readability**      | Very Pythonic, often preferred     | Less readable with `lambda`           |
+| **Return type**      | Always a **list**                  | A **map object** (iterator)           |
+| **Conditions**       | Can include `if` statements easily | Needs `filter()` for conditions       |
+| **Speed**            | Similar, sometimes slightly faster | Similar, sometimes faster             |
+| **Function needed?** | No, inline expressions are enough  | Requires a function (`lambda` or def) |
+Summary:
+Use list comprehensions for readability and when conditions are involved.
+Use map() when you already have a function and just want to apply it.
+

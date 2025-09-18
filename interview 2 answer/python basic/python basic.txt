@@ -1,0 +1,50 @@
+1.What are Python’s key features?
+ans: Features:
+ i)Easy to learn & read – Python uses clear, English-like syntax, making it beginner-friendly.
+ ii)Interpreted language – No need for compilation; Python runs line by line.
+ iii)Dynamically typed – You don’t have to declare variable types explicitly.
+ iv)High-level language – Focuses on problem-solving, not low-level details like memory management.
+ v)Portable – Python code runs on multiple platforms (Windows, Linux, Mac, etc.) without changes.
+ vi)Extensive standard library – Provides built-in modules for file handling, math, networking, etc.
+ vii)Object-Oriented – Supports classes, objects, inheritance, and encapsulation.
+ viii)Supports multiple paradigms – Procedural, Object-Oriented, and Functional programming.
+ ix)Large community & ecosystem – Rich support from developers, plus external libraries like NumPy, Pandas, Django, Flask, TensorFlow.
+ x)Automatic memory management – Python uses garbage collection to free unused memory.
+
+2.why is python  called as interpreted  language?
+Ans: Python code is executed line by line by the Python interpreter (like CPython, PyPy).
+ Unlike compiled languages (C, C++), where the whole program is converted into machine code before execution, Python directly translates and runs the code on the fly.
+ This makes Python easier to debug and more flexible, but usually slower than compiled languages.
+
+3.What happens if indentation is incorrect in Python?
+Ans: If indentation is incorrect, Python will raise an Indentation Error or sometimes a Syntax Error.
+       Incorrect indentation code:
+     def greet():
+print("Hello")   # ❌ No indentation
+
+4.What are Python keywords? Can you use them as variable names?
+ans:Keywords are reserved words in Python.
+They have a special meaning and are used to define the syntax and structure of the language.
+
+Examples: if, else, while, for, def, class, True, False, None, and, or, not, return.
+code:
+import keyword
+print(keyword. kwlist)
+No, you cannot use Python keywords as variable names.
+If you try, Python will throw a Syntax Error.
+
+5.What are the differences between Python 2 and Python3?
+ans: | Feature              | Python 2                                                       | Python 3                                               |
+| -------------------- | -------------------------------------------------------------- | ------------------------------------------------------ |
+| **Release status**   | Released in 2000, support ended in **Jan 2020** (no updates)   | Released in 2008, **actively maintained**              |
+| **Print statement**  | `print "Hello"` (without parentheses)                          | `print("Hello")` (function with parentheses)           |
+| **Integer division** | `5 / 2 = 2` (floor division by default)                        | `5 / 2 = 2.5` (true division by default)               |
+| **Unicode**          | Strings are ASCII by default, need `u"Hello"` for Unicode      | Strings are Unicode by default                         |
+| **Input function**   | `raw_input()` for strings, `input()` for eval                  | `input()` always returns a string                      |
+| **xrange()**         | `xrange()` for iterators (efficient), `range()` returns a list | `range()` behaves like `xrange()` (efficient iterator) |
+| **Error handling**   | `except Exception, e:`                                         | `except Exception as e:`                               |
+| **Libraries**        | Many libraries were built for Python 2 only                    | Most libraries now support Python 3                    |
+| **Community**        | Deprecated, no updates                                         | Current and future development                         |
+
+
+

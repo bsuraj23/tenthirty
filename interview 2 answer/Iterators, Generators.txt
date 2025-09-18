@@ -1,0 +1,59 @@
+31. What is the difference between an iterable and an iterator?
+ans:| Aspect           | Iterable                                               | Iterator                                                                             |
+| ---------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| **Definition**   | An object that can return its elements one at a time.  | An object that represents a stream of data and keeps track of the current position.  |
+| **Method**       | Must implement `__iter__()` which returns an iterator. | Must implement `__next__()` to get the next element and `__iter__()` (returns self). |
+| **Examples**     | `list`, `tuple`, `dict`, `str`, `set`                  | Objects returned by `iter(list)` or generator functions                              |
+| **Usage**        | Can be passed to `for` loops or `iter()` function.     | Used to fetch elements one at a time using `next()`.                                 |
+| **Exhaustible?** | No, you can call `iter()` on it multiple times.        | Yes, once all elements are consumed, `StopIteration` is raised.                      |
+
+
+32. What is the difference between `iter()` and `next()`?
+ans:| Feature               | `iter()`                                          | `next()`                                            |
+| --------------------- | ------------------------------------------------- | --------------------------------------------------- |
+| **Purpose**           | Returns an **iterator** from an iterable.         | Retrieves the **next item** from an iterator.       |
+| **Input**             | Takes an **iterable** (like list, tuple, string). | Takes an **iterator**.                              |
+| **Return**            | An **iterator object**.                           | The **next element** of the iterator.               |
+| **Raises Exception?** | No, does not raise exception.                     | Raises `StopIteration` when all items are consumed. |
+| **Example Use**       | `it = iter([1,2,3])`                              | `next(it)`                                          |
+
+
+33.What are generators in Python?
+ans:A generator is a special kind of function that returns an iterator.
+Instead of returning all values at once (like a list), it yields values one by one using the yield keyword.
+This makes it memory-efficient, especially for large datasets.
+yield → pauses function and returns value; resumes where it left off.
+Generators don’t keep all values in memory.
+Can be created with:
+Generator function using yield
+Generator expression like (i for i in range(5))
+
+34.What is the purpose of the `yield` keyword?
+ans:Purpose of yield:
+yield is used inside a function to make it a generator.
+Instead of returning a value and ending the function (like return), yield:
+Pauses the function, saving its state.
+Sends a value to the caller.
+Resumes from where it left off the next time you call it.
+| Feature       | `return`                  | `yield`                     |
+| ------------- | ------------------------- | --------------------------- |
+| Ends function | Yes                       | No, pauses function         |
+| Returns       | Single value              | One value at a time         |
+| Memory        | Can use a lot (full list) | Efficient (lazy evaluation) |
+
+yield → lazy value generator
+return → final value and exit
+
+35.How do dictionary comprehensions work?
+ans:A dictionary comprehension is a concise way to create a dictionary in one line.
+Similar to list comprehension, but for dictionaries.
+
+Syntax:
+{key_expression: value_expression for item in iterable if condition}
+You can optionally add a condition at the end.
+{key: value for item in iterable} → creates dictionary
+Can add if condition to filter items
+Can use .items() to modify existing dictionaries
+
+
+
