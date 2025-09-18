@@ -1,0 +1,221 @@
+
+#Python Basics
+1. What are Python’s key features?
+Python has easy-to-read syntax, is interpreted (run line by line), dynamically typed (no need to declare types), high-level (abstracts hardware details), has a large standard library, is portable (runs on many OSs), and supports both object-oriented and functional programming.
+
+2. Why is Python called an interpreted language?
+Because Python code is first compiled to bytecode and then executed line by line by the Python Virtual Machine (PVM), rather than compiled directly to machine code ahead of time.
+
+3. What happens if you indent incorrectly in Python?
+Indentation defines code blocks. Incorrect indentation raises IndentationError or “unexpected indent” errors.
+
+4. Can Python keywords be used as variable names?
+No. Keywords (like if, else, class) are reserved words and cannot be used as identifiers.
+
+5. What are the main differences between Python 2 and Python 3?
+Python 3 uses print() as a function, does true division (5/2 == 2.5), has Unicode strings by default, and input() returns a string. Python 2 is now deprecated.
+
+#Data Types & Variables
+6. What are mutable and immutable data types?
+Mutable objects (list, set, dict) can be changed after creation. Immutable objects (tuple, str, int) cannot be changed after creation.
+
+7. Compare List, Tuple, Set, Dict.
+List: ordered, mutable, allows duplicates.
+Tuple: ordered, immutable.
+Set: unordered, mutable, no duplicates.
+Dict: key–value pairs, keys unique.
+
+8. What are Python’s built-in data type categories?
+Numeric (int, float, complex), Sequence (list, tuple, range), Text (str), Set (set, frozenset), Mapping (dict), Boolean (bool), and NoneType.
+
+9. Difference between == and is?
+== checks value equality; is checks object identity (whether two variables point to the same object in memory).
+
+10. How are integers and floats stored?
+Integers are arbitrary precision objects; floats are stored as C double-precision numbers.
+
+#Lists, Strings & Collections
+11. Difference between append() and extend()?
+append(x) adds x as a single element at the end.
+extend(iterable) adds each element of the iterable to the list.
+
+12. What is shallow vs deep copy?
+Shallow copy creates a new object but references the same inner objects. Deep copy recursively copies inner objects as well.
+
+13. How to remove duplicates from a list?
+Use set(list) to remove duplicates or loop to build a new list with unique items.
+
+14. What does slicing [start:stop:step] do?
+It returns a new subsequence of a list or string from index start up to stop (exclusive) with step step.
+
+15. How to reverse a string?
+Use slicing: text[::-1] or ''.join(reversed(text)).
+
+#Control Flow & Loops
+16. What do break, continue, pass do?
+break exits the loop entirely.
+continue skips to the next iteration.
+pass does nothing (placeholder).
+
+17. How does else work with loops?
+The else block runs if the loop completes without hitting break.
+
+18. What does enumerate(iterable) return?
+It returns index–value pairs when iterating.
+
+19. How to iterate over a dictionary?
+for k, v in dict.items(): print(k, v)
+
+20. What is list comprehension?
+A concise way to create lists:
+[expression for item in iterable if condition]
+
+#Functions
+21. What are default arguments?
+Parameters with default values used if the caller does not supply them.
+
+22. What are *args and **kwargs?
+*args collects variable positional arguments; **kwargs collects variable keyword arguments.
+
+23. How does Python pass arguments?
+By object reference (sometimes called “pass-by-assignment”). Mutable objects can be modified inside the function.
+
+24. Are functions first-class objects?
+Yes. They can be assigned to variables, passed as arguments, or returned from other functions.
+
+25. What are lambda functions?
+Small anonymous functions defined with the lambda keyword.
+
+#OOP in Python
+26. What is a class vs an object?
+A class is a blueprint; an object is an instance of the class.
+
+27. Difference between instance, class, static methods?
+Instance method: operates on object’s data.
+Class method (@classmethod): operates on class data.
+Static method (@staticmethod): utility, no self or cls.
+
+28. What are dunder methods?
+Special methods like __init__, __str__, __add__ that give objects special behaviors.
+
+29. What does __init__ do?
+Initializes object attributes at creation.
+
+30. What is polymorphism?
+Same interface with different implementations (method overriding across classes).
+
+#Iterators, Generators & Comprehensions
+31. What is an Iterable vs an Iterator?
+Iterable can return an iterator. Iterator has __next__() to get the next item.
+
+32. How to get an iterator?
+Use iter(obj) and then next(it) to fetch items.
+
+33. What are generators?
+Functions that yield values lazily.
+
+34. What does yield do?
+It pauses the function and returns a value, resuming later where it left off.
+
+35. Example of dict comprehension?
+{k: v for k, v in iterable}
+
+#Exception Handling
+36. What is the top of Python’s exception hierarchy?
+BaseException. Exception covers most user-level errors.
+
+37. Structure of try/except?
+try: block contains risky code.
+except: handles error.
+else: runs if no exception.
+finally: runs always.
+
+38. How to create custom exceptions?
+Make a class inheriting from Exception.
+
+39. How to handle multiple exceptions?
+except (E1, E2): handle either E1 or E2.
+
+40. What if no matching except?
+Program stops and error is raised.
+
+#Decorators & Context Managers
+41. What are decorators?
+Functions that modify another function’s behavior with @decorator syntax.
+
+42. Can functions return functions?
+Yes. Functions are objects and can return other functions.
+
+43. What is a higher-order function?
+A function that takes or returns other functions.
+
+44. What is a context manager?
+An object that sets up and tears down resources (used with with).
+
+45. Why use with?
+It automatically handles __enter__ and __exit__ (setup/teardown) unlike manual try/finally.
+
+#Modules & Imports
+46. Difference between module and package?
+Module = single .py file. Package = directory with __init__.py and modules inside.
+
+47. What does __name__ == "__main__" mean?
+The script is run directly, not imported.
+
+48. How to import modules?
+import module imports entire module.
+from module import x imports specific names.
+
+49. What are relative imports?
+Using . and .. inside packages to refer to sibling/parent modules.
+
+50. How does Python search for modules?
+Using sys.path: current directory first, then installed packages.
+
+#Namespaces & Scope
+51. What is the LEGB rule?
+Python looks for variables in Local → Enclosing → Global → Built-in scopes.
+
+52. Difference between global and local variables?
+Global variables defined at module level; local variables inside functions.
+
+53. What does global keyword do?
+Allows modifying a global variable inside a function.
+
+54. What does nonlocal keyword do?
+Allows modifying a variable from an enclosing (but not global) scope.
+
+55. What happens with same name in different scopes?
+Inner scope shadows the outer variable locally.
+
+#Data Handling
+56. How to read/write files?
+open('file','r') or 'w' and use .read() / .write().
+
+57. Difference between text and binary mode?
+Text mode reads as strings; binary mode reads raw bytes ('rb', 'wb').
+
+58. How to handle CSV files?
+Use csv.reader and csv.writer from the csv module.
+
+59. How to handle JSON?
+Use json.dumps() to serialize to string, json.loads() to deserialize back.
+
+60. How to handle command-line args?
+Use sys.argv or the argparse module.
+
+#Functional Programming
+61. What does map() do?
+Applies a function to all items of an iterable.
+
+62. What is a lambda function?
+Small anonymous function defined as lambda x: x*2.
+
+63. Example of filter()?
+filter(lambda x: x>0, mylist) selects positive items.
+
+64. What does reduce() do?
+From functools, it reduces a list to a single value by applying a rolling computation.
+
+65. Difference between list comprehension and map()?
+List comprehension returns a list immediately. map() returns an iterator object (lazy) in Python 3.

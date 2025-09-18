@@ -1,0 +1,158 @@
+#Advanced Internals & Performance
+
+1. Python memory management
+
+Python uses a private heap to store objects.
+
+The memory manager allocates blocks from the OS and divides them for Python objects.
+
+It uses reference counting + a garbage collector for unused objects.
+
+2. id(), hash(), is
+
+id(obj) = unique memory address of the object.
+
+hash(obj) = number used in hash-based structures (dict, set).
+
+is = checks if two variables point to the same object (identity), not just equality.
+
+3. Garbage collector
+
+Main mechanism = reference counting.
+
+When count = 0 → memory freed.
+
+For cycles, Python uses the gc module to detect & clean up unreachable objects.
+
+4. Reference cycles
+
+Happens when objects reference each other, preventing ref count from hitting 0.
+
+Python’s cyclic GC scans objects and breaks cycles to free memory.
+
+5. deep copy vs pickle
+
+copy.deep copy(x) = creates a completely independent copy of x in memory.
+
+pickle.dumps(x) = serializes x to bytes (for saving/transferring), not just copying.
+
+6. Shallow copy, deep copy, assignment
+
+Assignment: b=a → both point to same object.
+
+Shallow copy: copy.copy(a) → new object but inner elements still shared.
+
+Deep copy: copy.deepcopy(a) → new object + new copies of inner elements.
+
+7. Python lists internally
+
+Dynamic array of pointers.
+
+Over-allocates space to allow fast appends.
+
+Index access = O(1); insert/remove in middle = slower.
+
+8. Python dictionaries internally
+
+Hash table: keys hashed to index slots.
+
+Handles collisions with open addressing.
+
+Very fast lookups (average O(1)).
+
+9. Ordered Dict vs normal dict
+
+Before Python 3.7, only OrderedDict remembered insertion order.
+
+From Python 3.7+, normal dicts also preserve insertion order, but OrderedDict still has extra features (like move_to_end).
+
+10. Profiling Python code
+
+Use built-in cProfile module.
+
+import cProfile
+cProfile.run('my_function()')
+
+
+Shows where time is spent.
+
+For memory: memory_profiler or tracemalloc.
+
+#Concurrency, Parallelism & Async
+
+11. GIL (Global Interpreter Lock)
+
+A lock that allows only one thread to run Python bytecode at a time.
+
+Exists to make memory management simple and safe.
+
+Threads don’t run Python code truly in parallel (CPU-bound tasks).
+
+12. Multithreading vs Multiprocessing
+
+Multithreading: many threads in same process, share memory (good for I/O tasks).
+
+Multiprocessing: separate processes, each with its own Python interpreter & memory (good for CPU tasks).
+
+13. When to use threading vs multiprocessing
+
+Use threading for I/O-bound tasks (network, file).
+
+Use multiprocessing for CPU-bound tasks (heavy computation).
+
+14. asyncio
+
+A library for asynchronous I/O using event loop and coroutines.
+
+It runs tasks concurrently in one thread (no GIL issues).
+
+Differs from threads: tasks don’t preempt each other; they yield control voluntarily.
+
+15. Coroutines vs Generators
+
+Generators: produce a sequence of values with yield.
+
+Coroutines: can consume values, await tasks, and do async work.
+
+16. ThreadPoolExecutor vs ProcessPoolExecutor
+
+ThreadPoolExecutor: runs tasks in a pool of threads (shared memory).
+
+ProcessPoolExecutor: runs tasks in a pool of processes (separate memory, true parallelism).
+
+17. Cooperative vs Preemptive multitasking
+
+Cooperative: tasks voluntarily yield control (async/await).
+
+Preemptive: OS forces context switches between tasks (threads).
+
+18. Async example fetching URLs
+
+import asyncio, aiohttp
+
+async def fetch(session, url):
+    async with session.get(url) as r:
+        return await r.text()
+
+async def main():
+    urls = ['https://example.com','https://python.org']
+    async with aiohttp.ClientSession() as session:
+        results = await asyncio.gather(*(fetch(session,u) for u in urls))
+        print(results)
+
+asyncio.run(main())
+
+
+19. Race conditions & deadlocks
+
+Race condition: two tasks access shared data at same time, causing wrong results.
+
+Deadlock: two tasks wait for each other forever.
+
+Python: use threading.Lock, asyncio.Lock, or proper design to avoid them.
+
+20. Inter-process communication (IPC)
+
+In Python: use multiprocessing.Queue, Pipe, Manager to share data between processes.
+
+For advanced cases: sockets, shared memory, or external message brokers.

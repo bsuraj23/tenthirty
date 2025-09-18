@@ -1,0 +1,270 @@
+Lists, Strings & Collections:
+
+11. Difference between append() and extend()
+append() adds one element to the end of a list.
+lst = [1,2]
+lst.append([3,4])  # [1, 2, [3,4]]
+
+extend() adds all elements from another list individually.
+lst = [1,2]
+lst.extend([3,4])  # [1, 2, 3, 4]
+
+12. Shallow copy vs deep copy
+Shallow copy: Copies the list, but nested elements refer to the same objects.
+Deep copy: Copies the list and all nested objects completely.
+
+import copy
+original = [[1,2],[3,4]]
+shallow = copy.copy(original)
+deep = copy.deepcopy(original)
+
+13. Remove duplicates from a list
+Use set():
+lst = [1,2,2,3]
+lst = list(set(lst))  # [1,2,3]
+
+
+14. Slicing operations
+Extract part of a list or string using start:stop:step
+lst = [1,2,3,4,5]
+print(lst[1:4])   # [2,3,4]
+print(lst[::2])   # [1,3,5]
+
+
+15. Reverse a string
+Using slicing:
+s = "hello"
+print(s[::-1])  # "olleh"
+Control Flow & Loops
+
+16. break, continue, pass
+break → exit the loop
+continue → skip current iteration and move to next
+pass → do nothing, placeholder
+
+17. else in loops
+Runs when the loop finishes normally (no break).
+
+18. enumerate()
+Gives index and value while looping:
+lst = ['a','b']
+for i, val in enumerate(lst):
+    print(i, val)
+
+19. Iterate through a dictionary
+d = {'a':1,'b':2}
+for key, val in d.items():
+    print(key, val)
+
+20. List comprehension
+Short way to create a list:
+lst = [x**2 for x in range(5)]  # [0,1,4,9,16]
+
+Functions:
+
+21. Default arguments
+Functions can have default values:
+def greet(name="Guest"):
+    print("Hello", name)
+
+
+22. *args vs **kwargs
+*args → any number of positional arguments
+**kwargs → any number of keyword arguments
+
+23. Pass-by-value vs pass-by-reference
+Python passes references to objects.
+Mutable objects can be changed inside functions; immutable cannot.
+
+24. Functions can be assigned to variables
+def hello(): print("Hi")
+greet = hello
+greet()  # Hi
+
+
+25. Lambda functions
+Short anonymous functions:
+f = lambda x: x**2
+print(f(3))  # 9
+
+OOP in Python
+26. Classes and objects
+Class → blueprint
+
+Object → instance of class
+class Person: pass
+p = Person()
+
+
+27. Instance, class, static methods
+Instance → uses self, per object
+Class → uses cls, per class
+Static → doesn’t need object or class reference
+
+28. Dunder (magic) methods
+Methods with __ like __init__, __str__, used for special behavior.
+
+29. __init__ method
+Constructor, runs when object is created.
+
+30. Polymorphism
+Same operation works on different data types or objects.
+len("abc")  # 3
+len([1,2,3])  # 3
+Iterators, Generators & Comprehensions
+
+31. Iterable vs iterator
+Iterable → can be looped over (list, tuple)
+Iterator → object that returns items one by one using next()
+
+32. iter() vs next()
+iter() → gets iterator from iterable
+next() → gets next item from iterator
+
+33. Generators
+Functions that yield values lazily using yield.
+
+34. yield keyword
+Produces a value and pauses function, resumes later.
+
+35. Dictionary comprehension
+d = {x: x**2 for x in range(3)}  # {0:0,1:1,2:4}
+
+Exception Handling:
+
+36. Exception vs BaseException
+Exception → general errors
+BaseException → includes system-exit exceptions
+
+37. try, except, finally, else
+try → block with risky code
+except → handle errors
+finally → runs always
+else → runs if no error
+
+38. Custom exceptions
+class MyError(Exception): pass
+raise MyError("Error message")
+
+39. One except for multiple errors
+try:
+    pass
+except (ValueError, TypeError):
+    pass
+
+
+40. No matching except
+Program crashes and shows error
+Decorators & Context Managers
+
+41. Decorators
+Functions that modify other functions
+
+42. Function can return another function
+def outer(): 
+    def inner(): print("Hi")
+    return inner
+f = outer()
+f()
+
+
+43. Higher-order function
+Function that takes or returns another function
+
+44. Context manager
+Object used with with to manage resources (like files)
+
+45. with vs try-finally
+with automatically closes resource
+try-finally requires manual cleanup
+
+Modules & Imports:
+
+46. Module vs package
+Module → a Python file
+Package → folder with __init__.py and modules
+
+47. __name__ == "__main__"
+Checks if file is run directly, not imported
+
+48. import vs from-import
+import module → use module.name
+from module import name → use name directly
+
+49. Relative imports
+Import modules relative to current file using . or ..
+
+50. Python searches modules
+Checks current folder, Python path, standard libraries
+
+Namespaces & Scope:
+
+51. LEGB rule
+Local → Enclosing → Global → Built-in scope
+
+52. Global vs local variables
+Local → inside function
+Global → outside function
+
+53. global keyword
+Access/modify global variable inside a function
+
+54. nonlocal keyword
+Modify variable in enclosing function scope
+
+55. Same variable in different scopes
+Python uses nearest scope first (LEGB rule)
+
+Data Handling:
+
+56. Read/write files
+with open("file.txt","r") as f: data=f.read()
+with open("file.txt","w") as f: f.write("text")
+
+
+57. Text vs binary mode
+Text → r, w → strings
+Binary → rb, wb → bytes
+
+58. Handle CSV files
+import csv
+with open("data.csv") as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)
+
+
+59. Serialize/deserialize JSON
+import json
+data = {"a":1}
+json_str = json.dumps(data)  # serialize
+data2 = json.loads(json_str)  # deserialize
+
+
+60. Command-line arguments
+Use argparse or sys.argv
+Functional Programming
+
+61. map(), filter(), reduce()
+map() → apply function to all items
+filter() → select items that match condition
+reduce() → reduce items to single value (from functools)
+
+62. Lambda function
+Short anonymous function: lambda x: x**2
+
+63. filter() example
+nums = [1,2,3,4]
+evens = list(filter(lambda x: x%2==0, nums))
+
+
+64. reduce() example
+from functools import reduce
+nums = [1,2,3]
+sum = reduce(lambda x,y: x+y, nums)  # 6
+
+
+65. List comprehension vs map()
+List comprehension → [x*2 for x in lst]
+Map → list(map(lambda x: x*2, lst))
+
