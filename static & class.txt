@@ -1,0 +1,34 @@
+#Why and when we use static method.?
+
+1. Static Method — @staticmethod
+
+Does not take self or cls.
+
+Behaves like a regular function, but lives inside the class’s namespace.
+
+Cannot access instance variables or class variables directly.
+
+Useful for utility/helper functions that are logically related to the class but don’t need instance or class data.
+   
+#When to use:
+
+When you want a function inside a class but it doesn’t depend on instance or class data.
+
+Example: validation, conversion, calculations.
+
+#Why and when we use class method.?
+
+2.Class Method — @classmethod
+
+Takes cls (the class itself) as the first parameter.
+
+Can access or modify class-level variables (shared by all instances).
+
+Often used as alternative constructors or factory methods.
+
+#When to use:
+
+When you need to create or configure an instance in a special way.
+
+When you need to work with class variables rather than instance variables.
+
