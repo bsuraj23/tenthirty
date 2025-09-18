@@ -1,26 +1,34 @@
-import os
-# File name
-file_name = "sample.txt"
+#static variable using constructor
+class Example:
+    static_var=20
+    def __init__(self,name):
+        self.name=name
+        print(Example.static_var)
+e=Example("Sindhu")
 
-# Step 1: Create and Write to the File
-with open(file_name, "w") as file:
-    file.write("Hello, this is the first line.\n")
-print("Step 1: File created and data written.")
+#Access outer class static variable from inner class
+class Outer:
+    static_var = 42   
+    class Inner:
+        def show(self):
+            print("Outer static var:", Outer.static_var)
+inner_obj = Outer.Inner()
+inner_obj.show()
 
-# Step 2: Append Data to the File
-with open(file_name, "a") as file:
-    file.write("This is an appended line.\n"
-print("Step 2: Data appended to the file.")
+#Access outer class instance variable from inner class
+class Outer:
+    def __init__(self, name):
+        self.name = name
 
-# Step 3: Read the File
-with open(file_name, "r") as file:
-    content = file.read()
-print("Step 3: File content after write and append:")
-print(content)
+        self.inner = self.Inner(self)
 
-# Step 4: Delete the File
-if os.path.exists(file_name):
-    os.remove(file_name)
-    print("Step 4: File deleted.")
-else:
-    print("The file does not exist.")
+    class Inner:
+        def __init__(self, outer_instance):
+            
+            self.outer = outer_instance
+
+        def show_outer_name(self):
+            print("Outer instance name:", self.outer.name)
+
+o = Outer("Sindhu")
+o.inner.show_outer_name()
