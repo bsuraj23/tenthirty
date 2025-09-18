@@ -1,0 +1,709 @@
+1.Explain how Python manages memory internally.
+Ans: Python uses a private heap space to store all objects and data structures. The memory management is automatic, but works like this:
+
+Reference Counting 🧮
+Each object keeps track of how many variables point to it.
+When the count becomes zero, Python deletes (frees) that object.
+
+Garbage Collector (GC) 🗑️
+Some objects can create circular references (e.g., two objects pointing to each other).
+Python has a garbage collector to find and clean up these unused objects.
+
+Memory Pools (via Malloc) 💾
+Python doesn’t directly ask the OS for every small object.
+Instead, it uses pools and blocks to manage memory efficiently.
+
+2.What is the difference between `id()`, `hash()`, and `is` in Python?
+Ans:id(object)
+Returns the unique identity (memory address) of an object.
+Always unique during the lifetime of the object.
+
+Example:
+a = [1, 2, 3]
+print(id(a))   # e.g., 140123456789456
+
+🔹 hash(object)
+Returns a hash value (integer) for hashable objects (like int, str, tuple).
+Used in dictionaries and sets for quick lookup.
+Not available for mutable objects like lists or dicts.
+
+Example:
+print(hash("hello"))   # e.g., 123456789
+print(hash(10))        # same value every run
+
+🔹 is (operator)
+Checks if two variables point to the same object in memory.
+It compares identity, not value.
+
+Example:
+a = [1, 2, 3]
+b = [1, 2, 3]
+print(a == b)  # True  (values are same)
+print(a is b)  # False (different objects in memory)
+ Table
+
+Function /    Operator      	           Checks / Returns	             Example
+id(obj)  	Unique memory             identity (address)	              id(10)
+hash(obj)	Hash value               (for hash able objects)	          hash("abc")
+is	   Same object in memory?            (True/False)	              a is b
+
+3.How does Python’s garbage collector work?
+Ans: Reference Counting (Primary mechanism)
+Every Python object has a reference count (how many variables point to it).
+When the reference count becomes zero, the memory is immediately freed.
+
+Example:
+import sys
+a = [1, 2, 3]
+print(sys.getrefcount(a))  # reference count > 1 (because of internal use in getrefcount)
+
+b = a      # another reference
+print(sys.getrefcount(a))  # count increases
+
+del b      # remove one reference
+print(sys.getrefcount(a))  # count decreases
+
+ii. Garbage Collector (for circular references)
+Problem: Sometimes objects reference each other → their reference count never reaches zero.
+Example:
+class Node:
+    def __init__(self):
+        self.ref = None
+a = Node()
+b = Node()
+a.ref = b
+b.ref = a
+
+iii. Generational Garbage Collection
+Python divides objects into three generations:
+Gen 0 → new objects
+Gen 1 → objects that survived one collection
+Gen 2 → long-lived objects
+Idea: Most objects die young (e.g., temporary lists, strings).
+So Python checks young generations more often than old ones → efficient.
+
+iv. Manual Control (optional)
+You can use the gc module to control garbage collection:
+import gc
+
+collect()        # Force garbage collection
+gc.disable()        # Disable automatic GC
+gc.enable()         # Enable it again
+
+Python frees memory automatically.
+Reference counting clears most objects.
+Garbage collector handles circular references.
+Generational GC makes it faster by focusing on young objects.
+
+4.What are reference cycles, and how does Python handle them?
+Ans: A reference cycle happens when two (or more) objects refer to each other, keeping their reference counts above zero — even though they are no longer needed by the program.
+Because of this cycle, reference counting alone cannot free them.
+
+Example of a Reference Cycle
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.ref = None
+
+a = Node(1)
+b = Node(2)
+
+a.ref = b   # a → b
+b.ref = a   # b → a   (cycle created)
+
+del a
+del b
+
+
+After del a and del b, the program has no variables pointing to these nodes.
+BUT a points to b and b points to a.
+Their reference counts never reach zero → memory leak if unchecked.
+ Python uses a cyclic garbage collector (gc module) in addition to reference counting:
+Detection
+The GC periodically scans objects.
+If a group of objects only reference each other (but not from outside), they are considered unreachable.
+Collection
+These unreachable cycles are broken.
+Memory is freed, even though reference counts never dropped to zero.
+Generational GC (optimization)
+Objects are divided into Gen 0, Gen 1, Gen 2.
+The GC looks for cycles more frequently in younger generations (where cycles are most common).
+Demonstration:
+import gc
+
+class Node:
+    def __init__(self):
+        self.ref = None
+
+a = Node()
+b = Node()
+
+a.ref = b
+b.ref = a   # cycle created
+
+del a
+del b
+
+# Manually trigger garbage collection
+unreachable = gc.collect()
+print("Unreachable objects collected:", unreachable)
+
+
+Output (varies):
+Unreachable objects collected: 2
+
+5.What is the difference between `deepcopy` and `pickle`?
+Ans: Copy.deepcopy:
+Purpose: Creates a new object that is a full independent copy of the original, including all nested objects.
+Scope: Works only in memory (during program execution).
+Use case: If you want a "fresh duplicate" of an object while your program is running.
+example:
+import copy
+
+a = [[1, 2], [3, 4]]
+b = copy.deepcopy(a)
+
+b[0][0] = 99
+print(a)  # [[1, 2], [3, 4]]  (unchanged)
+print(b)  # [[99, 2], [3, 4]] (independent copy)
+ii)pickle:
+Purpose: Converts a Python object into a byte stream (serialization) and back (deserialization).
+Scope: Allows saving objects to a file or sending them across a network, then restoring them later.
+Use case: If you want to store or transfer Python objects.
+import pickle
+
+data = {"x": 10, "y": [1, 2, 3]}
+
+# Serialize (save)
+with open("data.pkl", "wb") as f:
+    pickle.dump(data, f)
+
+# Deserialize (load)
+with open("data.pkl", "rb") as f:
+    new_data = pickle.load(f)
+
+print(new_data)  # {'x': 10, 'y': [1, 2, 3]}
+Main Differences:
+Feature               |       	deepcopy	         |                 pickle
+Purpose	              |      Copy objects in memory	 |          Serialize/deserialize objects
+Storage	              |       Temporary (RAM only)	 |       Can be saved to disk / sent over net
+Output	              |      A new Python object	 |           Byte stream (or file)
+Use case	      |      Duplicate objects safely	 |      Save/load objects across sessions
+
+6.Explain the difference between shallow copy, deep copy, and assignment.
+Ans: Assignment (=)
+What it does: Just creates a new reference (alias) to the same object.
+Effect: Both variables point to the same object in memory.
+Changes: If you modify one, the other also changes.
+example:
+a = [1, 2, [3, 4]]
+b = a   # assignment, no new object
+i)Shallow Copy
+What it does: Creates a new object, but the nested objects are still shared.
+Effect: Top-level is copied, but inner references are not duplicated.
+Changes:Changing outer object won’t affect the original.
+Changing nested object will affect both.
+b[0] = 99
+print(a)  # [99, 2, [3, 4]]  (changed!)
+print(b)  # [99, 2, [3, 4]]
+Key Point: Assignment = same object, different names.
+import copy
+
+a = [1, 2, [3, 4]]
+b = copy.copy(a)  # shallow copy
+
+b[0] = 99         # top-level change → independent
+print(a)  # [1, 2, [3, 4]]
+print(b)  # [99, 2, [3, 4]]
+
+b[2][0] = 88      # nested change → shared
+print(a)  # [1, 2, [88, 4]]
+print(b)  # [99, 2, [88, 4]]
+Key Point: Shallow copy = new container, but inner objects shared.
+iii)Deep Copy:
+What it does: Creates a completely independent clone, including all nested objects.
+Effect: Nothing is shared — everything is duplicated.
+Changes: Modifying one does not affect the other.
+import copy
+
+a = [1, 2, [3, 4]]
+b = copy.deepcopy(a)  # deep copy
+
+b[2][0] = 99
+print(a)  # [1, 2, [3, 4]]  (unchanged)
+print(b)  # [1, 2, [99, 4]] (independent)
+
+Key Point: Deep copy = fully independent clone.
+Quick Comparison:
+Operation	   |    New Object?	|   Nested Objects Copied?    |    Independent?
+Assignment	   |    ❌ No	        |        ❌ No	              |     ❌ No
+Shallow Copy	   |    ✅ Yes	        |        ❌ No (shared)	      |     ❌ Partial
+Deep Copy	   |    ✅ Yes	        |        ✅ Yes	              |     ✅ Fully
+
+7.How are Python’s lists implemented internally?
+Ans: i)Lists are dynamic arrays:
+In CPython (the standard Python implementation), a list is not a linked list.
+Instead, it’s implemented as a resizable array of pointers.
+Each element in the list is a pointer to a Python object (since everything in Python is an object).
+ii)Over-allocation (growth strategy):
+Lists need to support fast appends without reallocating every single time.
+So when you append, Python may allocate extra space in advance.
+Example:
+If a list of size 4 grows to 5, Python might allocate space for 8 elements internally.
+This way, many future appends are O(1).
+When it does run out of space, Python resizes by allocating a larger block and copying pointers over.
+iii)Memory layout:
+A Python list object has two parts:
+Header structure (stores size, capacity, etc.)
+Pointer array (stores references to actual Python objects)
+iv)Operations complexity:
+Because lists are dynamic arrays:
+Indexing (nums[i]) → O(1) (direct pointer lookup)
+Appending (nums.append(x)) → Amortized O(1)
+Popping at end (nums.pop()) → O(1)
+Inserting/removing in middle → O(n) (must shift elements)
+Checking membership (x in nums) → O(n)
+
+8.How does Python implement dictionaries (hash tables)?
+Ans: Basic idea:
+A dictionary maps keys → values.
+Internally, Python uses a hash table:
+Compute the hash(key).
+Use that to decide where to store the key–value pair in a table (an array of "slots").
+On lookup, re-compute the hash and go directly to the slot.
+ii)Dictionary slot structure:
+Each slot in the hash table stores:
+The hash of the key
+The key object itself
+The value object
+iii)Handling collisions:
+Sometimes two keys produce the same hash. Python uses open addressing with probing:
+If the chosen slot is full, it looks for the next available slot (linear probing with some tweaks).
+This avoids linked lists or secondary structures.
+iv)Resizing (growth strategy):
+When the table gets too full (≈ 2/3 full), Python resizes it to a bigger array (usually about double the size).
+This ensures performance stays amortized O(1).
+v)Insertion order preservation:
+Since Python 3.6 (CPython), dicts preserve insertion order as an implementation detail.
+From Python 3.7+, this became a language guarantee.
+vi)Complexity
+Operation	    |      Average	  |          Worst Case
+Lookup d[k]	       |       O(1)	          |            O(n)
+Insert d[k] = v	    |       O(1)                           |                    O(n)
+Delete del d[k]	    |        O(1)                        |                           	 O(n)
+vii)Memory layout:
+A simplified CPython dictionary has two parallel arrays:
+Index table: stores offsets to entries.
+Entries array: stores (hash, key, value).
+
+9.What is the difference between `OrderedDict` and a normal dict in Python 3.7+?
+Ans: Key Differences (still relevant):
+Feature	                  |           dict (3.7+)	                                     |                        OrderedDict
+Order preservation	  |         Yes (insertion order)	                             |                      Yes (insertion order)
+Reordering methods	  |     ❌ Not available	                                     |                    ✅ Has move_to_end() to reorder keys
+Equality check	          |    Order doesn’t matter (only key–value pairs must match)	     |          Order does matter (OrderedDict([("a",1),("b",2)]) != OrderedDict([("b",2),("a",1)]))
+Performance	          |   Slightly smaller & faster (fewer features)	             |           Slightly more overhead (extra doubly-linked list under the hood)
+
+10.How do you profile Python code for performance bottlenecks?
+Ans: Ways to Profile Python Code
+1. Quick Timing with time or timeit
+For small snippets, use timeit (preferred, more accurate than time).
+Good for micro-benchmarks.
+2. Using cProfile (built-in profiler)
+Standard way to profile full scripts/functions.
+Shows how many times each function was called and how much time was spent.
+Best for function-level bottlenecks.
+3. Line-by-Line Profiling (line_profiler)
+External tool (install: pip install line-profiler).
+Profiles time spent on each line of a function.
+Useful when you need fine-grained detail.
+4. Memory Profiling (memory_profiler)
+Checks where memory is being used (good for memory bottlenecks).
+ Good for RAM-heavy programs.
+5. Visualization with snakeviz
+Makes cProfile output easier to understand.
+Opens an interactive browser visualization of bottlenecks.
+
+*Summary
+Use timeit → quick one-liners.
+Use cProfile → overall function-level performance.
+Use line_profiler → detailed line-by-line profiling.
+Use memory_profiler → track memory usage.
+Use snakeviz → visualize profiling results.
+
+🔹 Concurrency, Parallelism & Async
+11.What is the Global Interpreter Lock (GIL)? Why does it exist?
+Ans: The GIL (Global Interpreter Lock) is a mutex (lock) in CPython (the main Python implementation).
+It ensures that only one thread executes Python bytecode at a time, even on multi-core CPUs.
+This means that multi-threaded Python programs don’t run in true parallel on multiple cores (for CPU-bound work).
+without the GIL, this would be unsafe.
+With the GIL, Python makes sure only one thread runs at a time, so internal data structures (like reference counts) don’t get corrupted.
+*The GIL exists mainly for simplicity and performance in CPython’s memory model:
+Memory management safety
+CPython uses reference counting to track object lifetimes.
+Every time an object is used, its reference count is incremented/decremented.
+Without the GIL, multiple threads updating reference counts simultaneously would need fine-grained locks → huge overhead.
+Simplicity of implementation
+The GIL makes the interpreter’s C code much simpler.
+No need to add locks around every Python object access.
+Performance trade-off
+For single-threaded programs (the majority when Python was designed), the GIL actually makes things faster, because we avoid the overhead of lots of small locks.
+
+*Consequences of the GIL
+Good for I/O-bound programs
+Threads waiting on I/O (e.g., network, disk) release the GIL → another thread can run.
+So multithreading is still useful for I/O-heavy tasks.
+Bad for CPU-bound programs
+Only one thread can execute at a time, so multiple threads don’t speed up computation.
+Example: numerical computations, image processing, etc.
+*Workarounds:
+Multiprocessing (multiprocessing module): Uses multiple processes (each with its own GIL). → True parallelism.
+C extensions / NumPy: Heavy computation can release the GIL in C code, allowing parallel execution.
+Alternative interpreters:
+Jython / IronPython: No GIL (but slower adoption, different ecosystems).
+PyPy: Still has a GIL, though research into STM (software transactional memory) has been ongoing.
+
+12.Difference between **multithreading** and **multiprocessing** in Python.
+Ans: | Feature              | **Multithreading**                             | **Multiprocessing**                  |
+| -------------------- | ---------------------------------------------- | ------------------------------------ |
+| **Execution model**  | Multiple threads, 1 process                    | Multiple processes                   |
+| **Memory space**     | Shared                                         | Separate (isolated)                  |
+| **Communication**    | Shared variables (with locks)                  | IPC (queues, pipes, shared mem)      |
+| **Overhead**         | Low (lightweight)                              | High (full process per worker)       |
+| **Best for**         | I/O-bound tasks (web scraping, network apps)   | CPU-bound tasks (data crunching, ML) |
+| **Affected by GIL?** | ✅ Yes (threads can’t run CPU work in parallel) | ❌ No (each process has its own GIL)  |
+
+Use multithreading → When tasks spend most time waiting (I/O-bound).
+Use multiprocessing → When tasks spend most time computing (CPU-bound).
+
+13.When should you use `threading` vs `multiprocessing`?
+Ans: | Task type                              | Use `threading`  | Use `multiprocessing`       |
+| -------------------------------------- | ---------------- | --------------------------- |
+| I/O-bound (network, disk, DB)          | ✅ Yes            | ❌ Not needed                |
+| CPU-bound (math, ML, image processing) | ❌ Limited by GIL | ✅ Yes                       |
+| Memory efficiency                      | ✅ Lightweight    | ❌ Heavier (separate memory) |
+| Easy data sharing                      | ✅ Shared memory  | ❌ Need queues/pipes         |
+
+Rule of Thumb:
+If you are waiting on something → threading.
+If you are crunching numbers → multiprocessing.
+
+14.What is `asyncio` in Python? How does it differ from threads?
+ans: asyncio is a library in Python for writing asynchronous, concurrent code using coroutines (async/await syntax).
+It provides an event loop that runs tasks, handling I/O without blocking.
+Main idea: Instead of running many threads, asyncio uses cooperative multitasking — tasks voluntarily give up control when waiting (like on I/O).
+| Feature               | **`asyncio`**                                                    | **Threads**                                             |
+| --------------------- | ---------------------------------------------------------------- | ------------------------------------------------------- |
+| **Concurrency model** | Single-threaded, cooperative (tasks yield control using `await`) | Pre-emptive (OS switches between threads automatically) |
+| **Parallelism**       | ❌ No true parallelism (runs on one thread, one core)             | ❌ In Python, limited by GIL for CPU-bound code          |
+| **Best for**          | I/O-bound tasks (network requests, DB calls, file I/O)           | I/O-bound tasks (also some parallelism in C extensions) |
+| **Overhead**          | Low (no thread creation, context switching cheap)                | Higher (thread creation & context switching cost)       |
+| **Synchronization**   | Less error-prone (tasks cooperate explicitly)                    | Needs locks, semaphores to avoid race conditions        |
+| **Scalability**       | Handles **thousands** of concurrent tasks efficiently            | Threads don’t scale well past hundreds                  |
+
+Use asyncio when you need to handle lots of I/O-bound tasks concurrently (e.g., web servers, web scraping, chatbots, APIs).
+Use Threads if you have blocking libraries that don’t support asyncio.
+Neither helps for CPU-bound tasks → use multiprocessing instead.
+
+15.How do coroutines differ from generators?
+Ans: | Feature         | **Generators**                 | **Coroutines**                       |
+| --------------- | ------------------------------ | ------------------------------------ |
+| **Goal**        | Produce values (iteration)     | Consume values / perform async tasks |
+| **Syntax**      | `def` + `yield`                | `async def` + `await` (modern)       |
+| **Resumption**  | Resumed with `next()`          | Resumed with `await` or `.send()`    |
+| **Typical use** | Lazy iteration, data pipelines | Concurrency (`asyncio`), event loops |
+| **Direction**   | One-way (producer → consumer)  | Two-way (can send/receive values)    |
+Generator → Like a water tap: you call next() to get the next drop of water.
+Coroutine → Like a cooperative worker: you can send tasks to it, and it tells you when it’s waiting/finished.
+
+16.Explain the difference between `concurrent.futures.ThreadPoolExecutor` and `ProcessPoolExecutor`.
+Ans: 1. ThreadPoolExecutor
+Uses threads inside a single Python process.
+Threads share the same memory space.
+Limited by the Global Interpreter Lock (GIL) → only one thread executes Python bytecode at a time.
+Best for I/O-bound tasks (network requests, file I/O, database queries).
+2. ProcessPoolExecutor
+Uses separate processes, not threads.
+Each process has its own Python interpreter and memory space.
+No GIL limitation → can run true parallel CPU-bound code across multiple cores.
+More overhead than threads (process creation, inter-process communication).
+Best for CPU-bound tasks (math-heavy computations, data processing, machine learning).
+Runs CPU-heavy tasks in parallel across cores.
+
+🔹 3. Key Differences
+Feature	                                       ThreadPoolExecutor	                                          ProcessPoolExecutor
+Concurrency type	                            Threads	                                                       Processes
+Memory	                                     Shared memory space	                                           Separate memory per process
+Affected by GIL?	                   ✅ Yes (not good for CPU-bound)	                                    ❌ No (true parallelism)
+Overhead	                                Low (lightweight)	                                             High (process startup, IPC)
+Best for	                                I/O-bound tasks	                                                         CPU-bound tasks
+Data sharing	                            Easy (shared memory, global vars)	                                 Hard (need pickling to send objects)
+🔹 4. Analogy
+ThreadPoolExecutor → Like workers in the same office sharing the same desk space (fast communication but can’t all type at once due to the GIL).
+ProcessPoolExecutor → Like workers in different offices (can all work in parallel, but need phone/email to communicate — slower setup).
+
+✅ Summary:
+Use ThreadPoolExecutor for I/O-bound tasks (e.g., web scraping, file I/O).
+Use ProcessPoolExecutor for CPU-bound tasks (e.g., heavy number crunching).
+
+17.What is the difference between cooperative multitasking and preemptive multitasking?
+Ans: Difference:
+| Feature      | **Cooperative Multitasking**                   | **Preemptive Multitasking**                    |
+| ------------ | ---------------------------------------------- | ---------------------------------------------- |
+| **Control**  | Tasks yield voluntarily                        | OS scheduler enforces switching                |
+| **Risk**     | One task can block all others                  | No single task can block forever               |
+| **Overhead** | Low (fewer context switches)                   | Higher (frequent forced switches)              |
+| **Examples** | Python `asyncio`, old Mac OS, embedded systems | Python `threading`, modern OS (Linux, Windows) |
+| **Best for** | I/O-bound tasks where tasks yield naturally    | General multitasking, CPU-bound work           |
+Cooperative multitasking = tasks decide when to give up control (asyncio).
+Preemptive multitasking = OS decides when to switch tasks (threads, processes).
+
+18.Write an example of an async function that fetches data from multiple URLs concurrently.
+Ans: use asyncio + aiohttp (an async HTTP client).
+We create tasks for all URLs.
+asyncio.gather runs them concurrently.
+Instead of waiting for each request one by one, all run at once → much faster.
+
+19. What are race conditions and deadlocks? How can Python handle them?
+Ans: Race Condition:
+Happens when two or more threads/tasks access shared data at the same time, and the final result depends on who runs first.
+Example: Two threads both try to update the same bank account balance → result may be wrong.
+Deadlock:
+Happens when two or more threads wait for each other forever.
+
+Example:
+Thread 1 holds Lock A and waits for Lock B.
+Thread 2 holds Lock B and waits for Lock A.
+Both are stuck.
+Always acquire locks in the same order.
+Use threading.Lock(timeout=...) or asyncio.Lock (for async).
+Or avoid shared state (use queues, multiprocessing).
+Summary:
+Race condition: Tasks/threads compete for the same data → inconsistent results.
+Deadlock: Tasks/threads wait forever on each other → program stuck.
+Python’s solution: Use threading.Lock, asyncio.Lock, or design programs to avoid sharing mutable state.
+
+20.How does Python handle inter-process communication?
+Ans: | IPC Method        | Use Case                                     |
+| ----------------- | -------------------------------------------- |
+| **Queue**         | Simple, thread/process-safe message passing  |
+| **Pipe**          | Lightweight, two-way communication           |
+| **Value / Array** | Share small fixed-size data (fast)           |
+| **SharedMemory**  | Share large buffers/NumPy arrays efficiently |
+| **Manager**       | Share complex Python objects (lists, dicts)  |
+| **Files/Sockets** | Cross-platform, cross-language IPC           |
+
+21. What are Python memory views?
+Ans: A memoryview is a built-in object that lets you view and manipulate the underlying memory of another object (like bytes, bytearray, or array) without copying the data.
+It acts like a "window" into the buffer of the object.
+This saves memory and improves performance when handling large datasets (e.g., images, binary files, NumPy arrays).
+example code:
+data = bytearray(b"hello")
+mv = memoryview(data)
+sub_mv = mv[1:4]   # view of "ell"
+sub_mv[0] = 88     # modifies original (88 = 'X')
+print(data)        # bytearray(b'hXllo')
+*Key Features
+Zero-copy slicing → mv[1:5] creates a new view, not a new object.
+Supports multi-dimensional data (like matrices in NumPy).
+Read/write access depends on the original object:
+bytes → read-only memoryview.
+bytearray or array → read/write memoryview.
+
+use memoryview:
+Efficiency: Avoids making unnecessary copies of large data.
+Interoperability: Works with NumPy, PIL, and other libraries that use the buffer protocol.
+Low-level access: Lets you peek into raw binary data directly.
+
+22.What is the difference between `bytes`, `bytearray`, and `memoryview`?
+Ans: Difference:
+ | Feature               | `bytes`                 | `bytearray`              | `memoryview`                   |
+| --------------------- | ----------------------- | ------------------------ | ------------------------------ |
+| **Mutable?**          | ❌ No                    | ✅ Yes                    | Depends on underlying object   |
+| **Copy on slice?**    | ✅ Yes                   | ✅ Yes                    | ❌ No (just a view)             |
+| **Use case**          | Store fixed binary data | Modify binary data       | Work with data without copying |
+| **Memory-efficient?** | Less (copies data)      | Less (copies on slicing) | Most efficient (zero-copy)     |
+Analogy:
+bytes → A printed book 📕 (cannot be changed).
+bytearray → A notebook 📒 (you can erase and rewrite).
+memoryview → A magnifying glass 🔍 on the book/notebook (you see/edit data without making a copy).
+
+23.How do you reduce memory usage for large datasets in Python?
+Ans: Use Efficient Data Types
+Built-in types (like lists, dicts) have overhead.
+Prefer arrays (array.array) or NumPy arrays with smaller dtypes.
+✅ Saves memory by choosing the smallest dtype that fits your data
+ii)Use Generators Instead of Lists:
+Lists store all elements in memory.
+Generators compute values on the fly.
+Generators (and iterators) reduce memory by avoiding storage of entire sequences.
+iii)Use __slots__ in Classes:
+By default, Python objects use a __dict__ to store attributes → memory heavy.
+Defining __slots__ removes this overhead.
+Saves memory when creating millions of objects.
+iv)Use Memory Mapping for Large Files:
+Instead of loading an entire file into RAM, map it to memory and access parts as needed.
+Useful for very large datasets (GBs).
+v)Avoid Unnecessary Copies:
+Python often makes copies when slicing or converting types.
+Use memoryview for zero-copy slices.
+vi)Chunk Data Processing:
+Don’t load everything at once.
+Process data in chunks (streaming).
+Saves RAM by only holding part of the dataset in memory.
+vii)Use Specialized Libraries:
+numpy.memmap → memory-efficient NumPy arrays for huge datasets.
+dask → parallel + out-of-core arrays/dataframes.
+pandas.Categorical → reduce memory for repeated strings.
+viii)Garbage Collection and Object Reuse:
+Delete unused variables: del var
+Use gc.collect() to free cyclic references.
+Reuse objects (e.g., array or pool of buffers) instead of creating new ones repeat
+
+
+24.What are slots (`__slots__`) in Python classes, and why are they useful?
+Ans: __slots__:
+By default, Python stores instance attributes in a per-object dictionary (__dict__).
+This dictionary makes attribute access flexible but also uses a lot of memory.
+If you know exactly what attributes your class will have, you can declare them in __slots__.
+Doing so tells Python not to use __dict__ but instead use a compact fixed structure.
+Every instance has a dictionary (__dict__) → flexible but memory-heavy.
+*__slots__ Useful:
+
+Memory efficiency:
+
+Removes the overhead of per-instance dictionaries.
+Huge savings if you create millions of objects.
+
+Faster attribute access:
+Attribute lookup is slightly faster because Python doesn’t need to search in a dictionary.
+
+Prevents accidental attributes:
+You can’t assign new attributes that aren’t in __slots__.
+🔹 Limitations of __slots__
+No __dict__ → can’t add new attributes dynamically.
+No __weakref__ unless you include "__weakref__" in __slots__.
+Doesn’t play nicely with multiple inheritance unless all parent classes define __slots__.
+🔹 Analogy
+Without __slots__ → every object carries a backpack full of pockets (the __dict__), ready to store anything.
+With __slots__ → every object has a slim wallet with fixed slots (only x, y, etc.) → lighter, faster, but less flexible.
+ 
+25.How do you implement an LRU cache manually?
+Ans: An LRU (Least Recently Used) cache keeps a limited number of items, and when it’s full, it discards the least recently used one.
+it can implement it manually using a combination of a dictionary (for O(1) lookup) and a doubly linked list (for O(1) updates of usage order).
+it Works:
+Dictionary (cache) → O(1) access to nodes.
+Doubly Linked List (head ↔ tail) → O(1) updates of "most/least recently used" order.
+On get() or put(), the accessed node is moved to the front (most recent).
+When full, the last node (before tail) is evicted.
+
+26.How does Python’s `functools.lru_cache` work internally?
+Ans:functools.lru_cache is essentially a dict + LRU tracking (doubly linked list) wrapped around your function. It stores results for fast lookup and evicts the least recently used items when full, all with minimal overhead.
+functools.lru_cache is a decorator that caches the results of a function.
+lru_cache:
+When the decorated function is called:
+If the arguments are already cached, it returns the cached result. ✅
+If not, it computes the result, stores it in the cache, and may evict the least recently used item if the cache is full.
+from functools import lru_cache
+
+@lru_cache(maxsize=3)
+def fib(n):
+    if n < 2:
+        return n
+    return fib(n-1) + fib(n-2)
+
+27.What are weak references (`weakref`) in Python?
+Ans: Normally, when you assign an object to a variable, Python increases its reference count.
+The object is kept alive as long as there’s at least one reference.
+Weak references allow you to reference an object without increasing its reference count.
+If the object is deleted (no strong references remain), the weak reference automatically becomes None or triggers a callback.
+*Use Weak References:
+Prevent memory leaks by avoiding circular references.
+Useful in caching, memoization, or observer patterns where you don’t want to force objects to stay alive.
+Let you track objects without owning them.
+
+Strong reference → You own a house key → the house can’t be destroyed.
+Weak reference → You have a copy of the key but don’t own the house → if the owner leaves, the house can be demolished, and your key becomes useless.
+
+28.How do you debug a memory leak in Python?
+Ans: Signs of a Memory Leak
+Memory usage of your Python process keeps growing over time.
+Objects that should be deleted are still accessible.
+Sluggish performance or crashes in long-running programs.
+ 2. Common Causes
+Global variables holding references
+Unclosed files or network connections
+Circular references with __del__ methods (garbage collector can’t handle them)
+Caching without eviction (e.g., dict grows indefinitely)
+Third-party library objects not released properly
+3.Debugging Approach:
+Observe memory growth using psutil or system monitor.
+Use tracemalloc to find which lines allocate the most memory.
+Use gc or objgraph to find objects still alive.
+Check for references: circular references, globals, caches.
+
+Fix leaks:
+Remove unnecessary references.
+Use weak references for caches (weakref).
+Close files, sockets, database connections.
+Avoid circular references with __del__.
+
+29.What are the trade-offs between generators and lists for memory efficiency?
+Ans: | Feature              | **List**                                          | **Generator**                                           |
+| -------------------- | ------------------------------------------------- | ------------------------------------------------------- |
+| **Storage**          | Stores all items in memory at once                | Generates items **on-the-fly**, does **not store** them |
+| **Memory footprint** | Large for big datasets                            | Very small, almost constant                             |
+| **Example**          | `[x*x for x in range(10**7)]` → huge memory usage | `(x*x for x in range(10**7))` → tiny memory usage       |
+
+Generators = memory-efficient, lazy, single-pass, no random access.
+Lists = higher memory usage, fast access, reusable, convenient.
+Trade-off: memory vs speed/reusability.
+
+30.How do you handle huge data (GBs) efficiently in Python?
+Ans: Handling huge datasets (GBs or more) in Python requires careful strategies to avoid running out of memory and to process data efficiently. 
+*Use Generators and Iterators:
+Don’t load the entire dataset into memory at once.
+Use generators (yield) or iterator-based APIs.
+*Chunk Processing:
+Process data in smaller chunks instead of all at once.
+Works with Pandas, CSV, or database queries.
+*Memory-Mapped Files:
+Use mmap or NumPy’s memmap to access parts of a large file without loading it fully.
+*Efficient Data Types:
+Use smaller numeric types (e.g., int8, float32) instead of default Python types.
+Use categorical types for repeated strings in Pandas.
+*Out-of-Core Libraries:
+Dask → for parallel and out-of-core computations like Pandas.
+Vaex → for memory-efficient large DataFrame processing.
+PySpark → for distributed big data.
+*Use Databases for Storage:
+Store huge data in SQLite, PostgreSQL, or NoSQL instead of memory.
+Query only what you need.
+*Avoid Unnecessary Copies:
+Use memoryview or NumPy views instead of copying arrays.
+Be mindful of Pandas copies (.copy() creates new memory).
+*Garbage Collection & Object Cleanup
+Explicitly delete large temporary objects with del obj.
+Call gc.collect() for long-running processes.
+*Parallel & Lazy Processing
+Use multiprocessing or Dask for CPU-heavy tasks.
+Combine with chunking and generators.
+ 
+Summary / Strategy:
+Lazy evaluation → generators, iterators.
+Process in chunks → Pandas chunksize, streaming.
+Memory-mapped files → mmap, np.memmap.
+Efficient data types → smaller numeric types, categorical.
+Out-of-core / distributed computing → Dask, Vaex, PySpark.
+Use databases → query only needed data.
+Avoid copies → memoryviews, slicing carefully.
+
+
+
+
+
+
+
+
+
+

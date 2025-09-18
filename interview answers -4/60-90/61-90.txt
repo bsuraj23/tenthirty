@@ -1,0 +1,768 @@
+32.Difference between `type()` and `class` in Python.
+Ans: Difference:
+| Feature                  | `class`                              | `type()`                                                                   |
+| ------------------------ | ------------------------------------ | -------------------------------------------------------------------------- |
+| **Definition**           | Used to define a new class in Python | Can be used to **create a class dynamically** at runtime                   |
+| **Syntax**               | `class My Class: ...`                 | `My Class = type("My Class", (BaseClass,), {"attar": value, "method": func})` |
+| **Execution**            | Statically written in code           | Dynamically executed in code                                               |
+| **Example**              | `python class A: pass `              | `python B = type("B", (), {"x": 5}) print(B.x) # 5`                        |
+| **Meta class connection** | Uses `type` under the hood           | `type` **is the default meta class** that creates classes                   |
+
+33. How do you create a Singleton class in Python?
+Ans: Singleton prevents multiple instances.
+Use __new__ or decorator for easy implementation.
+Commonly used for database connections, logging, configuration objects.
+
+34. How do you implement the Factory design pattern in Python?
+Ans:The Factory Pattern is a creational design pattern.
+It encapsulates object creation, so the client code doesn’t need to know the exact class it is creating.
+Helps to decouple object creation from usage.
+Analogy:
+You order a “vehicle” from a factory.
+The factory decides whether to give you a Car or Bike based on your request.
+You just use the vehicle; you don’t care how it’s made.
+
+35.What is monkey patching in Python?
+Ans: Monkey patching is the practice of dynamically modifying or extending a class or module at runtime.
+It allows you to add, change, or override methods or attributes without modifying the original source code.
+
+ Caution: Use carefully — it can make code harder to maintain.
+
+36. How do you implement mixins in Python?
+Ans: A Mixin is a class that provides additional functionality to another class through inheritance.
+Mixins do not stand alone; they are meant to be combined with other classes.
+Often used for code reuse and separation of concerns.
+
+37.What is duck typing? Give an example.
+Ans:Duck typing is a concept in Python (and other dynamically typed languages) where the type of an object is determined by what methods/attributes it has, rather than its actual class.
+Famous saying:
+“If it walks like a duck and quacks like a duck, it’s a duck.”
+
+Key idea:
+You don’t check the type with isinstance(); you just use the object’s methods/attributes.
+Python will raise an error only if the object doesn’t support the operation.
+
+38.How is multiple inheritance handled in Python (MRO - Method Resolution Order)?
+Ans:MRO (Method Resolution Order) is the order in which Python looks for a method or attribute in a class hierarchy.
+Python uses the C3 linearization algorithm to compute MRO for multiple inheritance.
+
+Ensures:
+Each class appears before its parents.
+The order is consistent with inheritance.
+No class appears twice.
+
+39. How do abstract base classes (`abc` module) work in Python?
+Ans: an Abstract Base Class:
+An abstract base class (ABC) is a class that cannot be instantiated on its own.
+It defines methods that must be implemented by subclasses.
+Think of it as a contract: any subclass must implement the abstract methods to be concrete.
+Use case: Define a common interface for multiple subclasses.
+ Python’s abc Module:
+Python provides the abc module to define abstract base classes.
+
+Key components:
+ABC → base class for creating abstract classes.
+@abstractmethod → decorator to mark methods as abstract.
+
+40.Explain dependency injection in Python with an example.
+Ans: Dependency Injection is a design pattern where an object receives its dependencies from the outside rather than creating them itself.
+Helps in:
+Decoupling components
+Making code more testable
+Improving flexibility
+Key idea: Don’t let a class create its own dependencies. Pass them in.
+example: class Engine:
+    def start(self):
+        print("Engine started")
+
+class Car:
+    def __init__(self):
+        self.engine = Engine()  # tightly coupled
+    def drive(self):
+        self.engine.start()
+        print("Car is driving")
+Benefits:
+-Testability → You can inject mock dependencies easily.
+-Flexibility → Swap implementations without changing the class.
+-Loose coupling → Components are independent.
+
+41.Implement a Trie in Python.
+Ans: A Trie is a tree-like data structure used to store strings efficiently.
+Each node represents a character, and paths from root → leaf represent words.
+Useful for autocomplete, spell checking, and prefix searches.
+Works
+*Insertion:
+Traverse each character.
+Create a new node if it doesn’t exist.
+Mark the last node as is_end_of_word = True.
+*Search:
+Traverse characters.
+If any character is missing → word doesn’t exist.
+Check is_end_of_word at last node.
+*Prefix Search:
+Traverse characters.
+If all characters exist → prefix exists.
+
+42.Implement a thread-safe queue in Python.
+Ans: implement a thread-safe queue in Python. Python actually provides built-in tools for this, but I’ll show both a manual implementation using threading.Lock and the built-in queue.Queue approach.
+Already thread-safe.
+Supports blocking operations (get(block=True)).
+Provides task_done() and join() for producer-consumer synchronization.
+*Thread safety: Ensure only one thread modifies the queue at a time using locks or a built-in thread-safe queue.
+*Avoid busy-waiting: Use queue.Queue’s blocking operations instead of continuously checking.
+*Use Cases: Producer-consumer problems, task scheduling, background workers.
+
+43.Implement a custom linked list class with `insert`, `delete`, and `search`.
+Ans: implement a custom singly linked list in Python with insert, delete, and search methods. I’ll make it clear and easy to understand.
+Time Complexity
+Operation	Complexity
+Insert	         O(n)
+Delete   	 O(n)
+Search	         O(n)
+
+n = number of nodes in the linked list.
+If inserting at head, insert can be O(1).
+
+44.How do you implement a priority queue in Python?
+Ans: A priority queue is like a regular queue, but each element has a priority.
+Elements with higher priority are dequeued first.
+Useful in: task scheduling, Dijkstra’s algorithm, event-driven simulations.
+Comparison
+Approach	  Thread-Safe	          |                     Complexity	    |                 Notes
+heapq	            ❌	                  |                   O(log n) for push/pop |           Fastest, simple
+Priority Queue	    ✅	                  |                      O(log n)	    |          Use in multithreading
+Custom list sort    ❌	                  |              O(n log n) for each insert |     	Simple but less efficient
+
+45.How do you optimize sorting large datasets in Python?
+Ans: Python’s built-in sort uses Timsort (hybrid of merge sort + insertion sort).
+Efficient for real-world datasets and partially sorted data.
+Time complexity: O(n log n)
+Space complexity: O(n) (Timsort is adaptive)
+Use built-in sorted() or list.sort() — already highly optimized.
+Use key parameter instead of custom comparison.
+Process data in chunks for memory efficiency.
+Use specialized libraries for numeric or tabular data: NumPy, Pandas, Dask.
+External sorting for datasets larger than memory.
+Avoid repeated sorting — sort once and reuse results.
+
+46.Implement a balanced binary search tree in Python.
+Ans:BST property: Left child < Node < Right child.
+AVL property: Balance factor of every node = height(left) - height(right) in {-1, 0, 1}.
+If balance factor goes outside this range, tree is rotated to maintain balance.
+
+*Rotations:
+Left rotation
+Right rotation
+Left-Right rotation
+Right-Left rotation
+*Key Points
+AVL Tree is a self-balancing BST.
+Balance factor = height(left) - height(right).
+Rotations (Left, Right, LR, RL) maintain balance after insertions.
+Search, insertion, and deletion have O(log n) complexity.
+I can also implement deletion in AVL Tree, which is slightly more complex due to rebalancing after removal.
+
+47.Implement graph traversal (BFS & DFS) in Python.
+Ans: implement graph traversal in Python using Breadth-First Search (BFS) and Depth-First Search (DFS). 
+| Traversal | Data Structure  | Order          |
+| --------- | --------------- | -------------- |
+| BFS       | Queue           | Level by level |
+| DFS       | Stack/Recursion | Depth first    |
+
+48. How do you detect cycles in a directed graph using Python?
+Ans:In a directed graph, a cycle exists if during DFS we revisit a node that is currently in the recursion stack.
+Use two sets/arrays:
+visited → nodes already fully explored
+rec_stack → nodes in the current DFS path
+DFS with recursion stack detects cycles in directed graphs.
+Time Complexity: O(V + E)
+Space Complexity: O(V) for visited + rec_stackAlternative Method
+*Alternative Method:
+Kahn’s Algorithm (Topological Sort):
+If topological sorting is possible → no cycle
+If not → cycle exists
+Useful for large graphs or when you already need a topological order.
+
+49.Implement a rate limiter in Python.
+Ans: A rate limiter restricts the number of operations in a given time window. One simple approach is the token bucket / sliding window method.
+Rate Limiter
+Token bucket / sliding window; use in-memory or Redis for distributed rate limiting.
+works:
+max_calls = max requests in period seconds.
+Each call checks if time window has passed.
+Thread-safe using threading.Lock().
+You can extend this for async functions or distributed systems using Redis.
+
+50. Implement a distributed counter using Python.
+Ans: A distributed counter allows multiple processes or machines to increment/decrement a shared counter.
+Commonly implemented using Redis, memcached, or database atomic operations.
+Distributed Counter
+Use atomic operations in Redis / Memcached / DB; ensures consistency across processes.
+
+51.What is a closure in Python? How is it different from a normal function?
+Ans: Closure:
+A closure is a function that remembers the environment in which it was created, even if it is called outside that scope.
+In other words, it encloses the variables from its enclosing function.
+Requirements for a closure:
+Must be a nested function (function inside another function).
+The inner function refers to a variable from the outer function.
+The outer function returns the inner function.
+| Feature  | Normal Function                           | Closure                                                         |
+| -------- | ----------------------------------------- | --------------------------------------------------------------- |
+| Scope    | Accesses only its **own local variables** | Can access variables from **enclosing function**                |
+| Lifetime | Exists only while being called            | **Remembers enclosed variables** even after outer function ends |
+| Use case | Simple computation or logic               | Useful for **data hiding, callbacks, decorators**               |
+
+52.Explain currying in Python with an example.
+Ans: Currying is the process of transforming a function that takes multiple arguments into a sequence of functions that each take a single argument.
+In other words, instead of calling f(a, b), you create a chain of functions: f(a)(b).
+Useful in functional programming, partial application, and higher-order functions.
+| Feature             | Explanation                                                                      |
+| ------------------- | -------------------------------------------------------------------------------- |
+| Currying            | Transform a multi-argument function into a sequence of single-argument functions |
+| Partial application | Pre-fill some arguments of a function (similar to currying)                      |
+| Benefits            | Reusability, cleaner functional code, easier composition                         |
+Normal function: f(a, b, c) → provide all arguments at once
+Curried function: f(a)(b)(c) → provide one argument at a time, creating specialized functions along the way.
+
+*example:
+from functools import partial
+
+def multiply(a, b):
+    return a * b
+
+double = partial(multiply, 2)  # Fix a=2
+triple = partial(multiply, 3)  # Fix a=3
+
+print(double(5))  # 10
+print(triple(5))  # 15
+
+53.What are partial functions (`functools.partial`)?
+Ans: A partial function is a function where some arguments are fixed (pre-filled), creating a new function.
+Useful for simplifying function calls and reusing functions with common arguments.
+In Python, partial functions are implemented using functools.partial.
+Code reuse → avoid repeating arguments.
+Cleaner functional code → especially with map, filter, or callbacks.
+Easier function composition → can create customized versions of general functions.
+| Feature             | Description                                                                        |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| `functools.partial` | Creates a new function with **fixed arguments**                                    |
+| Benefits            | Simplifies repetitive function calls, cleaner code, reusable specialized functions |
+| Use Cases           | Callbacks, functional programming, mapping/filtering with pre-filled parameters    |
+
+54.What is memoization? How is it different from caching?
+Ans:Memoization is an optimization technique where the results of expensive function calls are stored, so the next time the same inputs occur, the result can be returned immediately.
+It is a specific form of caching applied to functions.
+Caching:
+Caching is a broader concept: storing data (not only function results) so it can be quickly retrieved later.
+Caching can apply to functions, web requests, database queries, files, etc.
+For example:
+A web browser cache stores visited pages.
+A database cache stores query results.
+| Feature     | Memoization                                         | Caching                                                       |
+| ----------- | --------------------------------------------------- | ------------------------------------------------------------- |
+| Scope       | Specific to **functions**                           | General purpose (files, APIs, DB queries, etc.)               |
+| Storage Key | Usually based on **function arguments**             | Can be based on anything (URLs, queries, objects)             |
+| Automation  | Often built-in with decorators (e.g., `@lru_cache`) | Implemented manually or with cache systems (Redis, Memcached) |
+| Goal        | Avoid recomputing the same function result          | Avoid re-fetching or re-computing any expensive resource      |
+
+55.How do you implement functional pipelines in Python?
+Ans:A functional pipeline is a way of chaining operations so that the output of one function becomes the input of the next. This style is common in functional programming (like in Haskell or Scala) and can be achieved neatly in Python.compose: functions applied right-to-left (f(g(x))).
+pipe: data flows left-to-right (pipe(x, f, g, h)).
+Works beautifully with map, filter, reduce, and partial.
+Can even mimic Pandas-style .pipe() for method chaining.
+
+56. How do you implement tail recursion optimization (since Python doesn’t have it natively)?
+Ans:Python has no built-in TCO.
+The Pythonic way is usually rewriting recursion as iteration.
+can emulate it with trampolines (cleaner) or exceptions (hacky).
+
+57.Explain higher-order functions with real-world use cases.
+Ans: A higher-order function is a function that either:
+Takes another function as input, or
+Returns a function as output, or both.
+*Use cases in real-world Python:
+Decorators (functions returning functions).
+Callbacks in async code or event handling.
+Customizing behavior (passing key function to sorted, etc.).
+
+58. What is the difference between map/filter/reduce and comprehensions?
+Ans:*map()
+Applies a function to each element
+*filter()
+Filters elements based on condition
+*reduce()
+Reduces a sequence to a single value.
+map/filter/reduce are functional style (good when passing functions dynamically).
+Comprehensions are more Pythonic and usually preferred.
+reduce is the only one that doesn’t have a clean comprehension alternative.
+
+
+59. How do you implement function composition in Python?
+Ans: Function composition means combining functions such that h(x) = f(g(x)).
+
+60. What are monads in functional programming, and can they be represented in Python?
+Ans: Monads come from category theory, but intuitively:
+ A monad is just a wrapper around a value + rules for chaining computations.
+
+*Three key laws:
+wrap (unit) → put a value in a container.
+bind (flatMap) → apply a function that returns another container.
+associativity → chaining should be consistent.
+Monads aren’t built-in, but you can simulate them using classes.
+Maybe, Result, List, IO are common monads in functional languages.
+Libraries like toolz or returns bring more formal monads to Python.
+
+61.How do you write unit tests in Python (`unittest` vs `pytest`)?
+Ans: unittest (built-in)
+Inspired by Java’s JUnit.
+Comes with Python, no install needed.
+More verbose.
+*pytest (third-party, very popular)
+Simpler syntax, less boilerplate.
+Rich plugin ecosystem.
+Automatic test discovery.
+*differences:
+unittest: verbose, class-based, built-in.
+pytest: concise, feature-rich, external dependency.
+
+62. What is mocking in Python testing?
+Ans: Mocking means replacing real objects with fake ones during testing.
+Used when:
+External systems (DB, API, file system) are slow/unavailable.
+You want to isolate the unit under test.
+
+63. How do you patch dependencies in unit tests (`unittest.mock`)?
+Ans: patch replaces real dependencies with mocks during a test.
+requests.get is replaced with a mock just for this test.
+
+64. What is the difference between integration tests and unit tests?
+Ans:* Unit tests
+Test a single function/class/module in isolation.
+Fast, run in memory.
+Heavy use of mocks.
+Example: testing a math.add() function.
+
+*Integration tests
+Test how components work together.
+May use real DB, API, or filesystem.
+Slower, fewer in number.
+
+Example: testing a UserService that saves to a real database.
+Unit test = “Does my gear work?”
+Integration test = “Does the whole machine work when gears connect?”
+
+65. How do you write a parameterized test in Python?
+Ans: Instead of duplicating tests with different inputs, you can parametrize.
+Parameterized tests = run same test with multiple inputs (subTest in unittest, @pytest.mark.parametrize in pytest).
+
+66.What is the difference between `tox` and `pytest`?
+Ans: *pytest
+What it is:
+A testing framework in Python.
+Purpose:
+Helps you write and run tests easily.
+Key features:
+Simple syntax for writing tests (assert instead of self.assertEqual() in unittest)
+Fixtures for setup/teardown
+Plugins for coverage, mocking, parameterized testing, etc.
+Runs only in your current Python environment (whatever interpreter/virtualenv you are in).
+*tox:
+What it is:
+A test automation and environment management tool.
+Purpose:
+Runs your tests (often with pytest inside) across multiple Python versions and environments.
+Key features:
+Creates isolated virtual environments automatically
+Installs your package and dependencies inside those envs
+Runs your test suite (using pytest or any other test runner)
+Useful for projects that need to be tested on Python 3.8, 3.9, 3.10, 3.11, etc.
+Can also automate linting, type-checking, building docs, etc.
+
+67.How do you build and publish a Python package to PyPI?
+Ans: Organize your package properly (example project mypackage)
+This file defines metadata and build system.
+PyPI does not allow overwriting versions.
+Always bump version (0.1.0 → 0.1.1) before building & uploading again.
+
+
+68.How do you manage virtual environments and dependencies in Python?
+Ans: Managing virtual environments and dependencies properly is critical in Python projects.
+A virtual environment (venv) is an isolated Python environment.
+Each project can have its own dependencies without interfering with system Python or other projects.
+*Managing Dependencies
+✅ Install packages
+pip install requests flask
+✅ Freeze dependencies
+pip freeze > requirements.txt
+✅ Recreate env later
+pip install -r requirements.txt
+*Best Practices:
+Use one venv per project.
+Always keep a requirements.txt (or pyproject.toml if using Poetry).
+Pin exact versions for apps (pip freeze).
+Use loose versions for libraries (e.g., requests>=2.30,<3.0).
+Automate with tox/nox if testing across environments.
+
+69.What are wheels (`.whl`) in Python packaging?
+Ans: A wheel is a built distribution format for Python packages.
+File extension: .whl.
+It’s essentially a pre-built, ready-to-install package (a zip archive with metadata).
+Installing from a wheel is much faster than building from source (.tar.gz).
+Avoids requiring a compiler (C extensions already compiled).
+Ensures reproducible installs across platforms.
+
+numpy → package name
+1.26.0 → version
+cp311 → CPython 3.11
+win_amd64 → Windows 64-bit
+
+70. What is `poetry` in Python dependency management?
+Ans: Poetry is a modern tool for dependency management + packaging + publishing.
+It combines what you’d otherwise need multiple tools (pip, virtualenv, setuptools, twine) for.
+*Key features:
+Dependency management:
+Uses pyproject.toml instead of requirements.txt.
+Virtual environments:
+Automatically creates and manages them.
+Lock file:
+Creates poetry.lock for reproducible installs (like package-lock.json in Node).
+Publishing:
+Can build and upload packages to PyPI directly.
+
+71.How do you implement a simple REST API in Python without Flask/Django?
+Ans: Option A — minimal sync server using http. Server. Server
+Pros: async, middleware, routing, production-ready.
+Cons: external dependency.
+
+72.How do you implement WebSockets in Python?
+Ans: If you need HTTP + WebSockets in same app
+Use ASGI frameworks (Starlette, FastAPI, or aiohttp which supports websockets). ASGI is recommended for async + websockets.
+
+73.What is WSGI, and why is it important?
+Ans: WSGI = Web Server Gateway Interface. It’s a standard Python interface between web servers (Gunicorn, uWSGI) and synchronous Python web applications/frameworks (Django, Flask).
+A WSGI app is a callable: def app(environ, start_response): ...
+Why important: it decouples application code from the HTTP server so you can run the same app on different servers.
+Note: WSGI is synchronous. For async + WebSockets, ASGI (Asynchronous Server Gateway Interface) is the modern replacement.
+
+74.How do you scale a Python web application to handle millions of requests?
+Ans: A. Choose right concurrency model
+Use async (ASGI) for many I/O-bound connections (e.g., websockets, many concurrent HTTP requests).
+Use multiple worker processes (Gunicorn with multiple workers) for CPU-bound workloads.
+B. Horizontal scaling
+Run multiple app instances (pods/VMs) behind a load balancer (NGINX, AWS ALB).
+Use container orchestration (Kubernetes) with autoscaling.
+C. Caching
+Edge CDN for static assets.
+HTTP cache / reverse proxy (Varnish, NGINX).
+Application cache (Redis, Memcached) for expensive computations or DB query results.
+D. Database scaling
+Use read replicas for reads, partitioning/sharding for large datasets.
+Use connection pooling. Avoid N+1 queries; index appropriately.
+E. Queue background work
+Offload long-running tasks (image processing, emails) to background workers (Celery, RQ, Sidekiq-like systems) and message queues.
+F. Optimize app
+Profiling (cProfile, py-spy), remove hotspots, use native extensions or rewrite hot paths in C/Go if needed.
+Use efficient serialization (ujson/msgpack) when appropriate.
+G. Observability & resilience
+Logging, metrics (Prometheus), tracing (OpenTelemetry).
+Circuit breakers, rate limiting, backpressure.
+H. Architectural choices
+Microservices to split responsibilities; serverless for spiky workloads (AWS Lambda + API Gateway).
+Use managed services for DB/queue/search to reduce ops.
+Real-world tip: start by profiling and load-testing (locust, k6) to find bottlenecks — don’t prematurely optimize.
+
+75.What are Python’s options for message queues (e.g., RabbitMQ, Kafka)?
+Ans: RabbitMQ — AMQP broker, reliable, rich routing, good for complex messaging patterns. Good when you need guaranteed delivery and advanced routing.
+Apache Kafka — distributed log, high throughput, event streaming, durable, great for event sourcing and analytics. Not a simple task queue.
+Redis (Streams / PubSub / Lists) — simple, fast; Streams gives persistent log-like semantics. Good for lightweight queues and ephemeral tasks.
+Amazon SQS — fully managed queue service, reliable, simple; integrates with AWS ecosystem.
+Google Pub/Sub — managed pub/sub for GCP.
+NATS — lightweight, low-latency messaging system.
+ZeroMQ — messaging library (not a broker), extremely fast but more DIY.
+ActiveMQ — traditional JMS-style broker.
+Beanstalkd — simple work queue, low feature set but easy to use.
+Task libraries that integrate with brokers:
+Celery — task queue; commonly used with RabbitMQ or Redis as broker.
+RQ (Redis Queue) — simpler than Celery; uses Redis.
+Dramatiq — modern alternative to Celery; supports Redis/RabbitMQ.
+
+*Quick decision cheat-sheet
+Need minimal/no deps and tiny API → use http.server (toy).
+Need async and production readiness → use aiohttp or an ASGI framework (FastAPI/Starlette).
+Need WebSockets → prefer ASGI (websockets or aiohttp are good choices).
+Need to scale to millions → async + horizontal scaling + caching + queues + profiling.
+Queue choices → RabbitMQ (complex routing), Kafka (streaming/high-throughput), Redis (simple/fast), SQS/PubSub (managed).
+
+76.How do you implement a distributed task queue in Python (like Celery)?
+Ans:High-level architecture
+Producers: create tasks (enqueue messages).
+Broker: message transport (RabbitMQ, Redis, SQS, Kafka).
+Workers: consume messages and execute tasks (many instances, horizontally scaled).
+Result backend (optional): store results/status (Redis, DB, RPC).
+Scheduler (optional): schedule periodic tasks.
+Key concerns:
+Idempotency (tasks may be retried/duplicated).
+Acknowledgements and visibility timeouts.
+Retries and backoff.
+Monitoring (Flower, Prometheus).
+Fault tolerance and scaling (multiple workers, prefetch limits).
+uses:
+Use Celery for feature-rich mature ecosystems (complex routing, chords).
+Use Dramatiq / RQ if you want simpler API and faster setup.
+Use Kafka for high-throughput event streaming (not an out-of-the-box task queue).
+
+77.What is the difference between sync and async web frameworks in Python?
+Ans: Synchronous frameworks
+Examples: Flask, Django (classic).
+Request handling blocks a worker thread/process until completion.
+Good for CPU-bound or simple I/O, and many existing libraries are sync-first.
+Scaling pattern: more processes/workers.
+
+Asynchronous frameworks
+Examples: FastAPI, Starlette, aiohttp, Sanic.
+Use async/await. Single worker can handle many concurrent I/O-bound requests.
+Better for many concurrent connections, websockets, streaming.
+Requires async-compatible libraries (DB drivers, HTTP clients) for full benefit.
+
+Tradeoffs
+Async gives better concurrency for I/O-bound workloads with fewer processes, but adds complexity (async libraries, careful resource management).
+Sync is simpler and has wide library support; scale by adding more worker processes.
+
+78.How do you handle retries and backoff in Python services?
+Ans: Patterns:
+Immediate retry (small times) — rarely sufficient.
+Exponential backoff: wait = base × 2^attempt.
+Add jitter (randomization) to avoid thundering herd.
+Max attempts + dead-letter queue: after N failures, move to DLQ for manual inspection.
+Libraries
+tenacity — flexible retry decorator.
+Celery / Dramatiq have built-in retry support.
+79. What is the role of `uvicorn` and `gunicorn` in Python web apps?
+Ans: gunicorn: a widely-used WSGI/HTTP server for running sync Python apps (Flask/Django). It manages master/worker processes. It can also host ASGI apps via worker classes (e.g., uvicorn worker).
+uvicorn: a fast ASGI server (async) built on uvloop/httptools. Used to run ASGI frameworks (FastAPI, Starlette).
+Common combo: gunicorn (process management) + uvicorn.workers.UvicornWorker. This gives you gunicorn’s process management and uvicorn’s ASGI support.
+*Examples:
+Run FastAPI directly with uvicorn:
+uvicorn app:app --host 0.0.0.0 --port 8000 --workers 4
+Run with gunicorn + uvicorn workers:
+gunicorn -k uvicorn.workers.UvicornWorker app:app --workers 4 --bind 0.0.0.0:8000
+
+80. How do you implement rate limiting in a Python API?
+Ans: Common algorithms
+Fixed window: simple but can spike at boundaries.
+Sliding window: smoother, more accurate.
+Token bucket: popular and flexible (allows bursts up to bucket size).
+Leaky bucket: smooths out bursts.
+
+*implement:
+At the API gateway / load balancer (best: outside app).
+Or inside the app as middleware (Redis-based for cross-instance coordination).
+Using existing middleware/libs
+FastAPI: slowapi (rate-limiting with Redis and limiter semantics).
+Flask: Flask-Limiter.
+Envoy/NGINX/Cloudflare/AWS APIGW: often simplest & most scalable to rate limit at the edge.
+
+81. How do you implement your own context manager without using `with`?
+Ans: Normally we use with obj: which calls __enter__ and __exit__. But you can call them manually:
+A context manager is just an object with __enter__ and __exit__. with is sugar around this.
+
+82. How do you implement your own decorator class with parameters?
+Ans:A decorator is usually a function, but can also be a class with __call__.
+Adding parameters = store them in __init__.
+ 
+83. What is the difference between `__new__` and `__init__`?
+Ans: _new__:
+Creates a new instance of the class.
+Called before __init__.
+Always a class method (cls argument).
+Must return a new object (usually via super().__new__(cls)).
+__init__:
+Initializes the object after it’s created.
+Called automatically on the object returned by __new__.
+
+84. How do you implement operator overloading in Python?
+Ans: Operator overloading = defining special methods like __add__, __eq__, etc.
+Common magic methods:
+__add__ (+), __sub__ (-), __mul__ (*), __truediv__ (/),
+__eq__ (==), __lt__ (<), __gt__ (>), etc.
+
+85. How do you implement lazy evaluation in Python?
+Ans :Lazy evaluation = compute only when needed, cache result if required.
+Context manager without with → manually call __enter__ / __exit__.
+Decorator class with params → use __init__ + __call__.
+__new__ vs __init__ → create vs initialize.
+Operator overloading → implement dunder methods (__add__, __eq__, etc.).
+Lazy evaluation → properties, generators, or caching (lru_cache).
+
+86.What is the difference between `eval()` and `exec()`? Why are they dangerous?
+Ans:Both eval() and exec() allow execution of dynamically provided Python code (as strings), but they behave differently:
+
+*eval(expression):
+Evaluates a single expression (not statements).
+Returns the result of that expression.
+
+Example:
+
+result = eval("2 + 3 * 4")
+print(result)   # 14
+
+Only works with expressions like math, function calls, comprehensions, etc.
+Cannot handle statements like for, if, def.
+
+*exec(code):
+Executes a block of code (can include statements).
+Does not return a value (always None).
+
+Example:
+
+code = """
+for i in range(3):
+    print(i)
+"""
+exec(code)
+# Output: 0, 1, 2
+Can define functions, classes, loops, imports, etc.
+Both are dangerous if used on untrusted input, because they let attackers run arbitrary Python code on your system.
+
+87.How do you sandbox untrusted Python code?
+Ans: sandboxing untrusted Python is a common need and also tricky. Below I’ll give a practical, defense-in-depth approach.simple tricks aren’t enough, safe architectural choices, concrete (but cautious) code examples you can run locally, and common pitfalls to avoid.
+a)High-level strategy (defense in depth):
+Never rely on one technique. Real sandboxes combine several layers.
+b)Best realistic options (ordered by security + practicality)
+WASM (WebAssembly) runtime: compile code or use language runtimes targetting WASM. Very strong sandboxing guarantees. Good for untrusted plugins.
+Micro-VMs (Firecracker) or strong container runtimes: much stronger than plain containers; used in production for multi-tenant workloads.
+
+88. How do you secure a Python application against code injection attacks?
+An: Code injection is one of the most dangerous classes of attacks against Python (and any language).
+Code injection happens when untrusted input is treated as code and executed.
+In Python this can happen via:
+
+eval(), exec()
+pickle.load()
+os.system(), subprocess with shell=True
+unsafe template rendering (e.g., Jinja2 with autoescape=False)
+deserializing untrusted YAML with yaml.load()
+An attacker can then run arbitrary Python or system commands, steal data, or take over the server.
+Secure Against Code Injection
+1. Avoid dangerous functions
+
+Never use eval() or exec() on user input.
+
+Use ast.literal_eval() instead if you just need to parse Python literals.
+
+import ast
+value = ast.literal_eval("[1, 2, 3]")  # safe
+
+
+Avoid input() in production code (it behaves like eval() in Python 2!).
+
+Avoid pickle for untrusted data → use json or marshal.
+
+2. Secure subprocess calls
+
+Don’t pass user input directly into os.system() or subprocess with shell=True.
+
+Instead:
+
+import subprocess
+# BAD: vulnerable to `; rm -rf /`
+# subprocess.run(f"ls {user_input}", shell=True)
+
+# GOOD: arguments are passed as list
+subprocess.run(["ls", user_input])
+
+3. Use safe libraries
+YAML: yaml.safe_load() instead of yaml.load().
+Jinja2 templates: keep autoescape=True (default in Flask/Django).
+Serialization: prefer JSON over Pickle for external input.
+4. Validate and sanitize input
+Apply strict validation:
+Use regex for expected formats (emails, numbers, IDs).
+Enforce type checks.
+Apply length limits.
+
+import re
+if not re.match(r'^[a-zA-Z0-9_]+$', username):
+    raise ValueError("Invalid input")
+
+5. Principle of least privilege:
+Run the Python app as a non-root user.
+Restrict file permissions: app shouldn’t read /etc/passwd or secrets it doesn’t need.
+Apply OS-level sandboxing (Docker, seccomp, AppArmor).
+6. Output encoding
+Prevent injection into HTML/SQL/etc. by escaping output properly.
+
+Example: use ORM parameter binding for SQL, not string concatenation:
+# BAD
+cursor.execute(f"SELECT * FROM users WHERE name = '{name}'")
+# GOOD
+cursor.execute("SELECT * FROM users WHERE name = %s", (name,))
+7. Restrict imports & execution:
+If you must execute dynamic code (e.g., plugin system):
+Run in a sandboxed process (with resource limits).
+Use RestrictedPython or AST parsing for whitelisting.
+Don’t give untrusted code access to dangerous modules (os, sys, subprocess, socket).
+8. Monitoring & defense in depth
+
+Add timeouts for long-running operations:
+Limit memory & CPU (resource.setrlimit, cgroups, Docker).
+Log suspicious inputs and errors.
+Regularly update Python and dependencies to patch known RCE vulnerabilities.
+* Summary:
+
+✅ Don’t use eval, exec, pickle, os.system, subprocess(shell=True) on untrusted input.
+✅ Validate and sanitize all inputs.
+✅ Use safer alternatives (ast.literal_eval, json, parameterized queries).
+✅ Apply least privilege + sandboxing.
+✅ Escape output properly (HTML/SQL/etc.).
+
+
+89.How do you optimize Python for multi-core CPUs given the GIL?
+Ans: The Problem: The GIL
+
+GIL = Global Interpreter Lock
+In CPython, only one thread can execute Python bytecode at a time, even on multi-core CPUs.
+
+This means:
+CPU-bound Python code doesn’t get faster with threads.
+I/O-bound code can benefit from threads (since the GIL is released during I/O waits).
+
+🔹 Solutions for Multi-core CPU Usage:
+1. Multiprocessing
+Instead of threads, use processes (each process has its own GIL).
+Pros ✅: Uses all cores, built-in.
+Cons ❌: Higher memory overhead, slower inter-process communication.
+2. C Extensions / NumPy / Numba
+Many scientific libraries (NumPy, Pandas, SciPy) release the GIL when doing heavy math in C.
+Or use Numba to JIT-compile Python to machine code with multithreading:
+3. Cython
+Compile Python to C and tell it to release the GIL for CPU-heavy code.
+4. AsyncIO (for I/O-bound tasks)
+Doesn’t bypass the GIL, but handles many concurrent I/O tasks in a single thread.
+Great for networking, file I/O, API calls.
+5. Joblib / Dask
+Higher-level libraries for parallelism.
+Joblib (great for embarrassingly parallel tasks):
+from joblib import Parallel, delayed
+results = Parallel(n_jobs=-1)(delayed(pow)(i, 2) for i in range(10))
+print(results)
+Dask: scales Python code from laptop → cluster.
+6. Alternative Interpreters
+PyPy: faster JIT, but still has a GIL.
+
+Jython / IronPython: no GIL, but limited library support.
+HPy project (future): aims to solve GIL issues in C extensions.
+
+✅ Summary:
+The GIL blocks threads from scaling across cores, but you can still leverage multi-core CPUs via multiprocessing, C-extensions, Numba, Cython, or distributed frameworks. For I/O workloads, asyncio or threading are usually enough.
+
+90.How do you implement your own event loop in Python?
+Ans: building your own event loop is a great way to understand how asyncio works under the hood. I’ll give a compact, working implementation that supports:
+scheduling coroutines (simple await-style using generator-based coroutines)
+create_task() / run_until_complete()
+sleep() as a timer
+basic I/O readiness integration via selectors (so you can await socket readiness)
+a Future/Task abstraction
+This is intentionally small and educational (not a drop-in replacement for asyncio). Paste it into a Python file and run it.
+convert this to use async def/await so you can await sleep(1) directly.
