@@ -1,0 +1,258 @@
+Advanced Internals & Performance
+1. How Python manages memory internally
+Python uses a private heap to manage memory, where all objects and data structures are stored. The memory is managed by Python’s built-in memory manager, which handles allocation, garbage collection, and freeing memory. It uses reference counting as the primary mechanism, supplemented by a cyclic garbage collector to detect and clean up reference cycles. Small objects are pooled for efficiency via object pools (like pymalloc), reducing frequent allocations.
+
+2. Difference between id(), hash(), and is
+id(): Returns the unique identifier of an object, typically its memory address.
+hash(): Returns a hash value used for dictionary keys or sets; two objects with the same content can have the same hash but different identities.
+is: Checks if two variables reference the exact same object in memory.
+Example:
+
+a = [1, 2]
+b = a
+c = [1, 2]
+print(id(a), id(b), id(c))  # a and b same, c different
+print(a is b)  # True
+print(a is c)  # False
+print(hash(tuple(a)) == hash(tuple(c)))  # True if content is same
+
+3. How Python’s garbage collector works
+Python primarily uses reference counting: every object tracks how many references point to it. When references drop to zero, the object is immediately deallocated. For objects involved in cycles (where objects reference each other), Python uses a generational garbage collector (gc module), which periodically scans for unreachable objects and frees them.
+
+4. What are reference cycles and how Python handles them
+A reference cycle occurs when objects reference each other, forming a loop. Even if no external references exist, reference counting alone can't clean them. Python’s garbage collector handles this by:
+
+Grouping objects into generations.
+Detecting cycles in the object graph.
+Breaking cycles by clearing references and reclaiming memory.
+You can manually trigger this using gc.collect().
+
+5. Difference between deepcopy and pickle
+deepcopy: Creates a new object and recursively copies all nested objects, preserving structure but breaking shared references.
+pickle: Serializes objects to a byte stream for storage or transmission, and deserializes them later. It’s more about persistence and data interchange than memory structure replication.
+
+6. Difference between shallow copy, deep copy, and assignment
+Assignment (=): Both variables point to the same object; changes affect both.
+Shallow copy (copy.copy()): Creates a new outer object but nested objects ar shared.
+Deep copy (copy.deepcopy()): Recursively creates new copies of all objects.
+
+Example:
+import copy
+a = [1, [2, 3]]
+b = copy.copy(a)  # shallow copy
+c = copy.deepcopy(a)  # deep copy
+
+7. How Python’s lists are implemented internally
+Python lists are implemented as dynamic arrays. They allocate extra space to reduce resizing overhead. Appending elements is amortized O(1). Resizing involves allocating a new larger array and copying existing elements.
+
+8. How Python implements dictionaries (hash tables)
+Python dictionaries use a hash table:
+Keys are hashed, and the hash determines the index.
+Collisions are resolved via open addressing.
+The table resizes when the load factor exceeds a threshold.
+In Python 3.6+, insertion order is preserved due to an internal implementation detail that became a language feature in Python 3.7+.
+
+9. Difference between OrderedDict and dict in Python 3.7+
+Before Python 3.7, OrderedDict preserved insertion order, while dict did not. From Python 3.7 onwards, dict also preserves insertion order as part of the language specification. OrderedDict still offers additional methods like move_to_end() and reordering capabilities.
+
+10. How to profile Python code for performance bottlenecks
+You can use:
+cProfile or profile for deterministic profiling.
+timeit for measuring small code snippets.
+line_profiler or memory_profiler for line-by-line performance or memory profiling.
+Third-party tools like Py-Spy or Scalene for advanced insights.
+Example:
+python -m cProfile my_script.py
+
+>Concurrency, Parallelism & Async
+11. What is the Global Interpreter Lock (GIL)? Why does it exist?
+The GIL is a mutex that ensures only one thread executes Python bytecode at a time. It simplifies memory management, particularly reference counting, and prevents race conditions. It limits concurrency in CPU-bound programs but doesn’t affect I/O-bound tasks much.
+
+12. Difference between multithreading and multiprocessing
+Multithreading: Multiple threads share the same memory space. GIL limits CPU-bound threads.
+Multiprocessing: Separate processes with independent memory spaces, suitable for CPU-bound tasks.
+
+13. When to use threading vs multiprocessing
+Use threading for I/O-bound tasks where waiting time is high.
+Use multiprocessing for CPU-bound tasks to bypass the GIL.
+
+14. What is asyncio and how it differs from threads
+asyncio is a single-threaded, cooperative multitasking framework using event loops and coroutines. Unlike threads, it doesn’t rely on parallel execution but on yielding control during I/O waits.
+
+15. How do coroutines differ from generators
+Generators yield values lazily; consumers pull values.
+Coroutines receive values and control flow, often with await, enabling asynchronous workflows.
+
+16. Difference between ThreadPoolExecutor and ProcessPoolExecutor
+ThreadPoolExecutor: Runs functions in multiple threads within the same process.
+ProcessPoolExecutor: Runs functions in separate processes, avoiding GIL limitations and enabling parallel CPU usage.
+
+17. Difference between cooperative and preemptive multitasking
+Cooperative multitasking: Tasks voluntarily yield control, as in asyncio.
+Preemptive multitasking: The OS interrupts tasks to switch contexts, as in threads/processes.
+
+18. Async function example fetching multiple URLs
+import asyncio
+import aiohttp
+
+async def fetch(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            return await resp.text()
+
+async def main():
+    urls = ['https://example.com', 'https://python.org']
+    tasks = [fetch(url) for url in urls]
+    results = await asyncio.gather(*tasks)
+    for result in results:
+        print(result[:100])
+
+asyncio.run(main())
+
+19. What are race conditions and deadlocks? How can Python handle them
+Race condition: Multiple threads access shared data simultaneously, causing inconsistent results.
+Deadlock: Two or more threads wait indefinitely for resources held by each other.
+Python mitigates these with:
+Locks (threading.Lock)
+Semaphores, events
+Avoiding shared state where possible
+Using multiprocessing for isolation
+
+20. How does Python handle inter-process communication
+Python supports IPC via:
+multiprocessing.Queue, Pipe
+Shared memory with multiprocessing.shared_memory
+Files, sockets, or databases for more complex systems
+
+> Memory Optimization & Design
+21. What are Python memory views
+A memory view is a lightweight object that exposes the buffer protocol without copying data. It allows direct access to an object's memory, useful for large datasets and efficient manipulation.
+
+22. Difference between bytes, bytearray, and memoryview
+bytes: Immutable sequence of bytes.
+bytearray: Mutable sequence of bytes.
+memoryview: A view into a buffer’s memory without copying data.
+
+23. How do you reduce memory usage for large datasets
+Use generators instead of lists.
+Use numpy arrays with optimized dtypes.
+Apply compression or chunking.
+Use memoryview to avoid unnecessary copies.
+Offload data to disk or databases when feasible.
+
+24. What are slots (__slots__) in Python classes, and why are they useful
+__slots__ restricts attributes to a fixed set, saving memory by avoiding per-instance dictionaries. It improves memory efficiency, especially in classes with many instances.
+
+25. How do you implement an LRU cache manually
+You can use collections.OrderedDict to track insertion order and evict the oldest entry when the cache limit is reached.
+
+26. How does functools.lru_cache work internally
+It wraps a function, caching results in a dictionary keyed by arguments. When capacity is exceeded, it removes the least recently used entry to free space.
+
+27. What are weak references (weakref) in Python
+A weak reference doesn’t increase an object’s reference count, allowing it to be garbage collected when no strong references exist. Useful for caches or avoiding memory leaks.
+
+28. How do you debug a memory leak in Python
+Use gc to track unreachable objects.
+Analyze memory snapshots with tracemalloc.
+Monitor object growth with objgraph.
+Profile using memory profilers like memory_profiler.
+
+29. Trade-offs between generators and lists for memory efficiency
+Generators are memory-efficient since they produce items lazily.
+Lists store all elements in memory, faster access but higher memory usage.
+Use generators for large or streaming datasets.
+
+30. How do you handle huge data efficiently in Python
+Process in chunks.
+Use streaming or iterator-based processing.
+Avoid unnecessary copies.
+Use optimized libraries like numpy or pandas.
+Offload heavy computation or data storage.
+
+>>Advanced OOP & Design Patterns
+31. What are metaclasses in Python
+A metaclass is a “class of a class” that defines how classes are created and behave. It allows customization of class creation, such as injecting methods or attributes dynamically.
+
+32. Difference between type() and class
+type() can dynamically create classes or return the type of an object.
+class is a syntax used to define classes statically.
+Example:
+MyClass = type('MyClass', (object,), {'x': 5})
+
+33. How to create a Singleton class
+class Singleton:
+    _instance = None
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+34. How to implement the Factory design pattern
+class Dog:
+    def speak(self):
+        return "Woof"
+
+class Cat:
+    def speak(self):
+        return "Meow"
+
+def animal_factory(animal_type):
+    if animal_type == 'dog':
+        return Dog()
+    elif animal_type == 'cat':
+        return Cat()
+
+35. What is monkey patching in Python
+Monkey patching dynamically modifies classes or modules at runtime, usually to fix or extend functionality without altering the original code.
+
+36. How to implement mixins
+Mixins are classes that provide additional functionality to other classes via multiple inheritance without being a standalone component.
+
+class LoggingMixin:
+    def log(self, msg):
+        print(f"LOG: {msg}")
+
+class Worker(LoggingMixin):
+    def work(self):
+        self.log("Working hard!")
+
+37. What is duck typing? Example
+Duck typing is the practice where behavior, not type, determines compatibility. If an object “walks like a duck and quacks like a duck,” it’s treated as one.
+
+Example:
+
+class Duck:
+    def quack(self):
+        print("Quack!")
+
+class Person:
+    def quack(self):
+        print("I'm quacking!")
+
+def make_it_quack(entity):
+    entity.quack()
+
+38. How is multiple inheritance handled (MRO)
+Python uses the C3 linearization algorithm to determine the method resolution order, ensuring a consistent and predictable order of attribute and method lookup.
+
+39. How do abstract base classes work
+Abstract base classes (abc.ABC) define interfaces with abstract methods. Concrete subclasses must implement these methods or cannot be instantiated.
+
+40. Explain dependency injection with example
+Dependency injection passes dependencies into a class or function instead of hardcoding them.
+
+Example:
+
+class Database:
+    def query(self):
+        return "data"
+
+class Service:
+    def __init__(self, db):
+        self.db = db
+    def get_data(self):
+        return self.db.query()
+
+db = Database()
+service = Service(db)

@@ -1,0 +1,261 @@
+ 53.What are partial functions (`functools.partial`)?
+ partial functions are functions where some arguments are fixed or preset. 
+The functools.partial function allows you to create a new version of an existing function with one or more arguments already filled in.
+
+ 54.What is memoization? How is it different from caching?
+Memoization is an optimization technique where you store the results of expensive function calls and return the cached result when the same inputs occur again.
+
+What is Caching?
+Caching is a broader term where you store data so that future requests are faster. Memoization is a specific type of caching focused on function results.
+Difference between Memoization and Caching – Simple Points
+
+Memoization:
+>Stores results of a function to reuse later.
+>Used only for functions.
+>Helps avoid repeated calculations.
+>Usually implemented inside the function.
+
+Caching:
+>Stores data to reuse later.
+>Used for functions, files, web pages, etc.
+>Helps speed up access or reduce resource use.
+>Can be global or across systems.
+
+55.How do you implement functional pipelines in Python?
+A functional pipeline is a way to process data by passing it through a series of functions, where the output of one function becomes the input of the next.
+In Python, you can implement pipelines using function composition, map(), filter(), and other tools like functools.reduce.
+
+56.How do you implement tail recursion optimization (since Python doesn’t have it natively)?
+Tail Recursion Optimization in Python
+Python doesn’t optimize tail recursion automatically like some other languages. However, you can simulate or implement it manually to avoid hitting recursion limits for deep recursive calls.
+
+> What is Tail Recursion?
+A recursive function is tail recursive when the recursive call is the last operation in the function.
+In languages that support it, tail recursion can be optimized to reuse the same stack frame.
+Since Python lacks this optimization, you can:
+>Use iteration instead of recursion, or
+>Use a decorator or trampoline to simulate tail call optimization.
+
+57.57. Explain higher-order functions with real-world use cases.
+Higher-Order Functions in Python?
+A higher-order function is a function that either:
+Takes one or more functions as arguments, or
+Returns a function as a result.
+This makes it possible to build flexible, reusable, and composable code.
+Key Points:
+Functions can be passed around like variables.
+It helps in abstraction and separating concerns.
+Common examples include map(), filter(), and sorted().
+
+58.Differences Between map, filter, reduce, and Comprehensions in Python
+1️map():
+
+Purpose: Applies a function to every item in an iterable.
+Returns: A map object (can be converted to list, set, etc.).
+Use case: Transform each element of a sequence.
+Example:
+nums = [1, 2, 3]
+squared = list(map(lambda x: x**2, nums))
+print(squared)  # [1, 4, 9]
+
+2️.filter()
+Purpose: Selects items from an iterable that satisfy a condition.
+Returns: A filter object (convertible to list, set, etc.).
+Use case: Filter elements based on a condition.
+Example:
+nums = [1, 2, 3, 4, 5]
+evens = list(filter(lambda x: x % 2 == 0, nums))
+print(evens)  # [2, 4]
+
+3️.reduce()
+Purpose: Performs a cumulative operation on iterable elements to produce a single value.
+Returns: A single value.
+Use case: Sum, multiply, or combine items.
+
+Example:
+from functools import reduce
+nums = [1, 2, 3, 4]
+total = reduce(lambda x, y: x + y, nums)
+print(total)  # 10
+
+4️.Comprehensions (list/set/dict)
+Purpose: Create new iterables in a concise and readable way.
+Returns: A list, set, or dictionary depending on the comprehension used.
+Use case: Transform, filter, or combine elements in a readable syntax.
+
+Example:
+nums = [1, 2, 3, 4, 5]
+squared_evens = [x**2 for x in nums if x % 2 == 0]
+print(squared_evens)  # [4, 16]
+60. What are monads in functional programming, and can they be represented in Python?
+Monads in functional programming are design patterns that allow chaining computations while handling side effects (like None values, errors, or I/O) in a consistent way.
+ They wrap a value in a container and provide a method (usually called bind) to apply functions to that value safely, maintaining the context.
+Yes, they can be represented in Python using classes with a bind (or flat_map) method.
+
+#62.What is mocking in Python testing?
+Mocking means creating a fake version of something (like a function, API, or object) to test your code without relying on the real thing.
+63. How do you patch dependencies in unit tests (`unittest.mock`)?
+Patching means replacing a dependency (like a function or object) with a mock during the test so that you can control its behavior or check how it’s used.
+In Python, this is done using unittest.mock.patch().
+64. What is the difference between integration tests and unit tests?
+Unit Tests:
+
+>Test a single function or class in isolation.
+>Dependencies like databases or APIs are mocked or simulated.
+>Run fast and provide quick feedback.
+>Easy to debug and maintain.
+>Focus only on the correctness of a specific part.
+>Don’t require complex test environments.
+
+Integration Tests:
+
+>Test how multiple components work together.
+>Use real or simulated dependencies, like databases or networks.
+>Run slower because more components are involved.
+>Harder to trace errors and debug issues.
+>Check if workflows and interactions function properly.
+>Require more setup and coordination in the test environment.
+
+66. What is the difference between `tox` and `pytest`?
+pytest:
+
+It’s a testing framework.
+Used to write and run tests.
+Provides features like fixtures, parameterized tests, and detailed reports.
+Focuses on making it easy to test your code.
+Example:
+You write test functions using pytest and run them to check if your code behaves correctly.
+
+ tox:
+
+It’s a automation tool for testing across multiple environments.
+Helps you manage testing in different Python versions or with different dependencies.
+Creates isolated environments, installs requirements, and runs tests in each environment.
+Used for continuous integration and ensuring compatibility.
+Example:
+You use tox to test your project with Python 3.8, 3.9, and 3.10, each with specific packages.
+# Advanced Networking & System Design
+
+#71.How do you implement a simple REST API in Python without Flask/Django?
+Use the http.server module, which allows you to handle HTTP requests.
+Override methods like do_GET, do_POST to handle different request types.
+Return JSON responses using Python’s json module.
+72. How do you implement WebSockets in Python?
+How to Implement WebSockets in Python
+WebSockets allow two-way communication between the server and client over a single, long-lived connection. In Python, you can implement WebSockets using libraries like websockets or asyncio.
+
+73. What is WSGI, and why is it important?
+What is WSGI?
+WSGI stands for Web Server Gateway Interface.
+It’s a standard interface between Python web applications and web servers.
+It allows frameworks (like Flask, Django) and servers (like Gunicorn, uWSGI) to communicate in a consistent way.
+
+>> Why is WSGI Important?
+
+- Standardization: It defines how requests and responses are passed between servers and Python apps, so different servers and frameworks can work together.
+- Portability: Your Python web app can run on any server that supports WSGI without changing the code.
+- Flexibility: Allows developers to choose their preferred server or framework while ensuring compatibility.
+- Scalability: WSGI servers like Gunicorn or uWSGI can handle multiple requests efficiently.
+
+74. How do you scale a Python web application to handle millions of requests?
+Use multiple processes or threads (e.g., with Gunicorn or uWSGI) to handle concurrent requests.
+Deploy load balancers (like Nginx, HAProxy) to distribute traffic across servers.
+Use caching (Redis, Memcached) to reduce database hits.
+Implement database optimization with replication, sharding, and indexing.
+Use asynchronous frameworks (like FastAPI, Sanic) for high-concurrency scenarios.
+Deploy in cloud environments (AWS, GCP, Azure) that scale horizontally.
+Monitor and auto-scale using container orchestration (Kubernetes, Docker Swarm).
+
+75. What are Python’s options for message queues (e.g., RabbitMQ, Kafka)?
+
+Python supports several message queue solutions, such as:
+> RabbitMQ – Reliable, supports complex routing, works with libraries like pika.
+> Kafka – High-throughput, distributed messaging, works with confluent-kafka-python.
+> Redis Pub/Sub or Streams – Lightweight, in-memory messaging.
+> Amazon SQS – Managed cloud queue service.
+>ZeroMQ – High-performance messaging library.
+> Celery – Task queue that supports backends like Redis and RabbitMQ.
+
+76. How do you implement a distributed task queue in Python (like Celery)?
+
+> Install Celery and a message broker (e.g., Redis or RabbitMQ).
+> Define tasks in your Python app using decorators like @celery.task.
+> Configure Celery with the broker URL and backend.
+> Run Celery workers to process tasks asynchronously.
+> Call tasks from your app without waiting for results, or monitor them with result backends.
+
+77. What is the difference between sync and async web frameworks in Python?
+
+>Sync frameworks (like Django, Flask):
+Handle one request per worker at a time.
+Simpler to write, but less efficient under heavy concurrency.
+
+> Async frameworks (like FastAPI, Starlette, Sanic):
+Use async and await to handle multiple requests in the same thread.
+Better for I/O-bound workloads, websockets, long polling.
+
+78. How do you handle retries and backoff in Python services?
+
+> Use libraries like tenacity to wrap functions with retry logic.
+> Implement exponential backoff, waiting longer between retries.
+> Catch specific exceptions to decide when to retry.
+> Limit retries to avoid infinite loops.
+> Example pattern: retry up to 5 times, waiting 1s → 2s → 4s between attempts.
+
+ 79. What is the role of uvicorn and gunicorn in Python web apps?
+
+> gunicorn – A WSGI server that runs sync frameworks like Django and Flask with multiple worker processes.
+> uvicorn – An ASGI server optimized for async frameworks like FastAPI and Starlette.
+> They serve as the entry point between your Python app and incoming HTTP requests.
+> You can combine them (e.g., gunicorn using uvicorn.workers.UvicornWorker) to serve async apps in production.
+
+80. How do you implement rate limiting in a Python API?
+
+> Use middleware or decorators to track request counts per user or IP.
+> Store counters in Redis or in-memory cache for performance.
+> Implement sliding window or token bucket algorithms.
+> Use libraries like slowapi, django-ratelimit, or integrate with API gateways.
+> Return appropriate HTTP status codes (like 429 Too Many Requests) when limits are exceeded.
+
+81. How do you implement your own context manager without using with?
+Implement a class with two methods:
+__enter__() – code to run when entering the context.
+__exit__() – code to run when exiting the context.
+
+83. What is the difference between __new__ and __init__?
+__new__:
+Creates a new instance of a class.
+It's called before __init__.
+
+Used to control instance creation.
+__init__:
+Initializes the created instance.
+
+86. What is the difference between eval() and exec()? Why are they dangerous?
+> eval() evaluates a Python expression and returns a result.
+> exec() executes Python statements, including definitions and loops.
+
+Dangerous because:
+They can execute arbitrary code, which may delete files, access sensitive data, or perform harmful actions if user input isn’t validated.
+
+87. How do you sandbox untrusted Python code?
+
+> Run code in a separate process or container.
+> Restrict access to built-in functions and modules.
+> Limit memory, execution time, and available resources.
+> Avoid using eval() or exec() with untrusted input.
+> Use restricted environments like PyPy sandbox or containers like Docker.
+
+ 88. How do you secure a Python application against code injection attacks?
+
+> Never trust user input directly.
+> Avoid eval() and exec().
+> Validate and sanitize input before using it.
+> Use parameterized queries in databases.
+> Run sensitive operations in isolated environments or with limited permissions.
+
+89. How do you optimize Python for multi-core CPUs given the GIL
+> Use multiprocessing instead of threading to bypass the GIL.
+> Run tasks in separate processes that each have their own Python interpreter.
+> Use libraries like concurrent.futures.ProcessPoolExecutor or multiprocessing.Pool.
+> Offload CPU-heavy tasks to native extensions or external services.
