@@ -183,6 +183,13 @@ python questions
 2)can you access instance variable from static
 3)
 
+19-09
+
+1)in a module how will we know all the functions of its modules.
+2)if __name__=="__main__":    what is this code meaning
+3)what is type(args) in __init__ method
+4)what if 4 parameter give in one function and one parameter in another function and what is positional argument
+5)
 
 
 
