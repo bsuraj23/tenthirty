@@ -1,20 +1,36 @@
-import threading 
+#1.Creating a thread
+import threading
+
+def task():
+    print("This is a thread function.")
+
+# Create the thread
+thread = threading.Thread(target=task)
+
+print("Thread is created.")
+
+#2.Starting a thread
+import threading
+
+def task():
+    print("Thread has started and is running...")
+
+thread = threading.Thread(target=task)
+thread.start()  # Start the thread
+
+print("Thread is started.")
+
+#3.Using join() method
+import threading
 import time
-def task(name):
-    print(f"Thread{name} starting")
+
+def task():
+    print("Thread task is running...")
     time.sleep(2)
-    print(f"Thread {name} finished")
+    print("Thread task completed.")
 
-# Create threads
-t1 = threading.Thread(target=task,args=("A",))
-t2 = threading.Thread(target=task,args=("B",))
+thread = threading.Thread(target=task)
+thread.start()
+thread.join()
 
-# Start threads
-t1.start()
-t2.start()
-
-# Wait for threads to finish
-t1.join()
-t2.join()
-
-print("Both threads completed.")
+print("Main program continues after thread has finished.")
