@@ -14,5 +14,5 @@ class ResponseModel(BaseModel):
 
 @app.get("/items/", response_model=ResponseModel)
 def get_items():
-    items = [Item(name="bottle", price=10.0), Item(name="cap2", price=20.0)]
+    items = [Item(name="item1", price=10.0), Item(name="item2", price=20.0),Item(name="item3", price=34.0),]
     return {"items": items, "count": len(items)}

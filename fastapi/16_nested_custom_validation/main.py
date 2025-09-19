@@ -22,4 +22,3 @@ app = FastAPI()
 @app.post("/customers/")
 def create_customer(customer: Customer):
     return customer
- 

@@ -3,12 +3,12 @@ from fastapi import FastAPI, Depends
 
 def get_db():
     # Simulate a database session
-    db = {"users": ["Alice", "Bob"]}
+    db = {"users": ["Sindhu", "Chinnu"]}
     return db
 
 def get_current_user():
     # Simulate authentication
-    return "Alice"
+    return "Sindhu"
 
 def log_request():
     # Simulate logging
