@@ -1,0 +1,101 @@
+1)  Difference between **module and package** in Python?
+-->Module-module is a single python file(.py), which contains functions, classes, variables.
+eg: math.py is a module that provides math functions like sqrt, factorial, ceil, floor...
+   -import math- by using this we can use functions in the code
+-->Packages- package is a collection(folder) of related modules.
+   -It must contains __init__.py file(even if empty) to be treated as package.
+eg: numpy is a package with many modules inside
+   -import numpy as np - we can perform many task using this package numpy in coding
+
+2) What are **Python namespaces and scope** (LEGB rule)?
+-->Namespaces- namespaces are the placeholders like a box(dictionary) that maps names(identifiers) to objects
+eg: a=10 #here a is the namespace
+LEGB rule - explains python search order
+L- local namespaces - variables inside the function
+E-Enclosing namespaces - variables from outer of the function(for nested functions)
+G- Global namespace - variables which we can access every where it is in the top level of a module
+B- Built-in namespaces - functions and exceptions that python provides(print, len, ValueError...)
+-->Scope-Scope is where a variable can be accessed or modified within the code.
+LEGB rule(Name resolution order):
+L-Local- current function scope
+E-Enclosing- for outer function's scope(for nested functions)
+G-Global-module level scope
+B-Built-in - python built in names
+
+3)Explain **import vs from-import**.
+-->import- imports the whole module/package
+  -we must use module names as a prefix when accessing function/varables(like module.function name)
+eg: import math
+    print(math.sqrt(16))  # 4    here math is the module name must used in this.
+-->from _ import _ - import specific name from modules like(function, variables, classes) into your current namespace
+   - we can use them directly without module prefix
+eg:  form math import sqrt
+     print(sqrt(16))  # 4  here no need of use module - directly accessible
+
+4)What is **virtual environment (venv)** in Python? Why is it needed?
+-->Virtual environment is isolated workspace where you install and manage pytho packages independently of the system-wide python installations.
+ -if we want to do different projects they need its own packges. if we installing packages globally(pip install...) can mess up system 
+tools that relay on python. Virtual envirenment keeps everying safe.
+eg:One Projects needs its own packages setup. Another project needs its own. If we do both in the same environment, things get messy- conflict can occur. So, virtual environment give each project its own environment. Thats why we needed virtual environment.
+
+5) Difference between **shallow copy, deep copy, assignment operator**.?
+-->Assignment operator- It doesnt copy the object , just creates  a new reference as to the same object and if we change in one it will reflect in another.
+eg: #Assignment operator
+list1=[1,2,[3,4]]
+list2=list1         #assignment (no copy)
+list2[0]=100
+print(list1)     #[100,2,[3,4]]
+-->Shallow copy - It creates a new object, but copies references of nested objects(not the objects themselves).
+  -top level changes are independent, but nested objects are shared and changed.
+eg:#shallow copy
+import copy
+list1=[1,2,[3,4]]
+list2=copy.copy(list1)   #shallow copy
+list2[0]=100
+list2[2][0]=200
+print(list1)           #[1,2,[200,4]]      nested list affected
+print(list2),          #[100,2,[200,4]]
+-->Deep copy- it creates new objects and recursively copies all nested objects.
+  -Changes in one object donot affect in another unlike shallowcopy.
+eg:#deep copy
+list1=[1,2,[3,4]]
+list2=copy.deepcopy(list1)      #deep copy
+list2[0]=100
+list2[2][0]=200
+print(list1)            #[1,2,[3,4]]         unaffected
+print(list2)            #[100,2,[200,4]]
+
+6)Explain how **JSON** is handled in Python (`json` module).?
+-->JSON(javascript object notation) is a lightweight data format for exchanging data between systems.
+  -Looks like a python dictionary, but it is always a string.
+eg:json
+{
+  "name":"Harish",
+  "age":21,
+  "skills":["Python","FastAPI"]
+}
+-->Python json module- Python provides the json module to encode(dump) and decode(load) JSON data.
+  -JSON handling 
+  1)converting Python to Json
+ import json
+python_dict={
+  "name": "Harish",
+  "age": 21,
+  "skills": ["Python", "FastAPI"]
+}
+print("Converting python to json")
+json_string=json.dumps(python_dict)    #Function: dumps or dump
+print(type(python_dict),json_string,type(json_string),)   #if it is a string it is a json data, if it is a dict it is a python data
+
+  2)converting JSON to python
+  print("Converting JSON to pyhton")
+json_strings='{"name": "Harish", "age": 23, "skills": ["Python", "FastAPI"]}'
+python_dict=json.loads(json_strings)
+print(type(json_strings),python_dict,type(python_dict))
+
+
+
+
+
+
+  

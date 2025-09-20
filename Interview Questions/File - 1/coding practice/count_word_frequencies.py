@@ -1,4 +1,4 @@
-# Write code to read a text file and count word frequencies.
+# Write code to read a text file and count word frequencies.    
 from collections import Counter
 
 def count_word_frequencies(newfile):
@@ -21,3 +21,4 @@ if __name__=="__main__":
 #if you want to run the code you need to create the file which you given in this code 'sample.txt'
 #to check the file directory use 'dir' command in the terminal it will show the path, if the file is not there in the path you need to change
 #the path or you need to move the file to current path
+
