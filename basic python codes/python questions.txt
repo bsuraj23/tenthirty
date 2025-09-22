@@ -192,7 +192,10 @@ python questions
 5)
 
 
+22-09
 
+1)what is jira
+2)what is assert
 
 
 
