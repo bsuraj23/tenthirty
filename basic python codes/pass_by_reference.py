@@ -4,4 +4,4 @@ def modify_list(my_list):
     print(f"Inside function:{my_list}")
 a_list=[1,2,3]
 modify_list(a_list)  #function calling
-print(f"Outside funtion:{a_list}")
+print(f"Outside funtion:{a_list}")     #the list is modified
