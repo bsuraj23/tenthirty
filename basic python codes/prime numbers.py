@@ -7,4 +7,4 @@ else:
             print("Not prime")
             break
     else:
-        print(n," is Prime")
+        print("prime")
