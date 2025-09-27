@@ -1,8 +1,9 @@
 n=int(input("Elnter the number:"))
 a=0
 b=1
-
-for i in range(0,n):
+print(a)
+print(b)
+for i in range(n-2):
     c=a+b
     a=b
     b=c
